@@ -1,0 +1,1135 @@
+
+
+----STARTUP---- (2 June 2022 19:40:03) as /home/clinux01/Documentos/TusLibros-01/linux64/CuisUniversity-5096.image!
+
+
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #XXXTest category: 'TusLibros' stamp: 'AEC 6/2/2022 19:41:04'!
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRenamed: #XXXTest as: #CartTest stamp: 'AEC 6/2/2022 20:39:49'!
+Smalltalk renameClassNamed: #XXXTest as: #CartTest!
+!CartTest methodsFor: 'no messages' stamp: 'AEC 6/2/2022 20:42:23'!
+test01CartIsEmptyWhenCreated
+
+	
+	self assert: Cart new isEmpty! !
+
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartTest category: 'TusLibros' stamp: 'AEC 6/2/2022 20:42:43'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: 'Cart'
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartTest category: 'TusLibros' stamp: 'AEC 6/2/2022 20:42:45'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:42:47'!
+ERROR!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'AEC 6/2/2022 20:43:06'!
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:42:54' prior: 50474108!
+test01CartIsEmptyWhenCreated
+
+	
+	self assert: Cart new isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:43:09' prior: 50474144!
+test01CartIsEmptyWhenCreated
+
+	self assert: Cart new isEmpty! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:43:11'!
+ERROR!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:43:18'!
+ERROR!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:43:30'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:43:44'!
+isEmpty
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:43:59' prior: 50474162!
+isEmpty
+	
+	^ true! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:44:00'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:47:37'!
+test02CartIsNotEmptyWhenAddingABook
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self deny: cart isEmpty! !
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 20:47:44'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 20:48:01'!
+addBook: aSmallInteger 
+	self shouldBeImplemented.! !
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'AEC 6/2/2022 20:51:10'!
+Object subclass: #Cart
+	instanceVariableNames: 'books'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 20:51:06' prior: 50474184!
+addBook: aBookISBN 
+	
+	books add: aBookISBN! !
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 20:51:12'!
+ERROR!
+!Cart methodsFor: 'nil' stamp: 'AEC 6/2/2022 20:51:34' overrides: 16920235!
+initialize
+
+	books := OrderedCollection new! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:51:53' prior: 50474166!
+isEmpty
+	
+	^ books isEmpty! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:51:56'!
+PASSED!
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 20:51:56'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:59:41'!
+test03
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self assert: (cart hasBook: 1)! !
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 20:59:43'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:59:48'!
+hasBook: aSmallInteger 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:00:00' prior: 50474223!
+hasBook: aBookISBN
+ 
+	books includes: aBookISBN! !
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 21:00:01'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:00:16' prior: 50474228!
+hasBook: aBookISBN
+ 
+	^ books includes: aBookISBN! !
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 21:00:22'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 21:00:30'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:01:31'!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+
+!methodRemoval: CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 21:01:38'!
+test02CartIsNotEmptyWhenAddingABook
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self deny: cart isEmpty!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:02:02'!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self assert: (cart hasBook: 1)! !
+
+!methodRemoval: CartTest #test03 stamp: 'AEC 6/2/2022 21:02:02'!
+test03
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self assert: (cart hasBook: 1)!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:04:18' prior: 50474264!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: (cart amountOfBooksWithISBN: 1) equals: 3! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:04:21'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:04:28'!
+addBook: aSmallInteger quantity: aSmallInteger2 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:07:07' prior: 50474286!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: aQuantity! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:07:08'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:07:59' prior: 50474291!
+addBook: aBookISBN quantity: aQuantity 
+	
+	aQuantity timesRepeat: [ self addBook: aBookISBN ]! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:08:07'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:08:12'!
+amountOfBooksWithISBN: aSmallInteger 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:08:32' prior: 50474307!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books occurrencesOf: aBookISBN! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+!Cart methodsFor: 'initialization' stamp: 'AEC 6/2/2022 21:12:53' prior: 50474202 overrides: 16920235!
+initialize
+
+	books := Dictionary new! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:13:39' prior: 50474299!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: aQuantity! !
+
+!methodRemoval: Cart #addBook: stamp: 'AEC 6/2/2022 21:13:46'!
+addBook: aBookISBN 
+	
+	books add: aBookISBN!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:13:59' prior: 50474250!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:15:22' prior: 50474235!
+hasBook: aBookISBN
+ 
+	^ books includes: aBookISBN! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:15:33'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:15:33'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:15:33'!
+FAILURE!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:15:33'!
+FAILURE!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:16:01' prior: 50474276!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart amountOfBooksWithISBN: 1)! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:16:02'!
+FAILURE!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:16:06'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:16:07'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:16:09'!
+PASSED!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:16:33' prior: 50474312!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:16:36'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:16:36'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:16:36'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:17:40'!
+test03BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart amountOfBooksWithISBN: 1)! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:17:50'!
+FAILURE!
+!CartTest methodsFor: 'assertions' stamp: 'AEC 6/2/2022 21:17:53' overrides: 16961444!
+assert: aFalse description: aBlockClosure 
+	self shouldBeImplemented.! !
+
+!methodRemoval: CartTest #assert:description: stamp: 'AEC 6/2/2022 21:18:11'!
+assert: aFalse description: aBlockClosure 
+	self shouldBeImplemented.!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:18:19'!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart amountOfBooksWithISBN: 1)! !
+
+!methodRemoval: CartTest #test03BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:18:19'!
+test03BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart amountOfBooksWithISBN: 1)!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:18:21'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:18:52' prior: 50474334!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (books at: aBookISBN + aQuantity)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:18:54'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:18:54'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:18:54'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:18:54'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:19:13' prior: 50474448!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: ((books at: aBookISBN) + aQuantity)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:19:18'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:19:18'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:19:18'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:19:18'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:19:39' prior: 50474467!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (books at: aBookISBN + aQuantity)! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:20:01' prior: 50474486!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: aQuantity! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:20:36' prior: 50474388!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN ifAbsent: 0! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:20:59' prior: 50474492!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (self amountOfBooksWithISBN: aBookISBN + aQuantity)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:21:02'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:21:02'!
+FAILURE!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:21:02'!
+FAILURE!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:21:02'!
+FAILURE!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:21:06'!
+FAILURE!
+
+DoItIn: originalContext
+
+self amountOfBooksWithISBN: aBookISBN + aQuantity!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:22:20' prior: 50474502!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: ((self amountOfBooksWithISBN: aBookISBN) + aQuantity)! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:22:29' prior: 50474527!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (self amountOfBooksWithISBN: aBookISBN) + aQuantity! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:23:57'!
+quantityOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN ifAbsent: 0! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:23:57' prior: 50474425!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:23:57' prior: 50474534!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (self quantityOfBooksWithISBN: aBookISBN) + aQuantity! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:23:57' prior: 50474368!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+
+!methodRemoval: Cart #amountOfBooksWithISBN: stamp: 'AEC 6/2/2022 21:23:57'!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN ifAbsent: 0!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:29:56'!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	cart := Cart for:( OrderedCollection with: 1 with: 2).
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/2/2022 21:29:59'!
+ERROR!
+!Cart class methodsFor: 'instance creation' stamp: 'AEC 6/2/2022 21:30:04'!
+for: anOrderedCollection 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: anOrderedCollection ! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:43:57' prior: 50474588!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	cart := Cart for: (Set with: 1 with: 2).
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:44:25' prior: 50474610!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart catalog |
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+
+----QUIT----(2 June 2022 21:45:58) CuisUniversity-5096.image priorSource: 4557982!
+
+----STARTUP---- (5 June 2022 19:25:22) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/TusLibros-01/linux64/CuisUniversity-5096.image!
+
+!Cart class methodsFor: 'instance creation' stamp: 'AEC 6/5/2022 19:29:27' prior: 50474601!
+for: aCatalog 
+	^self new initializeFor: aCatalog ! !
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'AEC 6/5/2022 19:29:53'!
+Object subclass: #Cart
+	instanceVariableNames: 'books catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'initialization' stamp: 'AEC 6/5/2022 19:29:49'!
+initializeFor: aCatalog
+
+	books := Dictionary new.
+	catalog := aCatalog ! !
+
+!methodRemoval: Cart #initialize stamp: 'AEC 6/5/2022 19:30:00'!
+initialize
+
+	books := Dictionary new!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:33:54'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:34:14'!
+ERROR!
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 19:34:25'!
+bookNotInCatalogErrorDescription
+	self shouldBeImplemented.! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:35:11'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:35:20'!
+ERROR!
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 19:35:59' prior: 50474664!
+bookNotInCatalogErrorDescription
+	
+	^'El libro no se encuentra en el catalogo.'! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:36:08'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 19:36:37' prior: 50474569!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	books at: aBookISBN put: (self quantityOfBooksWithISBN: aBookISBN) + aQuantity! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:36:44'!
+FAILURE!
+!Cart methodsFor: 'nil' stamp: 'AEC 6/5/2022 19:37:59'!
+assertBookIsInCatalog: aBookISBN
+
+	(catalog includes: aBookISBN ) ifFalse:[self error: self class bookNotInCatalogErrorDescription]! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:38:15'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:38:15'!
+PASSED!
+!Cart class methodsFor: 'instance creation' stamp: 'AEC 6/5/2022 19:38:48' prior: 50474638!
+for: aCatalog 
+	
+	^self new initializeFor: aCatalog ! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:16' prior: 50474559!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart catalog |
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:22' prior: 50474727!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:32' prior: 50474576!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:41' prior: 50474343!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:40:05' prior: 50474149!
+test01CartIsEmptyWhenCreated
+
+	| cart catalog |
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:40:16' prior: 50474769!
+test01CartIsEmptyWhenCreated
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:20' prior: 50474777!
+test01CartIsEmptyWhenCreated
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:44' prior: 50474759!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:49' prior: 50474749!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:56' prior: 50474738!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:42:03' prior: 50474620!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:42:07'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23'!
+emptyCartWithTwoBookCatalog
+
+	^ Cart for: (Set with: 1 with: 2)! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474792!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474785!
+test01CartIsEmptyWhenCreated
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474821!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474801!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474810!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:43:45'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+!Cart methodsFor: 'initialization' stamp: 'AEC 6/5/2022 19:44:18' prior: 50474649!
+initializeFor: aCatalog
+
+	books := Bag new.
+	catalog := aCatalog ! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 19:44:38' prior: 50474685!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	books add: aBookISBN withOccurrences: aQuantity ! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 19:45:09' prior: 50474553!
+quantityOfBooksWithISBN: aBookISBN 
+	
+	^ books occurrencesOf: aBookISBN ! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+bolsa := Bag new.!
+
+bolsa add: 'falopa' withOccurrences: 10.!
+
+bolsa add: 'agua' withOccurrences: 5.!
+
+bolsa sortedCounts !
+
+bolsa sortedElements !
+
+bolsa sortedElements!
+
+'agua' -> 5!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:56:21'!
+test06ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty! !
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:56:49'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 19:56:55'!
+listContents
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 19:57:01' prior: 50474981!
+listContents
+	
+	^''! !
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:02:33'!
+test07ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents ! !
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:02:38'!
+FAILURE!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 20:02:57' prior: 50474985!
+listContents
+	
+	^books sortedElements ! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:03:01'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:06:43'!
+test08BookCannotBeAddedWithNonPositiveQuantity
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 0] raise: Error withMessageText: Cart nonPositiveBookQuantityErrorDescription! !
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:06:47'!
+ERROR!
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 20:06:51'!
+nonPositiveBookQuantityErrorDescription
+	self shouldBeImplemented.! !
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 20:08:12' prior: 50475092!
+nonPositiveBookQuantityErrorDescription
+	
+	^'La cantidad de libros a agregar no es positiva.'! !
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:08:28'!
+FAILURE!
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:08:41'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:09:29' prior: 50474923!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	aQuantity < 1 ifTrue:[self error: self class nonPositiveBookQuantityErrorDescription ].
+	books add: aBookISBN withOccurrences: aQuantity ! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:09:58'!
+assertQuantityIsPositive: aQuantity
+
+	^ aQuantity < 1 ifTrue:[self error: self class nonPositiveBookQuantityErrorDescription ]! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:09:58' prior: 50475111!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	self assertQuantityIsPositive: aQuantity.
+	books add: aBookISBN withOccurrences: aQuantity ! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:10:09' prior: 50475146!
+assertQuantityIsPositive: aQuantity
+
+	^ aQuantity > 1 ifFalse:[self error: self class nonPositiveBookQuantityErrorDescription ]! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:10:20' prior: 50475161!
+assertQuantityIsPositive: aQuantity
+
+	^ aQuantity > 0 ifFalse:[self error: self class nonPositiveBookQuantityErrorDescription ]! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:10:25'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:10:25'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:10:46'!
+test06BookCannotBeAddedWithNonPositiveQuantity
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 0] raise: Error withMessageText: Cart nonPositiveBookQuantityErrorDescription! !
+
+!methodRemoval: CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:10:46'!
+test08BookCannotBeAddedWithNonPositiveQuantity
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 0] raise: Error withMessageText: Cart nonPositiveBookQuantityErrorDescription!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:10:51'!
+test08ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents ! !
+
+!methodRemoval: CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:10:52'!
+test07ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:10:55'!
+test07ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty! !
+
+!methodRemoval: CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:10:55'!
+test06ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+!Cart methodsFor: 'asserting' stamp: 'AEC 6/5/2022 20:13:01' prior: 50474696!
+assertBookIsInCatalog: aBookISBN
+
+	(catalog includes: aBookISBN) ifFalse:[self error: self class bookNotInCatalogErrorDescription]! !
+
+----SNAPSHOT----(5 June 2022 20:16:57) CuisUniversity-5096.image priorSource: 4575338!
+
+----QUIT----(5 June 2022 20:17:05) CuisUniversity-5096.image priorSource: 4596677!
