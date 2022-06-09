@@ -1,0 +1,5493 @@
+
+
+----STARTUP---- (2 June 2022 19:40:03) as /home/clinux01/Documentos/TusLibros-01/linux64/CuisUniversity-5096.image!
+
+
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #XXXTest category: 'TusLibros' stamp: 'AEC 6/2/2022 19:41:04'!
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRenamed: #XXXTest as: #CartTest stamp: 'AEC 6/2/2022 20:39:49'!
+Smalltalk renameClassNamed: #XXXTest as: #CartTest!
+!CartTest methodsFor: 'no messages' stamp: 'AEC 6/2/2022 20:42:23'!
+test01CartIsEmptyWhenCreated
+
+	
+	self assert: Cart new isEmpty! !
+
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartTest category: 'TusLibros' stamp: 'AEC 6/2/2022 20:42:43'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: 'Cart'
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CartTest category: 'TusLibros' stamp: 'AEC 6/2/2022 20:42:45'!
+TestCase subclass: #CartTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:42:47'!
+ERROR!
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'AEC 6/2/2022 20:43:06'!
+Object subclass: #Cart
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:42:54' prior: 50474108!
+test01CartIsEmptyWhenCreated
+
+	
+	self assert: Cart new isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:43:09' prior: 50474144!
+test01CartIsEmptyWhenCreated
+
+	self assert: Cart new isEmpty! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:43:11'!
+ERROR!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:43:18'!
+ERROR!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:43:30'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:43:44'!
+isEmpty
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:43:59' prior: 50474162!
+isEmpty
+	
+	^ true! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:44:00'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:44:00'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:47:37'!
+test02CartIsNotEmptyWhenAddingABook
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self deny: cart isEmpty! !
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 20:47:44'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 20:48:01'!
+addBook: aSmallInteger 
+	self shouldBeImplemented.! !
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'AEC 6/2/2022 20:51:10'!
+Object subclass: #Cart
+	instanceVariableNames: 'books'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 20:51:06' prior: 50474184!
+addBook: aBookISBN 
+	
+	books add: aBookISBN! !
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 20:51:12'!
+ERROR!
+!Cart methodsFor: 'nil' stamp: 'AEC 6/2/2022 20:51:34' overrides: 16920235!
+initialize
+
+	books := OrderedCollection new! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:51:53' prior: 50474166!
+isEmpty
+	
+	^ books isEmpty! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 20:51:56'!
+PASSED!
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 20:51:56'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 20:59:41'!
+test03
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self assert: (cart hasBook: 1)! !
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 20:59:43'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 20:59:48'!
+hasBook: aSmallInteger 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:00:00' prior: 50474223!
+hasBook: aBookISBN
+ 
+	books includes: aBookISBN! !
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 21:00:01'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:00:16' prior: 50474228!
+hasBook: aBookISBN
+ 
+	^ books includes: aBookISBN! !
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 21:00:22'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test03 stamp: 'AEC 6/2/2022 21:00:30'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:01:31'!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+
+!methodRemoval: CartTest #test02CartIsNotEmptyWhenAddingABook stamp: 'AEC 6/2/2022 21:01:38'!
+test02CartIsNotEmptyWhenAddingABook
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self deny: cart isEmpty!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:02:02'!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self assert: (cart hasBook: 1)! !
+
+!methodRemoval: CartTest #test03 stamp: 'AEC 6/2/2022 21:02:02'!
+test03
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1.
+	
+	self assert: (cart hasBook: 1)!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:04:18' prior: 50474264!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: (cart amountOfBooksWithISBN: 1) equals: 3! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:04:21'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:04:28'!
+addBook: aSmallInteger quantity: aSmallInteger2 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:07:07' prior: 50474286!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: aQuantity! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:07:08'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:07:59' prior: 50474291!
+addBook: aBookISBN quantity: aQuantity 
+	
+	aQuantity timesRepeat: [ self addBook: aBookISBN ]! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:08:07'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:08:12'!
+amountOfBooksWithISBN: aSmallInteger 
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:08:32' prior: 50474307!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books occurrencesOf: aBookISBN! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:08:33'!
+PASSED!
+!Cart methodsFor: 'initialization' stamp: 'AEC 6/2/2022 21:12:53' prior: 50474202 overrides: 16920235!
+initialize
+
+	books := Dictionary new! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:13:39' prior: 50474299!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: aQuantity! !
+
+!methodRemoval: Cart #addBook: stamp: 'AEC 6/2/2022 21:13:46'!
+addBook: aBookISBN 
+	
+	books add: aBookISBN!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:13:59' prior: 50474250!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:15:22' prior: 50474235!
+hasBook: aBookISBN
+ 
+	^ books includes: aBookISBN! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:15:33'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:15:33'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:15:33'!
+FAILURE!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:15:33'!
+FAILURE!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:16:01' prior: 50474276!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart amountOfBooksWithISBN: 1)! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:16:02'!
+FAILURE!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:16:06'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:16:07'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:16:09'!
+PASSED!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:16:33' prior: 50474312!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:16:36'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:16:36'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:16:36'!
+PASSED!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:17:40'!
+test03BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart amountOfBooksWithISBN: 1)! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:17:50'!
+FAILURE!
+!CartTest methodsFor: 'assertions' stamp: 'AEC 6/2/2022 21:17:53' overrides: 16961444!
+assert: aFalse description: aBlockClosure 
+	self shouldBeImplemented.! !
+
+!methodRemoval: CartTest #assert:description: stamp: 'AEC 6/2/2022 21:18:11'!
+assert: aFalse description: aBlockClosure 
+	self shouldBeImplemented.!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:18:19'!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart amountOfBooksWithISBN: 1)! !
+
+!methodRemoval: CartTest #test03BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:18:19'!
+test03BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart amountOfBooksWithISBN: 1)!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:18:21'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:18:52' prior: 50474334!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (books at: aBookISBN + aQuantity)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:18:54'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:18:54'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:18:54'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:18:54'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:19:13' prior: 50474448!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: ((books at: aBookISBN) + aQuantity)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:19:18'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:19:18'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:19:18'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:19:18'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:19:39' prior: 50474467!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (books at: aBookISBN + aQuantity)! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:20:01' prior: 50474486!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: aQuantity! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:20:36' prior: 50474388!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN ifAbsent: 0! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:20:59' prior: 50474492!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (self amountOfBooksWithISBN: aBookISBN + aQuantity)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:21:02'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:21:02'!
+FAILURE!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:21:02'!
+FAILURE!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:21:02'!
+FAILURE!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:21:06'!
+FAILURE!
+
+DoItIn: originalContext
+
+self amountOfBooksWithISBN: aBookISBN + aQuantity!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:22:20' prior: 50474502!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: ((self amountOfBooksWithISBN: aBookISBN) + aQuantity)! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/2/2022 21:22:29' prior: 50474527!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (self amountOfBooksWithISBN: aBookISBN) + aQuantity! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/2/2022 21:22:31'!
+PASSED!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/2/2022 21:23:57'!
+quantityOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN ifAbsent: 0! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:23:57' prior: 50474425!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!Cart methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:23:57' prior: 50474534!
+addBook: aBookISBN quantity: aQuantity 
+	
+	books at: aBookISBN put: (self quantityOfBooksWithISBN: aBookISBN) + aQuantity! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:23:57' prior: 50474368!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	cart := Cart new.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+
+!methodRemoval: Cart #amountOfBooksWithISBN: stamp: 'AEC 6/2/2022 21:23:57'!
+amountOfBooksWithISBN: aBookISBN 
+	
+	^ books at: aBookISBN ifAbsent: 0!
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:29:56'!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	cart := Cart for:( OrderedCollection with: 1 with: 2).
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/2/2022 21:29:59'!
+ERROR!
+!Cart class methodsFor: 'instance creation' stamp: 'AEC 6/2/2022 21:30:04'!
+for: anOrderedCollection 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: anOrderedCollection ! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:43:57' prior: 50474588!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	cart := Cart for: (Set with: 1 with: 2).
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/2/2022 21:44:25' prior: 50474610!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart catalog |
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+
+----QUIT----(2 June 2022 21:45:58) CuisUniversity-5096.image priorSource: 4557982!
+
+----STARTUP---- (5 June 2022 19:25:22) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/TusLibros-01/linux64/CuisUniversity-5096.image!
+
+!Cart class methodsFor: 'instance creation' stamp: 'AEC 6/5/2022 19:29:27' prior: 50474601!
+for: aCatalog 
+	^self new initializeFor: aCatalog ! !
+
+!classDefinition: #Cart category: 'TusLibros' stamp: 'AEC 6/5/2022 19:29:53'!
+Object subclass: #Cart
+	instanceVariableNames: 'books catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cart methodsFor: 'initialization' stamp: 'AEC 6/5/2022 19:29:49'!
+initializeFor: aCatalog
+
+	books := Dictionary new.
+	catalog := aCatalog ! !
+
+!methodRemoval: Cart #initialize stamp: 'AEC 6/5/2022 19:30:00'!
+initialize
+
+	books := Dictionary new!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:33:54'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:34:14'!
+ERROR!
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 19:34:25'!
+bookNotInCatalogErrorDescription
+	self shouldBeImplemented.! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:35:11'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:35:20'!
+ERROR!
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 19:35:59' prior: 50474664!
+bookNotInCatalogErrorDescription
+	
+	^'El libro no se encuentra en el catalogo.'! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:36:08'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 19:36:37' prior: 50474569!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	books at: aBookISBN put: (self quantityOfBooksWithISBN: aBookISBN) + aQuantity! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:36:44'!
+FAILURE!
+!Cart methodsFor: 'nil' stamp: 'AEC 6/5/2022 19:37:59'!
+assertBookIsInCatalog: aBookISBN
+
+	(catalog includes: aBookISBN ) ifFalse:[self error: self class bookNotInCatalogErrorDescription]! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:38:15'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:38:15'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:38:15'!
+PASSED!
+!Cart class methodsFor: 'instance creation' stamp: 'AEC 6/5/2022 19:38:48' prior: 50474638!
+for: aCatalog 
+	
+	^self new initializeFor: aCatalog ! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:16' prior: 50474559!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart catalog |
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:22' prior: 50474727!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:32' prior: 50474576!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:39:41' prior: 50474343!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:40:05' prior: 50474149!
+test01CartIsEmptyWhenCreated
+
+	| cart catalog |
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:40:16' prior: 50474769!
+test01CartIsEmptyWhenCreated
+
+	| cart catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:20' prior: 50474777!
+test01CartIsEmptyWhenCreated
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:44' prior: 50474759!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:49' prior: 50474749!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:41:56' prior: 50474738!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/5/2022 19:42:03' prior: 50474620!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	
+	cart := Cart for: (Set with: 1 with: 2).
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:42:07'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:42:11'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23'!
+emptyCartWithTwoBookCatalog
+
+	^ Cart for: (Set with: 1 with: 2)! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474792!
+test02CartOnlyHasTheBookWhenAddingIt
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	cart addBook: 1 quantity: 1.
+	
+	self deny: cart isEmpty.
+	self assert: (cart hasBook: 1)! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474785!
+test01CartIsEmptyWhenCreated
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	self assert: cart isEmpty! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474821!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 3 quantity: 2] raise: Error withMessageText: Cart bookNotInCatalogErrorDescription! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474801!
+test03BooksCanBeAddedMultipleTimes
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	cart addBook: 1 quantity: 3.
+	
+	self assert: 3 equals: (cart quantityOfBooksWithISBN: 1)! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:43:23' prior: 50474810!
+test04BooksCanBeAddedMultipleTimesInDifferentMoments
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	cart addBook: 1 quantity: 3.
+	cart addBook: 1 quantity: 5.
+	
+	self assert: 8 equals: (cart quantityOfBooksWithISBN: 1)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:43:45'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:43:48'!
+PASSED!
+!Cart methodsFor: 'initialization' stamp: 'AEC 6/5/2022 19:44:18' prior: 50474649!
+initializeFor: aCatalog
+
+	books := Bag new.
+	catalog := aCatalog ! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 19:44:38' prior: 50474685!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	books add: aBookISBN withOccurrences: aQuantity ! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 19:45:09' prior: 50474553!
+quantityOfBooksWithISBN: aBookISBN 
+	
+	^ books occurrencesOf: aBookISBN ! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:45:17'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:46:17'!
+PASSED!
+
+bolsa := Bag new.!
+
+bolsa add: 'falopa' withOccurrences: 10.!
+
+bolsa add: 'agua' withOccurrences: 5.!
+
+bolsa sortedCounts !
+
+bolsa sortedElements !
+
+bolsa sortedElements!
+
+'agua' -> 5!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 19:56:21'!
+test06ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty! !
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:56:49'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 19:56:55'!
+listContents
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 19:57:01' prior: 50474981!
+listContents
+	
+	^''! !
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:03'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 19:57:08'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:02:33'!
+test07ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents ! !
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:02:38'!
+FAILURE!
+!Cart methodsFor: 'accessing' stamp: 'AEC 6/5/2022 20:02:57' prior: 50474985!
+listContents
+	
+	^books sortedElements ! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:03:01'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:03:04'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:06:43'!
+test08BookCannotBeAddedWithNonPositiveQuantity
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 0] raise: Error withMessageText: Cart nonPositiveBookQuantityErrorDescription! !
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:06:47'!
+ERROR!
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 20:06:51'!
+nonPositiveBookQuantityErrorDescription
+	self shouldBeImplemented.! !
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/5/2022 20:08:12' prior: 50475092!
+nonPositiveBookQuantityErrorDescription
+	
+	^'La cantidad de libros a agregar no es positiva.'! !
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:08:28'!
+FAILURE!
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:08:41'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:09:29' prior: 50474923!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	aQuantity < 1 ifTrue:[self error: self class nonPositiveBookQuantityErrorDescription ].
+	books add: aBookISBN withOccurrences: aQuantity ! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:09:40'!
+PASSED!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:09:58'!
+assertQuantityIsPositive: aQuantity
+
+	^ aQuantity < 1 ifTrue:[self error: self class nonPositiveBookQuantityErrorDescription ]! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:09:58' prior: 50475111!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	self assertQuantityIsPositive: aQuantity.
+	books add: aBookISBN withOccurrences: aQuantity ! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:10:09' prior: 50475146!
+assertQuantityIsPositive: aQuantity
+
+	^ aQuantity > 1 ifFalse:[self error: self class nonPositiveBookQuantityErrorDescription ]! !
+!Cart methodsFor: 'adding' stamp: 'AEC 6/5/2022 20:10:20' prior: 50475161!
+assertQuantityIsPositive: aQuantity
+
+	^ aQuantity > 0 ifFalse:[self error: self class nonPositiveBookQuantityErrorDescription ]! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:10:25'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:10:25'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+
+!testRun: #CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:10:26'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:10:46'!
+test06BookCannotBeAddedWithNonPositiveQuantity
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 0] raise: Error withMessageText: Cart nonPositiveBookQuantityErrorDescription! !
+
+!methodRemoval: CartTest #test08BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:10:46'!
+test08BookCannotBeAddedWithNonPositiveQuantity
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 0] raise: Error withMessageText: Cart nonPositiveBookQuantityErrorDescription!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:10:51'!
+test08ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents ! !
+
+!methodRemoval: CartTest #test07ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:10:52'!
+test07ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/5/2022 20:10:55'!
+test07ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty! !
+
+!methodRemoval: CartTest #test06ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:10:55'!
+test06ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test07ListOfEmptyCartIsEmpty stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/5/2022 20:11:00'!
+PASSED!
+!Cart methodsFor: 'asserting' stamp: 'AEC 6/5/2022 20:13:01' prior: 50474696!
+assertBookIsInCatalog: aBookISBN
+
+	(catalog includes: aBookISBN) ifFalse:[self error: self class bookNotInCatalogErrorDescription]! !
+
+----SNAPSHOT----(5 June 2022 20:16:57) CuisUniversity-5096.image priorSource: 4575338!
+
+----QUIT----(5 June 2022 20:17:05) CuisUniversity-5096.image priorSource: 4596677!
+
+----STARTUP---- (6 June 2022 18:47:50) as /home/clinux01/Documentos/TusLibros-01/linux64/CuisUniversity-5096.image!
+
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 18:56:03'!
+test07NonIntegerQuantityOfBookCantBeAdded
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 1.2] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cart nonIntegerBookQuantityError	 equals: anError message.
+			self assert: cart isEmpty
+		]! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 18:56:18' prior: 50475306!
+test07NonIntegerQuantityOfBookCantBeAdded
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 1.2] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cart nonIntegerBookQuantityErrorDescription	 equals: anError message.
+			self assert: cart isEmpty
+		]! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 18:56:26'!
+test08ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty! !
+
+!methodRemoval: CartTest #test07ListOfEmptyCartIsEmpty stamp: 'AEC 6/6/2022 18:56:26'!
+test07ListOfEmptyCartIsEmpty
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self assert: cart listContents isEmpty!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 18:56:30'!
+test09ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents ! !
+
+!methodRemoval: CartTest #test08ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/6/2022 18:56:30'!
+test08ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Set with: 1 with: 2 with: 3.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents !
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'AEC 6/6/2022 18:56:36'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'AEC 6/6/2022 18:57:00' prior: 50475153!
+addBook: aBookISBN quantity: aQuantity 
+	
+	self assertBookIsInCatalog: aBookISBN.
+	self assertQuantityIsValid: aQuantity.
+	books add: aBookISBN withOccurrences: aQuantity ! !
+!Cart methodsFor: 'asserting' stamp: 'AEC 6/6/2022 18:57:13'!
+assertQuantityIsValid: aQuantity
+
+	^ aQuantity > 0 ifFalse:[self error: self class nonPositiveBookQuantityErrorDescription ]! !
+
+!methodRemoval: Cart #assertQuantityIsPositive: stamp: 'AEC 6/6/2022 18:57:13'!
+assertQuantityIsPositive: aQuantity
+
+	^ aQuantity > 0 ifFalse:[self error: self class nonPositiveBookQuantityErrorDescription ]!
+!Cart methodsFor: 'asserting' stamp: 'AEC 6/6/2022 18:58:37' prior: 50475386!
+assertQuantityIsValid: aQuantity
+
+	aQuantity > 0 ifFalse:[self error: self class nonPositiveBookQuantityErrorDescription ].
+	aQuantity isInteger ifFalse:[self error: self class nonIntegerBookQuantityErrorDescription ]
+	! !
+!Cart class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 18:59:02'!
+nonIntegerBookQuantityErrorDescription
+	
+	^'La cantidad de libros a agregar no es un numero entero.'! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'AEC 6/6/2022 18:59:05'!
+ERROR!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/6/2022 18:59:05'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'AEC 6/6/2022 18:59:05'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 18:59:25' prior: 50475318!
+test07NonIntegerQuantityOfBookCantBeAdded
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 1.2] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cart nonIntegerBookQuantityErrorDescription	 equals: anError description.
+			self assert: cart isEmpty
+		]! !
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'AEC 6/6/2022 18:59:27'!
+FAILURE!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 19:00:21' prior: 50475447!
+test07NonIntegerQuantityOfBookCantBeAdded
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 1.2] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cart nonIntegerBookQuantityErrorDescription	 equals: anError messageText.
+			self assert: cart isEmpty
+		]! !
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/6/2022 19:00:23'!
+PASSED!
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 19:00:59' prior: 50475200!
+test06BookCannotBeAddedWithNonPositiveQuantity
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 1 quantity: 0] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cart nonPositiveBookQuantityErrorDescription	 equals: anError messageText.
+			self assert: cart isEmpty
+		]! !
+!CartTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 19:02:04' prior: 50474870!
+test05BookCannotBeAddedIfNotInCatalog
+
+	| cart |
+	
+	cart := self emptyCartWithTwoBookCatalog.
+	
+	self should: [cart addBook: 3 quantity: 2] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cart bookNotInCatalogErrorDescription	 equals: anError messageText.
+			self assert: cart isEmpty
+		]! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'AEC 6/6/2022 19:02:13'!
+PASSED!
+
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #XXXTest category: 'TusLibros' stamp: 'AEC 6/6/2022 19:04:20'!
+TestCase subclass: #XXXTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'AEC 6/6/2022 19:09:23'!
+Object subclass: #Cashier
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!XXXTest methodsFor: 'no messages' stamp: 'AEC 6/6/2022 19:09:17'!
+test01
+	
+	| cart cashier catalog |
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:09:34' prior: 50475582!
+test01
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription! !
+
+!testRun: #XXXTest #test01 stamp: 'AEC 6/6/2022 19:09:34'!
+ERROR!
+!Cashier class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 19:09:43'!
+emptyCartErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 19:10:13' prior: 50475606!
+emptyCartErrorDescription
+	
+	^ 'El carrito esta vacio.'! !
+
+!testRun: #XXXTest #test01 stamp: 'AEC 6/6/2022 19:10:20'!
+FAILURE!
+!Cashier methodsFor: 'no messages' stamp: 'AEC 6/6/2022 19:11:44'!
+checkout: aCart
+
+	aCart isEmpty ifTrue:[self error: self class emptyCartErrorDescription]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:11:54'!
+assertCartIsNotEmpty: aCart
+
+	^ aCart isEmpty ifTrue:[self error: self class emptyCartErrorDescription]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:11:54' prior: 50475618!
+checkout: aCart
+
+	self assertCartIsNotEmpty: aCart! !
+
+!testRun: #XXXTest #test01 stamp: 'AEC 6/6/2022 19:12:03'!
+PASSED!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:13:23'!
+test02
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:28:29' prior: 50475638!
+test02
+	
+	| cart cashier catalog price |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	price := cashier checkout: cart.
+	
+	self assert: 10 equals: price! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:34:26' prior: 50475651!
+test02
+	
+	| cart cashier catalog price |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	price := cashier checkout: cart.
+	
+	self assert: 5 + (2*2.5) equals: price! !
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 19:35:00'!
+ERROR!
+!Cart methodsFor: 'asserting' stamp: 'AEC 6/6/2022 19:35:51' prior: 50475290!
+assertBookIsInCatalog: aBookISBN
+
+	(catalog includesKey: aBookISBN) ifFalse:[self error: self class bookNotInCatalogErrorDescription]! !
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 19:36:16'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:39:04' prior: 50475631!
+checkout: aCart
+
+	self assertCartIsNotEmpty: aCart.
+	^ aCart value! !
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 19:39:15'!
+FAILURE!
+!Cart methodsFor: 'nil' stamp: 'AEC 6/6/2022 19:41:20' overrides: 16902254!
+value
+
+	^books sum:[:association | (association value) * (catalog at: association key)]! !
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 19:41:25'!
+ERROR!
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 19:41:25'!
+ERROR!
+!Cart methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 19:46:54' prior: 50475694 overrides: 16902254!
+value
+
+	^books sum:[ :aBookISBN |  catalog at: aBookISBN ]! !
+
+!testRun: #XXXTest #test01 stamp: 'AEC 6/6/2022 19:46:57'!
+PASSED!
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 19:46:57'!
+PASSED!
+
+August,2022!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:01:15'!
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 20:01:11'!
+test03
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.
+	
+	self should:[cashier checkout: cart usingCard: creditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardNumberOfDigitsErrorDescription.! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 20:02:08'!
+ERROR!
+!CreditCard class methodsFor: 'instance creation' stamp: 'AEC 6/6/2022 20:02:20'!
+for: aString number: aSmallInteger expiringOn: aGregorianMonthOfYear 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: aString number: aSmallInteger expiringOn: aGregorianMonthOfYear ! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'AEC 6/6/2022 20:27:04' prior: 50475740!
+for: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+
+	^self new initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 20:27:05'!
+ERROR!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:27:17'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'owner'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:27:17'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'owner creditCardNumber'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:27:17'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'owner creditCardNumber gregorianMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 20:27:17'!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	self shouldBeImplemented.
+	owner := anOwner.
+	creditCardNumber := aCreditCardNumber.
+	gregorianMonthOfYear := aGregorianMonthOfYear.! !
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 20:27:44' prior: 50475784!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	| expirationMonthOfYear number |
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+
+!methodRemoval: CreditCard #initializeFor:number:expiringOn: stamp: 'AEC 6/6/2022 20:29:23'!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	| expirationMonthOfYear number |
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:29:26'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'creditCardNumber gregorianMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:29:26'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'gregorianMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:29:26'!
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:29:38'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'owner'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:29:39'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'owner number'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CreditCard category: 'TusLibros' stamp: 'AEC 6/6/2022 20:29:40'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'owner number expirationMonthOfYear'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 20:29:37'!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 20:30:33'!
+ERROR!
+!Cashier class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 20:30:38'!
+invalidCreditCardNumberOfDigitsErrorDescription
+	self shouldBeImplemented.! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 20:51:45'!
+test04
+
+	self should:[CreditCard for: ' ' number: 1234567890123456 expiringOn: August,2022.]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 20:52:27'!
+test05
+
+	self should:[CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 20:53:20'!
+test04_
+	
+	| cart cashier catalog price |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	price := cashier checkout: cart.
+	
+	self assert: 5 + (2*2.5) equals: price! !
+
+!methodRemoval: XXXTest #test02 stamp: 'AEC 6/6/2022 20:53:31'!
+test02
+	
+	| cart cashier catalog price |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	price := cashier checkout: cart.
+	
+	self assert: 5 + (2*2.5) equals: price!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 20:53:38'!
+test05_
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.
+	
+	self should:[cashier checkout: cart usingCard: creditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardNumberOfDigitsErrorDescription.! !
+
+!methodRemoval: XXXTest #test03 stamp: 'AEC 6/6/2022 20:53:38'!
+test03
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.
+	
+	self should:[cashier checkout: cart usingCard: creditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardNumberOfDigitsErrorDescription.!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 20:53:44'!
+test02
+
+	self should:[CreditCard for: ' ' number: 1234567890123456 expiringOn: August,2022.]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+
+!methodRemoval: XXXTest #test04 stamp: 'AEC 6/6/2022 20:53:44'!
+test04
+
+	self should:[CreditCard for: ' ' number: 1234567890123456 expiringOn: August,2022.]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 20:53:48'!
+test03
+
+	self should:[CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription! !
+
+!methodRemoval: XXXTest #test05 stamp: 'AEC 6/6/2022 20:53:48'!
+test05
+
+	self should:[CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription!
+
+Date today!
+
+self monthOfYear!
+
+Date today!
+
+August,2022!
+
+self class!
+
+FixedGregorianDate today monthOfYear!
+
+FixedGregorianDate today monthOfYear + 1!
+
+(FixedGregorianDate today monthOfYear) + 1!
+
+FixedGregorianDate today monthOfYear next: 1!
+
+FixedGregorianDate today monthOfYear next!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:02:58' prior: 50475944!
+test02
+
+	self should:[CreditCard for: ' ' number: 1234567890123456 expiringOn: self nonExpiredMonthOfYear.]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+!XXXTest methodsFor: 'nil' stamp: 'AEC 6/6/2022 21:03:09'!
+nonExpiredMonthOfYear
+	
+	FixedGregorianDate today monthOfYear next! !
+
+FixedGregorianDate today monthOfYear previous!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:03:39'!
+expiredMonthOfYear
+	
+	FixedGregorianDate today monthOfYear previous! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:03:45' prior: 50475985!
+test02
+
+	self should:[CreditCard for: ' ' number: 1234567890123456 expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:04:02' prior: 50475960!
+test03
+
+	self should:[CreditCard for: 'Alan Kay' number: 123 expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription! !
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 21:04:51'!
+ERROR!
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 21:04:51'!
+ERROR!
+
+!methodRemoval: Cashier class #invalidCreditCardNumberOfDigitsErrorDescription stamp: 'AEC 6/6/2022 21:05:02'!
+invalidCreditCardNumberOfDigitsErrorDescription
+	self shouldBeImplemented.!
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 21:05:10'!
+ERROR!
+!CreditCard class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 21:05:19'!
+emptyOwnerNameErrorDescription
+	self shouldBeImplemented.! !
+!CreditCard class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 21:06:22' prior: 50476036!
+emptyOwnerNameErrorDescription
+	
+	^ 'El nombre de titular de la tarjeta esta vacio'! !
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 21:06:23'!
+FAILURE!
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 21:06:31'!
+FAILURE!
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 21:06:31'!
+FAILURE!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:07:03'!
+validCreditCardNumber
+
+	^1234567890123456! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:07:13' prior: 50476006!
+test02
+
+	self should:[CreditCard for: ' ' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:09:37' prior: 50475856!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	anOwner withBlanksTrimmed isEmpty ifTrue:[ self error: self class emptyOwnerNameErrorDescription ].
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:10:00' prior: 50476067!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	self assertOwnerNameIsNotBlank.
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+!CreditCard methodsFor: 'nil' stamp: 'AEC 6/6/2022 21:10:42'!
+assertOwnerNameIsNotBlank: anOwner
+
+	anOwner withBlanksTrimmed isEmpty ifTrue:[ self error: self class emptyOwnerNameErrorDescription ].! !
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:10:51' prior: 50476079!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	self assertOwnerNameIsNotBlank: anOwner.
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+
+!testRun: #XXXTest #test02 stamp: 'AEC 6/6/2022 21:10:56'!
+PASSED!
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:12:08'!
+ERROR!
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:12:08'!
+ERROR!
+!CreditCard class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 21:12:12'!
+invalidNumberOfDigitsErrorDescription
+	self shouldBeImplemented.! !
+!CreditCard class methodsFor: 'error-description' stamp: 'AEC 6/6/2022 21:12:37' prior: 50476112!
+invalidNumberOfDigitsErrorDescription
+	
+	^'El numero de tarjeta no tiene 16 digitos.'! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:12:38'!
+FAILURE!
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:16:45' prior: 50476096!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	self assertOwnerNameIsNotBlank: anOwner.
+	aCreditCardNumber size = 16 ifFalse:[ self error: self class invalidNumberOfDigitsErrorDescription ].
+	
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:17:32'!
+assertNumberHas16Digits: aCreditCardNumber
+
+	^ aCreditCardNumber size = 16 ifFalse:[ self error: self class invalidNumberOfDigitsErrorDescription ]! !
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:17:32' prior: 50476126!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+	
+	self assertOwnerNameIsNotBlank: anOwner.
+	self assertNumberHas16Digits: aCreditCardNumber.
+	
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:17:42'!
+FAILURE!
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:17:42'!
+FAILURE!
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:17:57' prior: 50476139!
+assertNumberHas16Digits: aCreditCardNumber
+
+	^ (aCreditCardNumber size = 16) ifFalse:[ self error: self class invalidNumberOfDigitsErrorDescription ]! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:18:06'!
+FAILURE!
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:18:06'!
+FAILURE!
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:18:20' prior: 50476163!
+assertNumberHas16Digits: aCreditCardNumber
+
+	(aCreditCardNumber size = 16) ifFalse:[ self error: self class invalidNumberOfDigitsErrorDescription ]! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:18:25'!
+FAILURE!
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:18:25'!
+FAILURE!
+!CreditCard methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:18:58' prior: 50476175!
+assertNumberHas16Digits: aCreditCardNumber
+
+	((aCreditCardNumber numberOfDigitsInBase: 10) = 16) ifFalse:[ self error: self class invalidNumberOfDigitsErrorDescription ]! !
+
+!testRun: #XXXTest #test03 stamp: 'AEC 6/6/2022 21:19:02'!
+PASSED!
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:20:09' prior: 50476015!
+test03
+
+	self should:[CreditCard for: 'Alan Kay' number: self invalidCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription! !
+!XXXTest methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:20:16'!
+invalidCreditCardNumber
+
+	^123! !
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 21:20:52' prior: 50475888!
+test04_
+	
+	| cart cashier catalog price |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	price := cashier checkout: cart.
+	
+	self assert: 5 + (2*2.5) equals: price! !
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 21:21:53' prior: 50476211!
+test04_
+	
+	| cart cashier catalog price creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: self invalidCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	price := cashier checkout: cart withCard: creditCard.
+	
+	self assert: 5 + (2*2.5) equals: price! !
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 21:37:42'!
+test02CantCreateCreditCardWithBlankOwnerName
+
+	self should:[CreditCard for: ' ' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+
+!methodRemoval: XXXTest #test02 stamp: 'AEC 6/6/2022 21:37:46'!
+test02
+
+	self should:[CreditCard for: ' ' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription!
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 21:38:10'!
+test03CantCreateCreditCardWithInvalidNumberOfDigits
+
+	self should:[CreditCard for: 'Alan Kay' number: self invalidCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription! !
+
+!methodRemoval: XXXTest #test03 stamp: 'AEC 6/6/2022 21:38:10'!
+test03
+
+	self should:[CreditCard for: 'Alan Kay' number: self invalidCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription!
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 21:38:30' prior: 50476223!
+test04_
+	
+	| cart cashier catalog price creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	price := cashier checkout: cart withCard: creditCard.
+	
+	self assert: 5 + (2*2.5) equals: price! !
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 21:49:54' prior: 50476277!
+test04_
+	
+	| cart cashier catalog creditCard expectedSale salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	cashier checkout: cart withCard: creditCard.
+	
+	expectedSale := cart listContents -> (5 + (2*2.5)).
+	
+	self assert: 1 equals: salesList size.
+	self assert: salesList includes: expectedSale! !
+
+!testRun: #XXXTest #test04_ stamp: 'AEC 6/6/2022 21:50:08'!
+ERROR!
+
+!testRun: #XXXTest #test04_ stamp: 'AEC 6/6/2022 21:50:08'!
+ERROR!
+!Cashier class methodsFor: 'instance creation' stamp: 'AEC 6/6/2022 21:50:16'!
+for: anOrderedCollection 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: anOrderedCollection ! !
+!Cashier class methodsFor: 'instance creation' stamp: 'AEC 6/6/2022 21:51:52' prior: 50476319!
+for: aSalesList
+	
+	^self new initializeFor: aSalesList! !
+
+!testRun: #XXXTest #test04_ stamp: 'AEC 6/6/2022 21:51:53'!
+ERROR!
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'AEC 6/6/2022 21:52:01'!
+Object subclass: #Cashier
+	instanceVariableNames: 'salesList'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:52:01'!
+initializeFor: aSalesList 
+	self shouldBeImplemented.
+	salesList := aSalesList.! !
+!Cashier methodsFor: 'initialization' stamp: 'AEC 6/6/2022 21:52:06' prior: 50476341!
+initializeFor: aSalesList 
+	
+	salesList := aSalesList.! !
+
+!testRun: #XXXTest #test04_ stamp: 'AEC 6/6/2022 21:52:07'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:52:12'!
+checkout: aCart withCard: aCreditCard 
+	self shouldBeImplemented.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:52:38' prior: 50476354!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	^ aCart value! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/6/2022 21:53:19' prior: 50476359!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	
+	salesList add: aCart listContents -> aCart value.! !
+
+!testRun: #XXXTest #test04_ stamp: 'AEC 6/6/2022 21:53:28'!
+PASSED!
+
+!testRun: #XXXTest #test04_ stamp: 'AEC 6/6/2022 21:53:41'!
+PASSED!
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/6/2022 21:56:35'!
+test04SaleIsRegisteredOnSalesListWithContentsAndPrice
+	
+	| cart cashier catalog creditCard expectedSale salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	cashier checkout: cart withCard: creditCard.
+	
+	expectedSale := cart listContents -> (5 + (2*2.5)).
+	
+	self assert: 1 equals: salesList size.
+	self assert: salesList includes: expectedSale! !
+
+!methodRemoval: XXXTest #test04_ stamp: 'AEC 6/6/2022 21:56:57'!
+test04_
+	
+	| cart cashier catalog creditCard expectedSale salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	cashier checkout: cart withCard: creditCard.
+	
+	expectedSale := cart listContents -> (5 + (2*2.5)).
+	
+	self assert: 1 equals: salesList size.
+	self assert: salesList includes: expectedSale!
+
+----QUIT----(6 June 2022 21:59:57) CuisUniversity-5096.image priorSource: 4596765!
+
+----STARTUP---- (7 June 2022 21:12:02) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/TusLibros-02/linux64/CuisUniversity-5096.image!
+
+
+!testRun: #XXXTest #test01 stamp: 'AEC 6/7/2022 21:12:25'!
+PASSED!
+
+!testRun: #XXXTest #test02CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:12:26'!
+PASSED!
+
+!testRun: #XXXTest #test03CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:12:26'!
+PASSED!
+
+!testRun: #XXXTest #test04SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:12:26'!
+PASSED!
+
+!testRun: #XXXTest #test05_ stamp: 'AEC 6/7/2022 21:12:26'!
+ERROR!
+
+!testRun: #XXXTest #test05_ stamp: 'AEC 6/7/2022 21:12:26'!
+ERROR!
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:13:36'!
+test05SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.
+	
+	self should:[cashier checkout: cart usingCard: creditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardNumberOfDigitsErrorDescription.! !
+
+!methodRemoval: XXXTest #test05_ stamp: 'AEC 6/7/2022 21:13:36'!
+test05_
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: 123 expiringOn: August,2022.
+	
+	self should:[cashier checkout: cart usingCard: creditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardNumberOfDigitsErrorDescription.!
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:16:52' prior: 50476443!
+test05SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self expiredMonthOfYear.
+	
+	self should:[cashier checkout: cart usingCard: creditCard]
+		raise: Error
+		withMessageText: Cashier expiredCreditCardErrorDescription.! !
+
+!testRun: #XXXTest #test05SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:16:54'!
+ERROR!
+!XXXTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:17:06' prior: 50476477!
+test05SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self expiredMonthOfYear.
+	
+	self should:[cashier checkout: cart withCard: creditCard]
+		raise: Error
+		withMessageText: Cashier expiredCreditCardErrorDescription.! !
+
+!testRun: #XXXTest #test01 stamp: 'AEC 6/7/2022 21:17:09'!
+PASSED!
+
+!testRun: #XXXTest #test02CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:17:09'!
+PASSED!
+
+!testRun: #XXXTest #test03CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:17:09'!
+PASSED!
+
+!testRun: #XXXTest #test04SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:17:09'!
+PASSED!
+
+!testRun: #XXXTest #test05SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:17:09'!
+ERROR!
+
+!testRun: #XXXTest #test05SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:17:09'!
+ERROR!
+!Cashier class methodsFor: 'error-description' stamp: 'AEC 6/7/2022 21:17:15'!
+expiredCreditCardErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'error-description' stamp: 'AEC 6/7/2022 21:17:36' prior: 50476537!
+expiredCreditCardErrorDescription
+	
+	^'La tarjeta de credito esta vencida.'! !
+
+!testRun: #XXXTest #test05SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:17:36'!
+FAILURE!
+
+!classRenamed: #XXXTest as: #CheckoutTest stamp: 'AEC 6/7/2022 21:18:04'!
+Smalltalk renameClassNamed: #XXXTest as: #CheckoutTest!
+
+!methodRemoval: Cashier #checkout: stamp: 'AEC 6/7/2022 21:18:29'!
+checkout: aCart
+
+	self assertCartIsNotEmpty: aCart.
+	^ aCart value!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:19:05' prior: 50475593!
+test01
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription! !
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:19:17' prior: 50476376!
+test04SaleIsRegisteredOnSalesListWithContentsAndPrice
+	
+	| cart cashier catalog expectedSale salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	expectedSale := cart listContents -> (5 + (2*2.5)).
+	
+	self assert: 1 equals: salesList size.
+	self assert: salesList includes: expectedSale! !
+!CheckoutTest methodsFor: 'test-support' stamp: 'AEC 6/7/2022 21:20:42'!
+validCreditCard
+
+	^CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.! !
+
+!testRun: #CheckoutTest #test01 stamp: 'AEC 6/7/2022 21:20:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:20:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test03CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:20:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:20:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:20:50'!
+FAILURE!
+
+!testRun: #CheckoutTest #test05SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:20:50'!
+FAILURE!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:21:27'!
+test03_
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription! !
+
+!methodRemoval: CheckoutTest #test01 stamp: 'AEC 6/7/2022 21:21:27'!
+test01
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:21:35'!
+test01CantCreateCreditCardWithBlankOwnerName
+
+	self should:[CreditCard for: ' ' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+
+!methodRemoval: CheckoutTest #test02CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:21:35'!
+test02CantCreateCreditCardWithBlankOwnerName
+
+	self should:[CreditCard for: ' ' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:21:39'!
+test02CantCreateCreditCardWithInvalidNumberOfDigits
+
+	self should:[CreditCard for: 'Alan Kay' number: self invalidCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription! !
+
+!methodRemoval: CheckoutTest #test03CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:21:39'!
+test03CantCreateCreditCardWithInvalidNumberOfDigits
+
+	self should:[CreditCard for: 'Alan Kay' number: self invalidCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:22:08'!
+test03SaleisNotRegisteredWhenCartIsEmpty
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription! !
+
+!methodRemoval: CheckoutTest #test03_ stamp: 'AEC 6/7/2022 21:22:08'!
+test03_
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withMessageText: Cashier emptyCartErrorDescription!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:22:21'!
+test05SaleIsRegisteredOnSalesListWithContentsAndPrice
+	
+	| cart cashier catalog expectedSale salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	expectedSale := cart listContents -> (5 + (2*2.5)).
+	
+	self assert: 1 equals: salesList size.
+	self assert: salesList includes: expectedSale! !
+
+!methodRemoval: CheckoutTest #test04SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:22:21'!
+test04SaleIsRegisteredOnSalesListWithContentsAndPrice
+	
+	| cart cashier catalog expectedSale salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	expectedSale := cart listContents -> (5 + (2*2.5)).
+	
+	self assert: 1 equals: salesList size.
+	self assert: salesList includes: expectedSale!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:22:26'!
+test04SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self expiredMonthOfYear.
+	
+	self should:[cashier checkout: cart withCard: creditCard]
+		raise: Error
+		withMessageText: Cashier expiredCreditCardErrorDescription.! !
+
+!methodRemoval: CheckoutTest #test05SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:22:26'!
+test05SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	cashier := Cashier new.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self expiredMonthOfYear.
+	
+	self should:[cashier checkout: cart withCard: creditCard]
+		raise: Error
+		withMessageText: Cashier expiredCreditCardErrorDescription.!
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:23:31' prior: 50476680!
+test03SaleisNotRegisteredWhenCartIsEmpty
+	
+	| cart cashier catalog |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	cashier := Cashier new.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cashier emptyCartErrorDescription	 equals: anError messageText.
+			self assert: cart isEmpty
+		].! !
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:24:46' prior: 50476780!
+test03SaleisNotRegisteredWhenCartIsEmpty
+	
+	| cart cashier catalog salesList |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cashier emptyCartErrorDescription	 equals: anError messageText.
+			self assert: cart isEmpty
+		].! !
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:24:52' prior: 50476742!
+test04SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self expiredMonthOfYear.
+	
+	self should:[cashier checkout: cart withCard: creditCard]
+		raise: Error
+		withMessageText: Cashier expiredCreditCardErrorDescription.! !
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:25:04' prior: 50476795!
+test03SaleisNotRegisteredWhenCartIsEmpty
+	
+	| cart cashier catalog salesList |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cashier emptyCartErrorDescription	 equals: anError messageText.
+			self assert: salesList isEmpty
+		].! !
+!CheckoutTest methodsFor: 'tests' stamp: 'AEC 6/7/2022 21:25:30' prior: 50476812!
+test04SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self expiredMonthOfYear.
+	
+	self should:[cashier checkout: cart withCard: creditCard]
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cashier expiredCreditCardErrorDescription	 equals: anError messageText.
+			self assert: salesList isEmpty
+		].! !
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:25:33'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:25:33'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'AEC 6/7/2022 21:25:33'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:25:33'!
+FAILURE!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:25:33'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:25:33'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:26:29'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:26:29'!
+FAILURE!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'AEC 6/7/2022 21:26:37'!
+PASSED!
+
+FixedGregorianDate today monthOfYear!
+
+FixedGregorianDate today!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/7/2022 21:29:16' prior: 50476365!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	aCreditCard isExpiredOn: FixedGregorianDate today.
+	salesList add: aCart listContents -> aCart value.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'AEC 6/7/2022 21:29:45' prior: 50476908!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	salesList add: aCart listContents -> aCart value.! !
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:29:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:29:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'AEC 6/7/2022 21:29:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:29:50'!
+FAILURE!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:29:50'!
+ERROR!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:30:03'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:30:03'!
+FAILURE!
+!CreditCard methodsFor: 'nil' stamp: 'AEC 6/7/2022 21:32:00'!
+isExpiredOn: aFixedGregorianDate
+
+	expirationMonthOfYear lastDate < aFixedGregorianDate! !
+
+FixedGregorianDate today monthOfYear lastDate !
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:33:17'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:33:17'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'AEC 6/7/2022 21:33:17'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:33:17'!
+FAILURE!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:33:17'!
+ERROR!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:33:23'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:33:23'!
+FAILURE!
+!CheckoutTest methodsFor: 'test-support' stamp: 'AEC 6/7/2022 21:33:55' prior: 50476000!
+expiredMonthOfYear
+	
+	^FixedGregorianDate today monthOfYear previous! !
+!CheckoutTest methodsFor: 'test-support' stamp: 'AEC 6/7/2022 21:34:03' prior: 50475993!
+nonExpiredMonthOfYear
+	
+	^FixedGregorianDate today monthOfYear next! !
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:34:09'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:34:09'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'AEC 6/7/2022 21:34:09'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:34:09'!
+FAILURE!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:34:09'!
+ERROR!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:34:14'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:34:14'!
+FAILURE!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:35:00'!
+ERROR!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:35:00'!
+ERROR!
+!CreditCard methodsFor: 'as yet unclassified' stamp: 'AEC 6/7/2022 21:35:10' prior: 50476952!
+isExpiredOn: aFixedGregorianDate
+
+	^ expirationMonthOfYear lastDate < aFixedGregorianDate! !
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'AEC 6/7/2022 21:35:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'AEC 6/7/2022 21:35:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'AEC 6/7/2022 21:35:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'AEC 6/7/2022 21:35:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'AEC 6/7/2022 21:35:34'!
+PASSED!
+
+----QUIT----(7 June 2022 22:16:57) CuisUniversity-5096.image priorSource: 4632591!
+
+----STARTUP---- (7 June 2022 22:17:05) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/TusLibros-02/linux64/CuisUniversity-5096.image!
+
+
+----QUIT----(7 June 2022 22:17:15) CuisUniversity-5096.image priorSource: 4652855!
+
+----STARTUP---- (8 June 2022 19:47:18) as C:\Users\Fede\Documents\Cuis-limpio\windows64 - Copy\CuisUniversity-5096.image!
+
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 19:49:53' prior: 50476638!
+test01CantCreateCreditCardWithBlankOwnerName
+
+	self should: [CreditCard for: ' ' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard emptyOwnerNameErrorDescription! !
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 19:49:57' prior: 50476658!
+test02CantCreateCreditCardWithInvalidNumberOfDigits
+
+	self should: [CreditCard for: 'Alan Kay' number: self invalidCreditCardNumber expiringOn: self nonExpiredMonthOfYear]
+		raise: Error
+		withMessageText: CreditCard invalidNumberOfDigitsErrorDescription! !
+
+'Una Persona Con Un Nombre Super Muy Pero Muy Largo' size!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 20:12:41'!
+test06
+	
+	| cart cashier catalog salesList cardWithLongName |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	cardWithLongName := CreditCard for: 'Una Persona Con Un Nombre Super Muy Pero Muy Largo' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	
+	self
+		should: [ cashier checkout: cart withCard: cardWithLongName ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier nameTooLongToSendToMerchantProcessor.
+			self assert: salesList isEmpty ]! !
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:12:52'!
+FAILURE!
+!Cashier class methodsFor: 'error-description' stamp: 'fm 6/8/2022 20:13:35'!
+nameTooLongToSendToMerchantProcessor
+	
+	^'El nombre del cliente debe tener como maximo 30 digitos.'! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:14:34' prior: 50476917!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self validateToSendToMerchantProcessor.
+	
+	salesList add: aCart listContents -> aCart value.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:15:58' prior: 50477122!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self validateToSendToMerchantProcessor: aCreditCard.
+	
+	salesList add: aCart listContents -> aCart value.! !
+
+self!
+
+self!
+!CreditCard methodsFor: 'initialization' stamp: 'fm 6/8/2022 20:17:13'!
+owner
+
+	^ owner! !
+!CreditCard class methodsFor: 'initialization' stamp: 'fm 6/8/2022 20:18:32'!
+assertNumberHas16Digits: aCreditCardNumber
+
+	((aCreditCardNumber numberOfDigitsInBase: 10) = 16) ifFalse:[ self error: self class invalidNumberOfDigitsErrorDescription ]! !
+
+!methodRemoval: CreditCard #assertNumberHas16Digits: stamp: 'fm 6/8/2022 20:18:32'!
+assertNumberHas16Digits: aCreditCardNumber
+
+	((aCreditCardNumber numberOfDigitsInBase: 10) = 16) ifFalse:[ self error: self class invalidNumberOfDigitsErrorDescription ]!
+!CreditCard class methodsFor: 'testing' stamp: 'fm 6/8/2022 20:18:41'!
+assertOwnerNameIsNotBlank: anOwner
+
+	anOwner withBlanksTrimmed isEmpty ifTrue:[ self error: self class emptyOwnerNameErrorDescription ].! !
+
+!methodRemoval: CreditCard #assertOwnerNameIsNotBlank: stamp: 'fm 6/8/2022 20:18:41'!
+assertOwnerNameIsNotBlank: anOwner
+
+	anOwner withBlanksTrimmed isEmpty ifTrue:[ self error: self class emptyOwnerNameErrorDescription ].!
+!CreditCard methodsFor: 'initialization' stamp: 'fm 6/8/2022 20:18:51' prior: 50476147!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+
+	owner := anOwner.
+	number := aCreditCardNumber.
+	expirationMonthOfYear := aGregorianMonthOfYear! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'fm 6/8/2022 20:19:54' prior: 50475752!
+for: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear 
+
+	self assertNumberHas16Digits: aCreditCardNumber.
+	self assertOwnerNameIsNotBlank: anOwner.
+	
+	^ self new initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:21:24'!
+validateToSendToMerchantProcessor: aCreditCard
+
+	aCreditCard owner size > 30 ifTrue: [ self error: self class nameTooLongToSendToMerchantProcessor ]! !
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:21:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 20:21:37'!
+FAILURE!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 20:21:37'!
+FAILURE!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 20:21:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 20:21:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 20:21:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:21:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 20:21:48'!
+FAILURE!
+!CreditCard class methodsFor: 'asserting' stamp: 'fm 6/8/2022 20:22:21' prior: 50477151!
+assertNumberHas16Digits: aCreditCardNumber
+
+	((aCreditCardNumber numberOfDigitsInBase: 10) = 16) ifFalse:[ self error: self invalidNumberOfDigitsErrorDescription ]! !
+!CreditCard class methodsFor: 'asserting' stamp: 'fm 6/8/2022 20:22:26' prior: 50477167!
+assertOwnerNameIsNotBlank: anOwner
+
+	anOwner withBlanksTrimmed isEmpty ifTrue:[ self error: self emptyOwnerNameErrorDescription ].! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:22:30'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 20:22:30'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 20:22:30'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 20:22:30'!
+FAILURE!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 20:22:30'!
+FAILURE!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 20:22:30'!
+FAILURE!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 20:22:30'!
+ERROR!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:22:30'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:22:53'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 20:22:55'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 20:22:55'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 20:22:55'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 20:22:55'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 20:22:55'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:22:55'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 20:23:02'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:23:02'!
+ERROR!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 20:23:02'!
+ERROR!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 20:23:02'!
+ERROR!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 20:23:02'!
+FAILURE!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 20:23:02'!
+FAILURE!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 20:23:02'!
+FAILURE!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 20:23:02'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 20:23:02'!
+ERROR!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:23:04'!
+ERROR!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 20:23:24'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:23:27'!
+ERROR!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:23:27'!
+ERROR!
+!CartTest methodsFor: 'test-support' stamp: 'fm 6/8/2022 20:24:09' prior: 50474849!
+emptyCartWithTwoBookCatalog
+
+	^ Cart for: (Dictionary with: 1->5 with: 2->2.5)! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 20:24:10'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:24:11'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 20:24:11'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 20:24:11'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 20:24:11'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 20:24:11'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 20:24:11'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 20:24:11'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 20:24:11'!
+ERROR!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 20:24:11'!
+ERROR!
+!CartTest methodsFor: 'tests' stamp: 'fm 6/8/2022 20:25:07' prior: 50475343!
+test09ListOfCartWithBooksReturnsBooksAndQuantities
+
+	| cart catalog expectedResult |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5 with: 3->1.
+	cart := Cart for: catalog.
+	
+	cart addBook: 1 quantity: 2.
+	cart addBook: 2 quantity: 3.
+	cart addBook: 3 quantity: 7.
+	cart addBook: 1 quantity: 2.
+	
+	expectedResult := SortedCollection with: 1->4 with: 2->3 with: 3->7.
+	self assert: expectedResult equals: cart listContents ! !
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 20:25:09'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:25:12'!
+PASSED!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 20:29:05'!
+test07
+	
+	| cart cashier catalog salesList |
+	
+	catalog := Dictionary with: 1->5000000000000000 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	
+	self
+		should: [ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier amountTooBigToSendToMerchantProcessor.
+			self assert: salesList isEmpty ]! !
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 20:29:10'!
+FAILURE!
+!Cashier class methodsFor: 'error-description' stamp: 'fm 6/8/2022 20:29:42'!
+amountTooBigToSendToMerchantProcessor
+	
+	^'El monto puede tener hasta 15 digitos.'! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:33:03' prior: 50477134!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self validateToSendToMerchantProcessor: aCreditCard.
+	self assertValidAmountToSendToMerchantProcessor: aCart value.
+	salesList add: aCart listContents -> aCart value.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:33:30'!
+assertNameIsValidToSendToMerchantProcessor: aCreditCard
+
+	aCreditCard owner size > 30 ifTrue: [ self error: self class nameTooLongToSendToMerchantProcessor ]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:33:30' prior: 50477523!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertValidAmountToSendToMerchantProcessor: aCart value.
+	salesList add: aCart listContents -> aCart value.! !
+
+!methodRemoval: Cashier #validateToSendToMerchantProcessor: stamp: 'fm 6/8/2022 20:33:30'!
+validateToSendToMerchantProcessor: aCreditCard
+
+	aCreditCard owner size > 30 ifTrue: [ self error: self class nameTooLongToSendToMerchantProcessor ]!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:33:49' prior: 50477545!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertIsValidAmountToSendToMerchantProcessor: aCart value.
+	salesList add: aCart listContents -> aCart value.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:34:55' prior: 50477568!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertAmountIsValidToSendToMerchantProcessor: aCart value.
+	salesList add: aCart listContents -> aCart value.! !
+
+1500000.12 numberOfDigitsInBase: 10!
+
+1500000.12 numberOfDigitsInBase: 10!
+
+10!
+
+1500000.12 truncated numberOfDigitsInBase: 10!
+
+9999999.12 truncated numberOfDigitsInBase: 10 !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:40:16'!
+assertAmountIsValidToSendToMerchantProcessor: anAmount
+
+	(anAmount truncated numberOfDigitsInBase: 10)  > 15 ifTrue: [ self error: self class amountTooBigToSendToMerchantProcessor ]! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 20:40:20' prior: 50477583!
+checkout: aCart withCard: aCreditCard 
+	
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertAmountIsValidToSendToMerchantProcessor: aCart value.
+	
+	salesList add: aCart listContents -> aCart value.! !
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 20:40:25'!
+PASSED!
+
+!classDefinition: #MerchantProcessorTestDouble category: 'TusLibros' stamp: 'fm 6/8/2022 20:54:38'!
+Object subclass: #MerchantProcessorTestDouble
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 20:57:30'!
+test08
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := MerchantProcessorTestDouble new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	self assert: '10.00' equals: merchantProcessor amountReceived! !
+!Cashier class methodsFor: 'instance creation' stamp: 'fm 6/8/2022 20:58:33'!
+for: aSalesList debitingTo: aMerchantProcessor
+	
+	^self new initializeFor: aSalesList debitingTo: aMerchantProcessor ! !
+
+!classDefinition: #Cashier category: 'TusLibros' stamp: 'fm 6/8/2022 20:58:49'!
+Object subclass: #Cashier
+	instanceVariableNames: 'salesList merchantProcessor'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!Cashier methodsFor: 'initialization' stamp: 'fm 6/8/2022 20:58:47'!
+initializeFor: aSalesList debitingTo: aMerchantProcessor 
+	
+	salesList := aSalesList.
+	merchantProcessor := aMerchantProcessor ! !
+!Cashier methodsFor: 'paying' stamp: 'fm 6/8/2022 21:00:50' prior: 50477612!
+checkout: aCart withCard: aCreditCard 
+	
+	| price |
+	
+	price := aCart value.
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertAmountIsValidToSendToMerchantProcessor: price.
+	
+	merchantProcessor debit: price from: aCreditCard.
+	salesList add: aCart listContents -> price.! !
+
+!classDefinition: #MerchantProcessorTestDouble category: 'TusLibros' stamp: 'fm 6/8/2022 21:01:37'!
+Object subclass: #MerchantProcessorTestDouble
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!MerchantProcessorTestDouble methodsFor: 'no messages' stamp: 'fm 6/8/2022 21:01:29'!
+debit: anAmount from: aCreditCard
+
+	amountReceived := anAmount! !
+!Cashier methodsFor: 'paying' stamp: 'fm 6/8/2022 21:01:47' prior: 50477697!
+checkout: aCart withCard: aCreditCard 
+	
+	| price |
+	
+	price := aCart value.
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertAmountIsValidToSendToMerchantProcessor: price.
+	
+	merchantProcessor debit: price from: aCreditCard.
+	salesList add: aCart listContents -> price! !
+!MerchantProcessorTestDouble methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 21:01:59'!
+amountReceived
+
+	^ amountReceived! !
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:02:44'!
+FAILURE!
+
+10.0!
+!Cashier methodsFor: 'paying' stamp: 'fm 6/8/2022 21:03:49' prior: 50477727!
+checkout: aCart withCard: aCreditCard 
+	
+	| price |
+	
+	price := aCart value.
+	self assertCartIsNotEmpty: aCart.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertAmountIsValidToSendToMerchantProcessor: price.
+	
+	merchantProcessor debit: (self formatAmount: price) from: aCreditCard.
+	salesList add: aCart listContents -> price! !
+
+10.0 fractionPart!
+
+10.0 printStringFractionDigits: 2!
+!Cashier methodsFor: 'paying' stamp: 'fm 6/8/2022 21:07:39'!
+formatAmount: anAmount
+
+	^ anAmount printStringFractionDigits: 2! !
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:07:42'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:07:42'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:07:42'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:07:42'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:07:42'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:07:42'!
+ERROR!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 21:07:42'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 21:07:42'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:07:42'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:07:57'!
+FAILURE!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:09:54'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:09:54'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:09:54'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:09:54'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:09:54'!
+ERROR!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 21:09:54'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 21:09:54'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:09:54'!
+PASSED!
+!CheckoutTest methodsFor: 'test-support' stamp: 'fm 6/8/2022 21:12:48'!
+cashierWithEmptySalesList
+
+	^ Cashier for: OrderedCollection new debitingTo: MerchantProcessorTestDouble new! !
+!CheckoutTest methodsFor: 'test-support' stamp: 'fm 6/8/2022 21:13:15'!
+cashierWith: aSalesList
+
+	^ Cashier for: aSalesList debitingTo: MerchantProcessorTestDouble new! !
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:13:22' prior: 50476850!
+test04SaleIsNotRegisteredWhenCreditCardIsExpired
+	
+	| cart cashier catalog creditCard salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := self cashierWith: salesList.
+	creditCard := CreditCard for: 'Alan Kay' number: self validCreditCardNumber expiringOn: self expiredMonthOfYear.
+	
+	self should:[cashier checkout: cart withCard: creditCard]
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cashier expiredCreditCardErrorDescription	 equals: anError messageText.
+			self assert: salesList isEmpty
+		].! !
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:13:36' prior: 50476833!
+test03SaleisNotRegisteredWhenCartIsEmpty
+	
+	| cart cashier catalog salesList |
+	
+	catalog := Set with: 1 with: 2.
+	cart := Cart for: catalog.
+	
+	salesList := OrderedCollection new.
+	cashier := self cashierWith: salesList.
+	
+	self should: [cashier checkout: cart withCard: self validCreditCard] 
+		raise: Error 
+		withExceptionDo: [ :anError |
+			self assert: Cashier emptyCartErrorDescription	 equals: anError messageText.
+			self assert: salesList isEmpty
+		].! !
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:13:39' prior: 50476703!
+test05SaleIsRegisteredOnSalesListWithContentsAndPrice
+	
+	| cart cashier catalog expectedSale salesList |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := self cashierWith: salesList.
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	expectedSale := cart listContents -> (5 + (2*2.5)).
+	
+	self assert: 1 equals: salesList size.
+	self assert: salesList includes: expectedSale! !
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:13:41'!
+FAILURE!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:13:41'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:13:41'!
+FAILURE!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:14:08'!
+FAILURE!
+!Cashier methodsFor: 'paying' stamp: 'fm 6/8/2022 21:14:52' prior: 50477752!
+checkout: aCart withCard: aCreditCard 
+	
+	| price |
+	
+	self assertCartIsNotEmpty: aCart.
+	price := aCart value.
+	(aCreditCard isExpiredOn: FixedGregorianDate today) ifTrue:[self error: self class expiredCreditCardErrorDescription].
+	self assertNameIsValidToSendToMerchantProcessor: aCreditCard.
+	self assertAmountIsValidToSendToMerchantProcessor: price.
+	
+	merchantProcessor debit: (self formatAmount: price) from: aCreditCard.
+	salesList add: aCart listContents -> price! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:14:58'!
+PASSED!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:20:17'!
+test09
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := FailingMerchantProcessorTestDouble new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	self
+		should:	[ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: 				FailingMerchantProcessorTestDouble cannotProcessDebit.
+			self assert: salesList isEmpty ]! !
+
+Object subclass: #FailingMerchantProcessorTestDouble
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #FailingMerchantProcessorTestDouble category: 'TusLibros' stamp: 'fm 6/8/2022 21:20:55'!
+Object subclass: #FailingMerchantProcessorTestDouble
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRenamed: #FailingMerchantProcessorTestDouble as: #FailingMerchantProcessorTestDoublep stamp: 'fm 6/8/2022 21:23:42'!
+Smalltalk renameClassNamed: #FailingMerchantProcessorTestDouble as: #FailingMerchantProcessorTestDoublep!
+
+!classRenamed: #FailingMerchantProcessorTestDoublep as: #FailingMerchantProcessorTestDouble stamp: 'fm 6/8/2022 21:23:49'!
+Smalltalk renameClassNamed: #FailingMerchantProcessorTestDoublep as: #FailingMerchantProcessorTestDouble!
+
+!classRenamed: #MerchantProcessorTestDouble as: #WorkingMerchantProcessor stamp: 'fm 6/8/2022 21:24:52'!
+Smalltalk renameClassNamed: #MerchantProcessorTestDouble as: #WorkingMerchantProcessor!
+!CheckoutTest methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 21:24:52' prior: 50477658!
+test08
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := WorkingMerchantProcessor new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	self assert: '10.00' equals: merchantProcessor amountReceived! !
+!CheckoutTest methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 21:24:52' prior: 50477830!
+cashierWithEmptySalesList
+
+	^ Cashier for: OrderedCollection new debitingTo: WorkingMerchantProcessor new! !
+!CheckoutTest methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 21:24:52' prior: 50477836!
+cashierWith: aSalesList
+
+	^ Cashier for: aSalesList debitingTo: WorkingMerchantProcessor new! !
+
+!classDefinition: #XXXXSD category: 'TusLibros' stamp: 'fm 6/8/2022 21:26:23'!
+Object subclass: #XXXXSD
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #WorkingMerchantProcessor category: 'TusLibros' stamp: 'fm 6/8/2022 21:26:23'!
+XXXXSD subclass: #WorkingMerchantProcessor
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+----SNAPSHOT----(8 June 2022 21:27:00) CuisUniversity-5096.image priorSource: 4653082!
+
+----QUIT----(8 June 2022 21:27:04) CuisUniversity-5096.image priorSource: 4686725!
+
+----STARTUP---- (8 June 2022 21:27:08) as C:\Users\Fede\Documents\Cuis-limpio\windows64 - Copy\CuisUniversity-5096.image!
+
+
+!classRenamed: #XXXXSD as: #MerchantProcessorTestTriple stamp: 'fm 6/8/2022 21:27:43'!
+Smalltalk renameClassNamed: #XXXXSD as: #MerchantProcessorTestTriple!
+
+MerchantProcessorTestTriple subclass: #FailingMerchantProcessorTestDouble
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #FailingMerchantProcessorTestDouble category: 'TusLibros' stamp: 'fm 6/8/2022 21:28:33'!
+MerchantProcessorTestTriple subclass: #FailingMerchantProcessorTestDouble
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!MerchantProcessorTestTriple methodsFor: 'no messages' stamp: 'fm 6/8/2022 21:28:50'!
+debit: anAmount from: aCreditCard
+
+	self subclassResponsibility ! !
+!FailingMerchantProcessorTestDouble methodsFor: 'no messages' stamp: 'fm 6/8/2022 21:29:19' overrides: 50478141!
+debit: anAmount from: aCreditCard
+
+	self error: self class cannotProcessDebit! !
+
+	self error: self class cannotProcessDebit!
+
+!testRun: #CheckoutTest #test09 stamp: 'fm 6/8/2022 21:29:39'!
+ERROR!
+
+self globals!
+
+Smalltalk globals!
+
+FailingMerchantProcessorTestDouble!
+
+FailingMerchantProcessorTestDouble!
+!FailingMerchantProcessorTestDouble class methodsFor: 'no messages' stamp: 'fm 6/8/2022 21:34:15'!
+cannotProcessDebit! !
+
+FailingMerchantProcessorTestDouble!
+
+TestCase subclass: #CheckoutTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #CheckoutTest category: 'TusLibros' stamp: 'fm 6/8/2022 21:35:06'!
+TestCase subclass: #CheckoutTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:35:15' prior: 50478008!
+test09
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := FailingMerchantProcessorTestDouble new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	self
+		should:	[ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: 				FailingMerchantProcessorTestDouble cannotProcessDebit.
+			self assert: salesList isEmpty ]! !
+
+!classDefinition: #MerchantProcessorTestDouble category: 'TusLibros' stamp: 'fm 6/8/2022 21:36:43'!
+Object subclass: #MerchantProcessorTestDouble
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+MerchantProcessorTestDouble!
+
+MerchantProcessorTestDouble subclass: #FailingMerchantProcessorTestDouble
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #FailingMerchantProcessorTestDouble category: 'TusLibros' stamp: 'fm 6/8/2022 21:37:06'!
+MerchantProcessorTestDouble subclass: #FailingMerchantProcessorTestDouble
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+MerchantProcessorTestDouble subclass: #WorkingMerchantProcessor
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classDefinition: #WorkingMerchantProcessor category: 'TusLibros' stamp: 'fm 6/8/2022 21:37:11'!
+MerchantProcessorTestDouble subclass: #WorkingMerchantProcessor
+	instanceVariableNames: 'amountReceived'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+!classRemoval: #MerchantProcessorTestTriple stamp: 'fm 6/8/2022 21:37:25'!
+Object subclass: #MerchantProcessorTestTriple
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!MerchantProcessorTestDouble methodsFor: 'no messages' stamp: 'fm 6/8/2022 21:37:41'!
+debit: anAmount from: aCreditCard
+
+	self subclassResponsibility ! !
+!FailingMerchantProcessorTestDouble class methodsFor: 'as yet unclassified' stamp: 'fm 6/8/2022 21:38:15' prior: 50478160!
+cannotProcessDebit
+
+	^ 'No se puede procesar el pago.'! !
+
+!testRun: #CheckoutTest #test09 stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CheckoutTest #test09 stamp: 'fm 6/8/2022 21:38:37'!
+PASSED!
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test06 stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!testRun: #CheckoutTest #test09 stamp: 'fm 6/8/2022 21:40:59'!
+PASSED!
+
+!classDefinition: #WorkingMerchantProcessor category: 'TusLibros' stamp: 'fm 6/8/2022 21:43:10'!
+MerchantProcessorTestDouble subclass: #WorkingMerchantProcessor
+	instanceVariableNames: 'amountReceived timesCalled'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+!WorkingMerchantProcessor methodsFor: 'paying' stamp: 'fm 6/8/2022 21:43:09' prior: 50477722 overrides: 50478243!
+debit: anAmount from: aCreditCard
+
+	amountReceived := anAmount.
+	timesCalled := timesCalled + 1! !
+!WorkingMerchantProcessor methodsFor: 'paying' stamp: 'fm 6/8/2022 21:43:17' overrides: 16920235!
+initialize
+
+	timesCalled := 0! !
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:44:34'!
+test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong
+	
+	| cart cashier catalog salesList cardWithLongName |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	cardWithLongName := CreditCard for: 'Una Persona Con Un Nombre Super Muy Pero Muy Largo' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	
+	self
+		should: [ cashier checkout: cart withCard: cardWithLongName ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier nameTooLongToSendToMerchantProcessor.
+			self assert: salesList isEmpty ]! !
+
+!methodRemoval: CheckoutTest #test06 stamp: 'fm 6/8/2022 21:44:34'!
+test06
+	
+	| cart cashier catalog salesList cardWithLongName |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	cardWithLongName := CreditCard for: 'Una Persona Con Un Nombre Super Muy Pero Muy Largo' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	
+	self
+		should: [ cashier checkout: cart withCard: cardWithLongName ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier nameTooLongToSendToMerchantProcessor.
+			self assert: salesList isEmpty ]!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:45:58' prior: 50478359!
+test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong
+	
+	| cart cashier catalog salesList cardWithLongName merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := WorkingMerchantProcessor new.
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	cardWithLongName := CreditCard for: 'Una Persona Con Un Nombre Super Muy Pero Muy Largo' number: self validCreditCardNumber expiringOn: self nonExpiredMonthOfYear.
+	
+	self
+		should: [ cashier checkout: cart withCard: cardWithLongName ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier nameTooLongToSendToMerchantProcessor.
+			self assert: salesList isEmpty.
+			self assert: merchantProcessor timesCalled isZero]! !
+!WorkingMerchantProcessor methodsFor: 'paying' stamp: 'fm 6/8/2022 21:46:15'!
+timesCalled
+
+	^ timesCalled ! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test07 stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+
+!testRun: #CheckoutTest #test09 stamp: 'fm 6/8/2022 21:46:18'!
+PASSED!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:46:54'!
+test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig
+	
+	| cart cashier catalog salesList |
+	
+	catalog := Dictionary with: 1->5000000000000000 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	
+	self
+		should: [ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier amountTooBigToSendToMerchantProcessor.
+			self assert: salesList isEmpty ]! !
+
+!methodRemoval: CheckoutTest #test07 stamp: 'fm 6/8/2022 21:46:54'!
+test07
+	
+	| cart cashier catalog salesList |
+	
+	catalog := Dictionary with: 1->5000000000000000 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList.
+	
+	self
+		should: [ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier amountTooBigToSendToMerchantProcessor.
+			self assert: salesList isEmpty ]!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:47:41' prior: 50478500!
+test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5000000000000000 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := WorkingMerchantProcessor new.
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	self
+		should: [ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: Cashier amountTooBigToSendToMerchantProcessor.
+			self assert: salesList isEmpty.
+			self assert: merchantProcessor timesCalled isZero ]! !
+
+!testRun: #CheckoutTest #test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test08 stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+
+!testRun: #CheckoutTest #test09 stamp: 'fm 6/8/2022 21:47:50'!
+PASSED!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:48:23'!
+test08AmountIsSentFormattedToMerchantProcessor
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := WorkingMerchantProcessor new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	self assert: '10.00' equals: merchantProcessor amountReceived! !
+
+!methodRemoval: CheckoutTest #test08 stamp: 'fm 6/8/2022 21:48:23'!
+test08
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := WorkingMerchantProcessor new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	cashier checkout: cart withCard: self validCreditCard.
+	
+	self assert: '10.00' equals: merchantProcessor amountReceived!
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:48:30' prior: 50478176!
+test09
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := FailingMerchantProcessorTestDouble new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	self
+		should:	[ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals:			FailingMerchantProcessorTestDouble cannotProcessDebit.
+			self assert: salesList isEmpty ]! !
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:48:37' prior: 50478635!
+test09
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := FailingMerchantProcessorTestDouble new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	self
+		should:	[ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: FailingMerchantProcessorTestDouble cannotProcessDebit.
+			self assert: salesList isEmpty ]! !
+!CheckoutTest methodsFor: 'tests' stamp: 'fm 6/8/2022 21:49:47'!
+test09CannotCheckoutWhenMerchantProcessorCannotProcessDebit
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := FailingMerchantProcessorTestDouble new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	self
+		should:	[ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: FailingMerchantProcessorTestDouble cannotProcessDebit.
+			self assert: salesList isEmpty ]! !
+
+!methodRemoval: CheckoutTest #test09 stamp: 'fm 6/8/2022 21:49:47'!
+test09
+	
+	| cart cashier catalog salesList merchantProcessor |
+	
+	catalog := Dictionary with: 1->5 with: 2->2.5.
+	cart := Cart for: catalog.
+	cart addBook: 1 quantity: 1.
+	cart addBook: 2 quantity: 2.
+	merchantProcessor := FailingMerchantProcessorTestDouble new.
+	
+	salesList := OrderedCollection new.
+	cashier := Cashier for: salesList debitingTo: merchantProcessor.
+	
+	self
+		should:	[ cashier checkout: cart withCard: self validCreditCard ]
+		raise: Error
+		withExceptionDo: [:anError |
+			self assert: anError messageText equals: FailingMerchantProcessorTestDouble cannotProcessDebit.
+			self assert: salesList isEmpty ]!
+
+!testRun: #CheckoutTest #test09CannotCheckoutWhenMerchantProcessorCannotProcessDebit stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test08AmountIsSentFormattedToMerchantProcessor stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!testRun: #CheckoutTest #test09CannotCheckoutWhenMerchantProcessorCannotProcessDebit stamp: 'fm 6/8/2022 21:49:56'!
+PASSED!
+
+!methodRemoval: Cashier class #for: stamp: 'fm 6/8/2022 21:50:35'!
+for: aSalesList
+	
+	^self new initializeFor: aSalesList!
+!Behavior method!
+for: aCatalog
+	^ [
+	([
+	(self coverAll:
+		{20 to: 23}) new ] valueCoveringAll:
+		{25 to: 27}) initializeFor:
+		(aCatalog
+			cover: (44 to: 51)
+			declaredAt: (6 to: 13)) ] valueCoveringAll:
+		{29 to: 42}.! !
+!Behavior method!
+initializeFor: aCatalog
+	(books _ [
+	(Bag
+		cover: (36 to: 38)
+		declaredAt: (36 to: 38)) new ] valueCoveringAll:
+		{40 to: 42})
+		cover: (27 to: 31)
+		declaredAt: (27 to: 31).
+	(catalog _ aCatalog
+		cover: (57 to: 64)
+		declaredAt: (16 to: 23))
+		cover: (46 to: 52)
+		declaredAt: (46 to: 52).! !
+!Behavior method!
+isEmpty
+	^ [
+	(books
+		cover: (14 to: 18)
+		declaredAt: (14 to: 18)) isEmpty ] valueCoveringAll:
+		{20 to: 26}.! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+addBook: aBookISBN quantity: aQuantity
+	[
+	(self coverAll:
+		{44 to: 47}) assertBookIsInCatalog:
+		(aBookISBN
+			cover: (72 to: 80)
+			declaredAt: (10 to: 18)) ] valueCoveringAll:
+		{49 to: 70}.
+	[
+	(self coverAll:
+		{84 to: 87}) assertQuantityIsValid:
+		(aQuantity
+			cover: (112 to: 120)
+			declaredAt: (30 to: 38)) ] valueCoveringAll:
+		{89 to: 110}.
+	[
+	(books
+		cover: (124 to: 128)
+		declaredAt: (124 to: 128))
+		add:
+			(aBookISBN
+				cover: (135 to: 143)
+				declaredAt: (10 to: 18))
+		withOccurrences:
+			(aQuantity
+				cover: (162 to: 170)
+				declaredAt: (30 to: 38)) ] valueCoveringAll:
+		{130 to: 133. 145 to: 160}.! !
+!Behavior method!
+assertBookIsInCatalog: aBookISBN
+	[
+	([
+	(catalog
+		cover: (37 to: 43)
+		declaredAt: (37 to: 43)) includesKey:
+		(aBookISBN
+			cover: (58 to: 66)
+			declaredAt: (24 to: 32)) ] valueCoveringAll:
+		{45 to: 56}) ifFalse: [
+		[
+		(self coverAll:
+			{78 to: 81}) error:
+			([
+			([
+			(self coverAll:
+				{90 to: 93}) class ] valueCoveringAll:
+				{95 to: 99}) bookNotInCatalogErrorDescription ] valueCoveringAll:
+				{101 to: 132}) ] valueCoveringAll:
+			{83 to: 88} ]] valueCoveringAll:
+		{69 to: 76}.! !
+!Behavior method!
+assertQuantityIsValid: aQuantity
+	[
+	([
+	(aQuantity
+		cover: (36 to: 44)
+		declaredAt: (24 to: 32)) >
+		(0 coverAll:
+			{48 to: 48}) ] valueCoveringAll:
+		{46 to: 46}) ifFalse: [
+		[
+		(self coverAll:
+			{59 to: 62}) error:
+			([
+			([
+			(self coverAll:
+				{71 to: 74}) class ] valueCoveringAll:
+				{76 to: 80}) nonPositiveBookQuantityErrorDescription ] valueCoveringAll:
+				{82 to: 120}) ] valueCoveringAll:
+			{64 to: 69} ]] valueCoveringAll:
+		{50 to: 57}.
+	[
+	([
+	(aQuantity
+		cover: (126 to: 134)
+		declaredAt: (24 to: 32)) isInteger ] valueCoveringAll:
+		{136 to: 144}) ifFalse: [
+		[
+		(self coverAll:
+			{155 to: 158}) error:
+			([
+			([
+			(self coverAll:
+				{167 to: 170}) class ] valueCoveringAll:
+				{172 to: 176}) nonIntegerBookQuantityErrorDescription ] valueCoveringAll:
+				{178 to: 215}) ] valueCoveringAll:
+			{160 to: 165} ]] valueCoveringAll:
+		{146 to: 153}.! !
+!Behavior method!
+hasBook: aBookISBN
+	^ [
+	(books
+		cover: (25 to: 29)
+		declaredAt: (25 to: 29)) includes:
+		(aBookISBN
+			cover: (41 to: 49)
+			declaredAt: (10 to: 18)) ] valueCoveringAll:
+		{31 to: 39}.! !
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+quantityOfBooksWithISBN: aBookISBN
+	^ [
+	(books
+		cover: (42 to: 46)
+		declaredAt: (42 to: 46)) occurrencesOf:
+		(aBookISBN
+			cover: (63 to: 71)
+			declaredAt: (26 to: 34)) ] valueCoveringAll:
+		{48 to: 61}.! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+bookNotInCatalogErrorDescription
+	^ 'El libro no se encuentra en el catalogo.' coverAll:
+		{38 to: 79}.! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+nonPositiveBookQuantityErrorDescription
+	^ 'La cantidad de libros a agregar no es positiva.' coverAll:
+		{45 to: 93}.! !
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+nonIntegerBookQuantityErrorDescription
+	^ 'La cantidad de libros a agregar no es un numero entero.' coverAll:
+		{44 to: 100}.! !
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+listContents
+	^ [
+	(books
+		cover: (18 to: 22)
+		declaredAt: (18 to: 22)) sortedElements ] valueCoveringAll:
+		{24 to: 37}.! !
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+emptyOwnerNameErrorDescription
+	^ 'El nombre de titular de la tarjeta esta vacio' coverAll:
+		{37 to: 83}.! !
+!Behavior method!
+for: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear
+	[
+	(self coverAll:
+		{77 to: 80}) assertNumberHas16Digits:
+		(aCreditCardNumber
+			cover: (107 to: 123)
+			declaredAt: (22 to: 38)) ] valueCoveringAll:
+		{82 to: 105}.
+	[
+	(self coverAll:
+		{127 to: 130}) assertOwnerNameIsNotBlank:
+		(anOwner
+			cover: (159 to: 165)
+			declaredAt: (6 to: 12)) ] valueCoveringAll:
+		{132 to: 157}.
+	^ [
+	([
+	(self coverAll:
+		{173 to: 176}) new ] valueCoveringAll:
+		{178 to: 180})
+		initializeFor:
+			(anOwner
+				cover: (197 to: 203)
+				declaredAt: (6 to: 12))
+		number:
+			(aCreditCardNumber
+				cover: (213 to: 229)
+				declaredAt: (22 to: 38))
+		expiringOn:
+			(aGregorianMonthOfYear
+				cover: (243 to: 263)
+				declaredAt: (52 to: 72)) ] valueCoveringAll:
+		{182 to: 195. 205 to: 211. 231 to: 241}.! !
+!Behavior method!
+assertNumberHas16Digits: aCreditCardNumber
+	[
+	([
+	([
+	(aCreditCardNumber
+		cover: (48 to: 64)
+		declaredAt: (26 to: 42)) numberOfDigitsInBase:
+		(10 coverAll:
+			{88 to: 89}) ] valueCoveringAll:
+		{66 to: 86}) =
+		(16 coverAll:
+			{94 to: 95}) ] valueCoveringAll:
+		{92 to: 92}) ifFalse: [
+		[
+		(self coverAll:
+			{108 to: 111}) error:
+			([
+			(self coverAll:
+				{120 to: 123}) invalidNumberOfDigitsErrorDescription ] valueCoveringAll:
+				{125 to: 161}) ] valueCoveringAll:
+			{113 to: 118} ]] valueCoveringAll:
+		{98 to: 105}.! !
+!Behavior method!
+assertOwnerNameIsNotBlank: anOwner
+	[
+	([
+	([
+	(anOwner
+		cover: (38 to: 44)
+		declaredAt: (28 to: 34)) withBlanksTrimmed ] valueCoveringAll:
+		{46 to: 62}) isEmpty ] valueCoveringAll:
+		{64 to: 70}) ifTrue: [
+		[
+		(self coverAll:
+			{81 to: 84}) error:
+			([
+			(self coverAll:
+				{93 to: 96}) emptyOwnerNameErrorDescription ] valueCoveringAll:
+				{98 to: 127}) ] valueCoveringAll:
+			{86 to: 91} ]] valueCoveringAll:
+		{72 to: 78}.! !
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+invalidNumberOfDigitsErrorDescription
+	^ 'El numero de tarjeta no tiene 16 digitos.' coverAll:
+		{43 to: 85}.! !
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+initialize
+	(timesCalled _ 0 coverAll:
+		{28 to: 29})
+		cover: (14 to: 24)
+		declaredAt: (14 to: 24).! !
+!Behavior method!
+for: aSalesList debitingTo: aMerchantProcessor
+	^ [
+	([
+	(self coverAll:
+		{52 to: 55}) new ] valueCoveringAll:
+		{57 to: 59})
+		initializeFor:
+			(aSalesList
+				cover: (76 to: 85)
+				declaredAt: (6 to: 15))
+		debitingTo:
+			(aMerchantProcessor
+				cover: (99 to: 116)
+				declaredAt: (29 to: 46)) ] valueCoveringAll:
+		{61 to: 74. 87 to: 97}.! !
+!Behavior method!
+initializeFor: aSalesList debitingTo: aMerchantProcessor
+	(salesList _ aSalesList
+		cover: (75 to: 84)
+		declaredAt: (16 to: 25))
+		cover: (62 to: 70)
+		declaredAt: (62 to: 70).
+	(merchantProcessor _ aMerchantProcessor
+		cover: (109 to: 126)
+		declaredAt: (39 to: 56))
+		cover: (88 to: 104)
+		declaredAt: (88 to: 104).! !
+!Behavior method!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear
+	(owner _ anOwner
+		cover: (96 to: 102)
+		declaredAt: (16 to: 22))
+		cover: (87 to: 91)
+		declaredAt: (87 to: 91).
+	(number _ aCreditCardNumber
+		cover: (116 to: 132)
+		declaredAt: (32 to: 48))
+		cover: (106 to: 111)
+		declaredAt: (106 to: 111).
+	(expirationMonthOfYear _ aGregorianMonthOfYear
+		cover: (161 to: 181)
+		declaredAt: (62 to: 82))
+		cover: (136 to: 156)
+		declaredAt: (136 to: 156).! !
+!Behavior method!
+checkout: aCart withCard: aCreditCard
+	| price |
+	[
+	(self coverAll:
+		{56 to: 59}) assertCartIsNotEmpty:
+		(aCart
+			cover: (83 to: 87)
+			declaredAt: (11 to: 15)) ] valueCoveringAll:
+		{61 to: 81}.
+	(price _ [
+	(aCart
+		cover: (100 to: 104)
+		declaredAt: (11 to: 15)) value ] valueCoveringAll:
+		{106 to: 110})
+		cover: (91 to: 95)
+		declaredAt: (45 to: 49).
+	[
+	([
+	(aCreditCard
+		cover: (115 to: 125)
+		declaredAt: (27 to: 37)) isExpiredOn:
+		([
+		(FixedGregorianDate
+			cover: (140 to: 157)
+			declaredAt: (140 to: 157)) today ] valueCoveringAll:
+			{159 to: 163}) ] valueCoveringAll:
+		{127 to: 138}) ifTrue: [
+		[
+		(self coverAll:
+			{174 to: 177}) error:
+			([
+			([
+			(self coverAll:
+				{186 to: 189}) class ] valueCoveringAll:
+				{191 to: 195}) expiredCreditCardErrorDescription ] valueCoveringAll:
+				{197 to: 229}) ] valueCoveringAll:
+			{179 to: 184} ]] valueCoveringAll:
+		{166 to: 172}.
+	[
+	(self coverAll:
+		{234 to: 237}) assertNameIsValidToSendToMerchantProcessor:
+		(aCreditCard
+			cover: (283 to: 293)
+			declaredAt: (27 to: 37)) ] valueCoveringAll:
+		{239 to: 281}.
+	[
+	(self coverAll:
+		{297 to: 300}) assertAmountIsValidToSendToMerchantProcessor:
+		(price
+			cover: (348 to: 352)
+			declaredAt: (45 to: 49)) ] valueCoveringAll:
+		{302 to: 346}.
+	[
+	(merchantProcessor
+		cover: (358 to: 374)
+		declaredAt: (358 to: 374))
+		debit:
+			([
+			(self coverAll:
+				{384 to: 387}) formatAmount:
+				(price
+					cover: (403 to: 407)
+					declaredAt: (45 to: 49)) ] valueCoveringAll:
+				{389 to: 401})
+		from:
+			(aCreditCard
+				cover: (416 to: 426)
+				declaredAt: (27 to: 37)) ] valueCoveringAll:
+		{376 to: 381. 410 to: 414}.
+	[
+	(salesList
+		cover: (430 to: 438)
+		declaredAt: (430 to: 438)) add:
+		([
+		([
+		(aCart
+			cover: (445 to: 449)
+			declaredAt: (11 to: 15)) listContents ] valueCoveringAll:
+			{451 to: 462}) ->
+			(price
+				cover: (467 to: 471)
+				declaredAt: (45 to: 49)) ] valueCoveringAll:
+			{464 to: 465}) ] valueCoveringAll:
+		{440 to: 443}.! !
+!Behavior method!
+assertCartIsNotEmpty: aCart
+	^ [
+	([
+	(aCart
+		cover: (33 to: 37)
+		declaredAt: (23 to: 27)) isEmpty ] valueCoveringAll:
+		{39 to: 45}) ifTrue: [
+		[
+		(self coverAll:
+			{55 to: 58}) error:
+			([
+			([
+			(self coverAll:
+				{67 to: 70}) class ] valueCoveringAll:
+				{72 to: 76}) emptyCartErrorDescription ] valueCoveringAll:
+				{78 to: 102}) ] valueCoveringAll:
+			{60 to: 65} ]] valueCoveringAll:
+		{47 to: 53}.! !
+!Behavior method!
+emptyCartErrorDescription
+	^ 'El carrito esta vacio.' coverAll:
+		{32 to: 55}.! !
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+value
+	^ [
+	(books
+		cover: (10 to: 14)
+		declaredAt: (10 to: 14)) sum: [ :aBookISBN |
+		[
+		(catalog
+			cover: (36 to: 42)
+			declaredAt: (36 to: 42)) at:
+			(aBookISBN
+				cover: (48 to: 56)
+				declaredAt: (23 to: 31)) ] valueCoveringAll:
+			{44 to: 46} ]] valueCoveringAll:
+		{16 to: 19}.! !
+!Behavior method!
+isExpiredOn: aFixedGregorianDate
+	^ [
+	([
+	(expirationMonthOfYear
+		cover: (38 to: 58)
+		declaredAt: (38 to: 58)) lastDate ] valueCoveringAll:
+		{60 to: 67}) <
+		(aFixedGregorianDate
+			cover: (71 to: 89)
+			declaredAt: (14 to: 32)) ] valueCoveringAll:
+		{69 to: 69}.! !
+!Behavior method!
+expiredCreditCardErrorDescription
+	^ 'La tarjeta de credito esta vencida.' coverAll:
+		{39 to: 75}.! !
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+assertNameIsValidToSendToMerchantProcessor: aCreditCard
+	[
+	([
+	([
+	([
+	(aCreditCard
+		cover: (59 to: 69)
+		declaredAt: (45 to: 55)) owner ] valueCoveringAll:
+		{71 to: 75}) size ] valueCoveringAll:
+		{77 to: 80}) >
+		(30 coverAll:
+			{84 to: 85}) ] valueCoveringAll:
+		{82 to: 82}) ifTrue: [
+		[
+		(self coverAll:
+			{97 to: 100}) error:
+			([
+			([
+			(self coverAll:
+				{109 to: 112}) class ] valueCoveringAll:
+				{114 to: 118}) nameTooLongToSendToMerchantProcessor ] valueCoveringAll:
+				{120 to: 155}) ] valueCoveringAll:
+			{102 to: 107} ]] valueCoveringAll:
+		{87 to: 93}.! !
+!Behavior method!
+owner
+	^ owner
+		cover: (11 to: 15)
+		declaredAt: (11 to: 15).! !
+!Behavior method!
+assertAmountIsValidToSendToMerchantProcessor: anAmount
+	[
+	([
+	([
+	([
+	(anAmount
+		cover: (59 to: 66)
+		declaredAt: (47 to: 54)) truncated ] valueCoveringAll:
+		{68 to: 76}) numberOfDigitsInBase:
+		(10 coverAll:
+			{100 to: 101}) ] valueCoveringAll:
+		{78 to: 98}) >
+		(15 coverAll:
+			{107 to: 108}) ] valueCoveringAll:
+		{105 to: 105}) ifTrue: [
+		[
+		(self coverAll:
+			{120 to: 123}) error:
+			([
+			([
+			(self coverAll:
+				{132 to: 135}) class ] valueCoveringAll:
+				{137 to: 141}) amountTooBigToSendToMerchantProcessor ] valueCoveringAll:
+				{143 to: 179}) ] valueCoveringAll:
+			{125 to: 130} ]] valueCoveringAll:
+		{110 to: 116}.! !
+!Behavior method!
+formatAmount: anAmount
+	^ [
+	(anAmount
+		cover: (28 to: 35)
+		declaredAt: (15 to: 22)) printStringFractionDigits:
+		(2 coverAll:
+			{63 to: 64}) ] valueCoveringAll:
+		{37 to: 62}.! !
+!Behavior method!
+debit: anAmount from: aCreditCard
+	(amountReceived _ anAmount
+		cover: (55 to: 62)
+		declaredAt: (8 to: 15))
+		cover: (37 to: 50)
+		declaredAt: (37 to: 50).
+	(timesCalled _ [
+	(timesCalled
+		cover: (66 to: 76)
+		declaredAt: (66 to: 76)) +
+		(1 coverAll:
+			{94 to: 95}) ] valueCoveringAll:
+		{93 to: 93})
+		cover: (81 to: 91)
+		declaredAt: (66 to: 76).! !
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+nameTooLongToSendToMerchantProcessor
+	^ 'El nombre del cliente debe tener como maximo 30 digitos.' coverAll:
+		{42 to: 99}.! !
+!Behavior method!
+timesCalled
+	^ timesCalled
+		cover: (17 to: 27)
+		declaredAt: (17 to: 27).! !
+
+!testRun: #CheckoutTest #test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+amountTooBigToSendToMerchantProcessor
+	^ 'El monto puede tener hasta 15 digitos.' coverAll:
+		{43 to: 82}.! !
+
+!testRun: #CheckoutTest #test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+amountReceived
+	^ amountReceived
+		cover: (20 to: 33)
+		declaredAt: (20 to: 33).! !
+
+!testRun: #CheckoutTest #test08AmountIsSentFormattedToMerchantProcessor stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+!Behavior method!
+debit: anAmount from: aCreditCard
+	[
+	(self coverAll:
+		{37 to: 40}) error:
+		([
+		([
+		(self coverAll:
+			{49 to: 52}) class ] valueCoveringAll:
+			{54 to: 58}) cannotProcessDebit ] valueCoveringAll:
+			{60 to: 77}) ] valueCoveringAll:
+		{42 to: 47}.! !
+!Behavior method!
+cannotProcessDebit
+	^ 'No se puede procesar el pago.' coverAll:
+		{24 to: 54}.! !
+
+!testRun: #CheckoutTest #test09CannotCheckoutWhenMerchantProcessorCannotProcessDebit stamp: 'fm 6/8/2022 21:50:38'!
+PASSED!
+
+!methodRemoval: Cashier #initializeFor: stamp: 'fm 6/8/2022 21:51:31'!
+initializeFor: aSalesList 
+	
+	salesList := aSalesList.!
+!Behavior method!
+for: aCatalog
+	^ [
+	([
+	(self coverAll:
+		{20 to: 23}) new ] valueCoveringAll:
+		{25 to: 27}) initializeFor:
+		(aCatalog
+			cover: (44 to: 51)
+			declaredAt: (6 to: 13)) ] valueCoveringAll:
+		{29 to: 42}.! !
+!Behavior method!
+initializeFor: aCatalog
+	(books _ [
+	(Bag
+		cover: (36 to: 38)
+		declaredAt: (36 to: 38)) new ] valueCoveringAll:
+		{40 to: 42})
+		cover: (27 to: 31)
+		declaredAt: (27 to: 31).
+	(catalog _ aCatalog
+		cover: (57 to: 64)
+		declaredAt: (16 to: 23))
+		cover: (46 to: 52)
+		declaredAt: (46 to: 52).! !
+!Behavior method!
+isEmpty
+	^ [
+	(books
+		cover: (14 to: 18)
+		declaredAt: (14 to: 18)) isEmpty ] valueCoveringAll:
+		{20 to: 26}.! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+addBook: aBookISBN quantity: aQuantity
+	[
+	(self coverAll:
+		{44 to: 47}) assertBookIsInCatalog:
+		(aBookISBN
+			cover: (72 to: 80)
+			declaredAt: (10 to: 18)) ] valueCoveringAll:
+		{49 to: 70}.
+	[
+	(self coverAll:
+		{84 to: 87}) assertQuantityIsValid:
+		(aQuantity
+			cover: (112 to: 120)
+			declaredAt: (30 to: 38)) ] valueCoveringAll:
+		{89 to: 110}.
+	[
+	(books
+		cover: (124 to: 128)
+		declaredAt: (124 to: 128))
+		add:
+			(aBookISBN
+				cover: (135 to: 143)
+				declaredAt: (10 to: 18))
+		withOccurrences:
+			(aQuantity
+				cover: (162 to: 170)
+				declaredAt: (30 to: 38)) ] valueCoveringAll:
+		{130 to: 133. 145 to: 160}.! !
+!Behavior method!
+assertBookIsInCatalog: aBookISBN
+	[
+	([
+	(catalog
+		cover: (37 to: 43)
+		declaredAt: (37 to: 43)) includesKey:
+		(aBookISBN
+			cover: (58 to: 66)
+			declaredAt: (24 to: 32)) ] valueCoveringAll:
+		{45 to: 56}) ifFalse: [
+		[
+		(self coverAll:
+			{78 to: 81}) error:
+			([
+			([
+			(self coverAll:
+				{90 to: 93}) class ] valueCoveringAll:
+				{95 to: 99}) bookNotInCatalogErrorDescription ] valueCoveringAll:
+				{101 to: 132}) ] valueCoveringAll:
+			{83 to: 88} ]] valueCoveringAll:
+		{69 to: 76}.! !
+!Behavior method!
+assertQuantityIsValid: aQuantity
+	[
+	([
+	(aQuantity
+		cover: (36 to: 44)
+		declaredAt: (24 to: 32)) >
+		(0 coverAll:
+			{48 to: 48}) ] valueCoveringAll:
+		{46 to: 46}) ifFalse: [
+		[
+		(self coverAll:
+			{59 to: 62}) error:
+			([
+			([
+			(self coverAll:
+				{71 to: 74}) class ] valueCoveringAll:
+				{76 to: 80}) nonPositiveBookQuantityErrorDescription ] valueCoveringAll:
+				{82 to: 120}) ] valueCoveringAll:
+			{64 to: 69} ]] valueCoveringAll:
+		{50 to: 57}.
+	[
+	([
+	(aQuantity
+		cover: (126 to: 134)
+		declaredAt: (24 to: 32)) isInteger ] valueCoveringAll:
+		{136 to: 144}) ifFalse: [
+		[
+		(self coverAll:
+			{155 to: 158}) error:
+			([
+			([
+			(self coverAll:
+				{167 to: 170}) class ] valueCoveringAll:
+				{172 to: 176}) nonIntegerBookQuantityErrorDescription ] valueCoveringAll:
+				{178 to: 215}) ] valueCoveringAll:
+			{160 to: 165} ]] valueCoveringAll:
+		{146 to: 153}.! !
+!Behavior method!
+hasBook: aBookISBN
+	^ [
+	(books
+		cover: (25 to: 29)
+		declaredAt: (25 to: 29)) includes:
+		(aBookISBN
+			cover: (41 to: 49)
+			declaredAt: (10 to: 18)) ] valueCoveringAll:
+		{31 to: 39}.! !
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+quantityOfBooksWithISBN: aBookISBN
+	^ [
+	(books
+		cover: (42 to: 46)
+		declaredAt: (42 to: 46)) occurrencesOf:
+		(aBookISBN
+			cover: (63 to: 71)
+			declaredAt: (26 to: 34)) ] valueCoveringAll:
+		{48 to: 61}.! !
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+bookNotInCatalogErrorDescription
+	^ 'El libro no se encuentra en el catalogo.' coverAll:
+		{38 to: 79}.! !
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+nonPositiveBookQuantityErrorDescription
+	^ 'La cantidad de libros a agregar no es positiva.' coverAll:
+		{45 to: 93}.! !
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+nonIntegerBookQuantityErrorDescription
+	^ 'La cantidad de libros a agregar no es un numero entero.' coverAll:
+		{44 to: 100}.! !
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+listContents
+	^ [
+	(books
+		cover: (18 to: 22)
+		declaredAt: (18 to: 22)) sortedElements ] valueCoveringAll:
+		{24 to: 37}.! !
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+emptyOwnerNameErrorDescription
+	^ 'El nombre de titular de la tarjeta esta vacio' coverAll:
+		{37 to: 83}.! !
+!Behavior method!
+for: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear
+	[
+	(self coverAll:
+		{77 to: 80}) assertNumberHas16Digits:
+		(aCreditCardNumber
+			cover: (107 to: 123)
+			declaredAt: (22 to: 38)) ] valueCoveringAll:
+		{82 to: 105}.
+	[
+	(self coverAll:
+		{127 to: 130}) assertOwnerNameIsNotBlank:
+		(anOwner
+			cover: (159 to: 165)
+			declaredAt: (6 to: 12)) ] valueCoveringAll:
+		{132 to: 157}.
+	^ [
+	([
+	(self coverAll:
+		{173 to: 176}) new ] valueCoveringAll:
+		{178 to: 180})
+		initializeFor:
+			(anOwner
+				cover: (197 to: 203)
+				declaredAt: (6 to: 12))
+		number:
+			(aCreditCardNumber
+				cover: (213 to: 229)
+				declaredAt: (22 to: 38))
+		expiringOn:
+			(aGregorianMonthOfYear
+				cover: (243 to: 263)
+				declaredAt: (52 to: 72)) ] valueCoveringAll:
+		{182 to: 195. 205 to: 211. 231 to: 241}.! !
+!Behavior method!
+assertNumberHas16Digits: aCreditCardNumber
+	[
+	([
+	([
+	(aCreditCardNumber
+		cover: (48 to: 64)
+		declaredAt: (26 to: 42)) numberOfDigitsInBase:
+		(10 coverAll:
+			{88 to: 89}) ] valueCoveringAll:
+		{66 to: 86}) =
+		(16 coverAll:
+			{94 to: 95}) ] valueCoveringAll:
+		{92 to: 92}) ifFalse: [
+		[
+		(self coverAll:
+			{108 to: 111}) error:
+			([
+			(self coverAll:
+				{120 to: 123}) invalidNumberOfDigitsErrorDescription ] valueCoveringAll:
+				{125 to: 161}) ] valueCoveringAll:
+			{113 to: 118} ]] valueCoveringAll:
+		{98 to: 105}.! !
+!Behavior method!
+assertOwnerNameIsNotBlank: anOwner
+	[
+	([
+	([
+	(anOwner
+		cover: (38 to: 44)
+		declaredAt: (28 to: 34)) withBlanksTrimmed ] valueCoveringAll:
+		{46 to: 62}) isEmpty ] valueCoveringAll:
+		{64 to: 70}) ifTrue: [
+		[
+		(self coverAll:
+			{81 to: 84}) error:
+			([
+			(self coverAll:
+				{93 to: 96}) emptyOwnerNameErrorDescription ] valueCoveringAll:
+				{98 to: 127}) ] valueCoveringAll:
+			{86 to: 91} ]] valueCoveringAll:
+		{72 to: 78}.! !
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+invalidNumberOfDigitsErrorDescription
+	^ 'El numero de tarjeta no tiene 16 digitos.' coverAll:
+		{43 to: 85}.! !
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+initialize
+	(timesCalled _ 0 coverAll:
+		{28 to: 29})
+		cover: (14 to: 24)
+		declaredAt: (14 to: 24).! !
+!Behavior method!
+for: aSalesList debitingTo: aMerchantProcessor
+	^ [
+	([
+	(self coverAll:
+		{52 to: 55}) new ] valueCoveringAll:
+		{57 to: 59})
+		initializeFor:
+			(aSalesList
+				cover: (76 to: 85)
+				declaredAt: (6 to: 15))
+		debitingTo:
+			(aMerchantProcessor
+				cover: (99 to: 116)
+				declaredAt: (29 to: 46)) ] valueCoveringAll:
+		{61 to: 74. 87 to: 97}.! !
+!Behavior method!
+initializeFor: aSalesList debitingTo: aMerchantProcessor
+	(salesList _ aSalesList
+		cover: (75 to: 84)
+		declaredAt: (16 to: 25))
+		cover: (62 to: 70)
+		declaredAt: (62 to: 70).
+	(merchantProcessor _ aMerchantProcessor
+		cover: (109 to: 126)
+		declaredAt: (39 to: 56))
+		cover: (88 to: 104)
+		declaredAt: (88 to: 104).! !
+!Behavior method!
+initializeFor: anOwner number: aCreditCardNumber expiringOn: aGregorianMonthOfYear
+	(owner _ anOwner
+		cover: (96 to: 102)
+		declaredAt: (16 to: 22))
+		cover: (87 to: 91)
+		declaredAt: (87 to: 91).
+	(number _ aCreditCardNumber
+		cover: (116 to: 132)
+		declaredAt: (32 to: 48))
+		cover: (106 to: 111)
+		declaredAt: (106 to: 111).
+	(expirationMonthOfYear _ aGregorianMonthOfYear
+		cover: (161 to: 181)
+		declaredAt: (62 to: 82))
+		cover: (136 to: 156)
+		declaredAt: (136 to: 156).! !
+!Behavior method!
+checkout: aCart withCard: aCreditCard
+	| price |
+	[
+	(self coverAll:
+		{56 to: 59}) assertCartIsNotEmpty:
+		(aCart
+			cover: (83 to: 87)
+			declaredAt: (11 to: 15)) ] valueCoveringAll:
+		{61 to: 81}.
+	(price _ [
+	(aCart
+		cover: (100 to: 104)
+		declaredAt: (11 to: 15)) value ] valueCoveringAll:
+		{106 to: 110})
+		cover: (91 to: 95)
+		declaredAt: (45 to: 49).
+	[
+	([
+	(aCreditCard
+		cover: (115 to: 125)
+		declaredAt: (27 to: 37)) isExpiredOn:
+		([
+		(FixedGregorianDate
+			cover: (140 to: 157)
+			declaredAt: (140 to: 157)) today ] valueCoveringAll:
+			{159 to: 163}) ] valueCoveringAll:
+		{127 to: 138}) ifTrue: [
+		[
+		(self coverAll:
+			{174 to: 177}) error:
+			([
+			([
+			(self coverAll:
+				{186 to: 189}) class ] valueCoveringAll:
+				{191 to: 195}) expiredCreditCardErrorDescription ] valueCoveringAll:
+				{197 to: 229}) ] valueCoveringAll:
+			{179 to: 184} ]] valueCoveringAll:
+		{166 to: 172}.
+	[
+	(self coverAll:
+		{234 to: 237}) assertNameIsValidToSendToMerchantProcessor:
+		(aCreditCard
+			cover: (283 to: 293)
+			declaredAt: (27 to: 37)) ] valueCoveringAll:
+		{239 to: 281}.
+	[
+	(self coverAll:
+		{297 to: 300}) assertAmountIsValidToSendToMerchantProcessor:
+		(price
+			cover: (348 to: 352)
+			declaredAt: (45 to: 49)) ] valueCoveringAll:
+		{302 to: 346}.
+	[
+	(merchantProcessor
+		cover: (358 to: 374)
+		declaredAt: (358 to: 374))
+		debit:
+			([
+			(self coverAll:
+				{384 to: 387}) formatAmount:
+				(price
+					cover: (403 to: 407)
+					declaredAt: (45 to: 49)) ] valueCoveringAll:
+				{389 to: 401})
+		from:
+			(aCreditCard
+				cover: (416 to: 426)
+				declaredAt: (27 to: 37)) ] valueCoveringAll:
+		{376 to: 381. 410 to: 414}.
+	[
+	(salesList
+		cover: (430 to: 438)
+		declaredAt: (430 to: 438)) add:
+		([
+		([
+		(aCart
+			cover: (445 to: 449)
+			declaredAt: (11 to: 15)) listContents ] valueCoveringAll:
+			{451 to: 462}) ->
+			(price
+				cover: (467 to: 471)
+				declaredAt: (45 to: 49)) ] valueCoveringAll:
+			{464 to: 465}) ] valueCoveringAll:
+		{440 to: 443}.! !
+!Behavior method!
+assertCartIsNotEmpty: aCart
+	^ [
+	([
+	(aCart
+		cover: (33 to: 37)
+		declaredAt: (23 to: 27)) isEmpty ] valueCoveringAll:
+		{39 to: 45}) ifTrue: [
+		[
+		(self coverAll:
+			{55 to: 58}) error:
+			([
+			([
+			(self coverAll:
+				{67 to: 70}) class ] valueCoveringAll:
+				{72 to: 76}) emptyCartErrorDescription ] valueCoveringAll:
+				{78 to: 102}) ] valueCoveringAll:
+			{60 to: 65} ]] valueCoveringAll:
+		{47 to: 53}.! !
+!Behavior method!
+emptyCartErrorDescription
+	^ 'El carrito esta vacio.' coverAll:
+		{32 to: 55}.! !
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+value
+	^ [
+	(books
+		cover: (10 to: 14)
+		declaredAt: (10 to: 14)) sum: [ :aBookISBN |
+		[
+		(catalog
+			cover: (36 to: 42)
+			declaredAt: (36 to: 42)) at:
+			(aBookISBN
+				cover: (48 to: 56)
+				declaredAt: (23 to: 31)) ] valueCoveringAll:
+			{44 to: 46} ]] valueCoveringAll:
+		{16 to: 19}.! !
+!Behavior method!
+isExpiredOn: aFixedGregorianDate
+	^ [
+	([
+	(expirationMonthOfYear
+		cover: (38 to: 58)
+		declaredAt: (38 to: 58)) lastDate ] valueCoveringAll:
+		{60 to: 67}) <
+		(aFixedGregorianDate
+			cover: (71 to: 89)
+			declaredAt: (14 to: 32)) ] valueCoveringAll:
+		{69 to: 69}.! !
+!Behavior method!
+expiredCreditCardErrorDescription
+	^ 'La tarjeta de credito esta vencida.' coverAll:
+		{39 to: 75}.! !
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+assertNameIsValidToSendToMerchantProcessor: aCreditCard
+	[
+	([
+	([
+	([
+	(aCreditCard
+		cover: (59 to: 69)
+		declaredAt: (45 to: 55)) owner ] valueCoveringAll:
+		{71 to: 75}) size ] valueCoveringAll:
+		{77 to: 80}) >
+		(30 coverAll:
+			{84 to: 85}) ] valueCoveringAll:
+		{82 to: 82}) ifTrue: [
+		[
+		(self coverAll:
+			{97 to: 100}) error:
+			([
+			([
+			(self coverAll:
+				{109 to: 112}) class ] valueCoveringAll:
+				{114 to: 118}) nameTooLongToSendToMerchantProcessor ] valueCoveringAll:
+				{120 to: 155}) ] valueCoveringAll:
+			{102 to: 107} ]] valueCoveringAll:
+		{87 to: 93}.! !
+!Behavior method!
+owner
+	^ owner
+		cover: (11 to: 15)
+		declaredAt: (11 to: 15).! !
+!Behavior method!
+assertAmountIsValidToSendToMerchantProcessor: anAmount
+	[
+	([
+	([
+	([
+	(anAmount
+		cover: (59 to: 66)
+		declaredAt: (47 to: 54)) truncated ] valueCoveringAll:
+		{68 to: 76}) numberOfDigitsInBase:
+		(10 coverAll:
+			{100 to: 101}) ] valueCoveringAll:
+		{78 to: 98}) >
+		(15 coverAll:
+			{107 to: 108}) ] valueCoveringAll:
+		{105 to: 105}) ifTrue: [
+		[
+		(self coverAll:
+			{120 to: 123}) error:
+			([
+			([
+			(self coverAll:
+				{132 to: 135}) class ] valueCoveringAll:
+				{137 to: 141}) amountTooBigToSendToMerchantProcessor ] valueCoveringAll:
+				{143 to: 179}) ] valueCoveringAll:
+			{125 to: 130} ]] valueCoveringAll:
+		{110 to: 116}.! !
+!Behavior method!
+formatAmount: anAmount
+	^ [
+	(anAmount
+		cover: (28 to: 35)
+		declaredAt: (15 to: 22)) printStringFractionDigits:
+		(2 coverAll:
+			{63 to: 64}) ] valueCoveringAll:
+		{37 to: 62}.! !
+!Behavior method!
+debit: anAmount from: aCreditCard
+	(amountReceived _ anAmount
+		cover: (55 to: 62)
+		declaredAt: (8 to: 15))
+		cover: (37 to: 50)
+		declaredAt: (37 to: 50).
+	(timesCalled _ [
+	(timesCalled
+		cover: (66 to: 76)
+		declaredAt: (66 to: 76)) +
+		(1 coverAll:
+			{94 to: 95}) ] valueCoveringAll:
+		{93 to: 93})
+		cover: (81 to: 91)
+		declaredAt: (66 to: 76).! !
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+nameTooLongToSendToMerchantProcessor
+	^ 'El nombre del cliente debe tener como maximo 30 digitos.' coverAll:
+		{42 to: 99}.! !
+!Behavior method!
+timesCalled
+	^ timesCalled
+		cover: (17 to: 27)
+		declaredAt: (17 to: 27).! !
+
+!testRun: #CheckoutTest #test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+amountTooBigToSendToMerchantProcessor
+	^ 'El monto puede tener hasta 15 digitos.' coverAll:
+		{43 to: 82}.! !
+
+!testRun: #CheckoutTest #test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig stamp: 'fm 6/8/2022 21:52:12'!
+PASSED!
+!Behavior method!
+amountReceived
+	^ amountReceived
+		cover: (20 to: 33)
+		declaredAt: (20 to: 33).! !
+
+!testRun: #CheckoutTest #test08AmountIsSentFormattedToMerchantProcessor stamp: 'fm 6/8/2022 21:52:13'!
+PASSED!
+!Behavior method!
+debit: anAmount from: aCreditCard
+	[
+	(self coverAll:
+		{37 to: 40}) error:
+		([
+		([
+		(self coverAll:
+			{49 to: 52}) class ] valueCoveringAll:
+			{54 to: 58}) cannotProcessDebit ] valueCoveringAll:
+			{60 to: 77}) ] valueCoveringAll:
+		{42 to: 47}.! !
+!Behavior method!
+cannotProcessDebit
+	^ 'No se puede procesar el pago.' coverAll:
+		{24 to: 54}.! !
+
+!testRun: #CheckoutTest #test09CannotCheckoutWhenMerchantProcessorCannotProcessDebit stamp: 'fm 6/8/2022 21:52:13'!
+PASSED!
+
+!methodRemoval: CheckoutTest #cashierWithEmptySalesList stamp: 'fm 6/8/2022 21:55:09'!
+cashierWithEmptySalesList
+
+	^ Cashier for: OrderedCollection new debitingTo: WorkingMerchantProcessor new!
+
+!classDefinition: #FailingMerchantProcessorTestDouble category: 'TusLibros' stamp: 'fm 6/8/2022 21:57:37'!
+MerchantProcessorTestDouble subclass: #FailingMerchantProcessorTestDouble
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros'!
+
+----SNAPSHOT----(8 June 2022 22:01:50) CuisUniversity-5096.image priorSource: 4686813!
+
+----QUIT----(8 June 2022 22:01:53) CuisUniversity-5096.image priorSource: 4739656!
+
+----STARTUP---- (8 June 2022 22:03:08) as C:\Users\Fede\Documents\Cuis-limpio\windows64 - Copy\CuisUniversity-5096.image!
+
+
+----QUIT----(8 June 2022 22:03:17) CuisUniversity-5096.image priorSource: 4739744!
+
+----STARTUP---- (8 June 2022 23:37:45) as C:\Users\Fede\Documents\Cuis-limpio\windows64 - Copy\CuisUniversity-5096.image!
+
+!Cashier methodsFor: 'asserting' stamp: 'fm 6/8/2022 23:38:32' prior: 50477537!
+assertNameIsValidToSendToMerchantProcessor: aCreditCard
+
+	aCreditCard owner withBlanksTrimmed size > 30 ifTrue: [ self error: self class nameTooLongToSendToMerchantProcessor ]! !
+
+!testRun: #CartTest #test01CartIsEmptyWhenCreated stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test02CartOnlyHasTheBookWhenAddingIt stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test03BooksCanBeAddedMultipleTimes stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test04BooksCanBeAddedMultipleTimesInDifferentMoments stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test05BookCannotBeAddedIfNotInCatalog stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test06BookCannotBeAddedWithNonPositiveQuantity stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test07NonIntegerQuantityOfBookCantBeAdded stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test08ListOfEmptyCartIsEmpty stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CartTest #test09ListOfCartWithBooksReturnsBooksAndQuantities stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test01CantCreateCreditCardWithBlankOwnerName stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test02CantCreateCreditCardWithInvalidNumberOfDigits stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test03SaleisNotRegisteredWhenCartIsEmpty stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test04SaleIsNotRegisteredWhenCreditCardIsExpired stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test05SaleIsRegisteredOnSalesListWithContentsAndPrice stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test06ShouldNotSendToMerchantProcessorWhenNameIsTooLong stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test07ShouldNotSendToMerchantProcessorWhenAmountIsTooBig stamp: 'fm 6/8/2022 23:38:34'!
+PASSED!
+
+!testRun: #CheckoutTest #test08AmountIsSentFormattedToMerchantProcessor stamp: 'fm 6/8/2022 23:38:35'!
+PASSED!
+
+!testRun: #CheckoutTest #test09CannotCheckoutWhenMerchantProcessorCannotProcessDebit stamp: 'fm 6/8/2022 23:38:35'!
+PASSED!
+
+----QUIT----(8 June 2022 23:39:19) CuisUniversity-5096.image priorSource: 4739952!
