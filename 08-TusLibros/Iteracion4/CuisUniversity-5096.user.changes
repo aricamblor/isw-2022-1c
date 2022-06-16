@@ -1,0 +1,3695 @@
+
+
+----STARTUP---- (13 June 2022 20:25:47) as /home/clinux01/Documentos/TusLibros-04/linux64/CuisUniversity-5096.image!
+
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/TusLibros-Model Ejercicio it4.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/TusLibros-Tests Ejercicio it4.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/TusLibrosREST Ejercicio it4.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/linux64/Packages/System/Collections-CompactArrays.pck.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/linux64/Packages/Features/Compression.pck.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/linux64/Packages/Features/Sound.pck.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/linux64/Packages/Features/Cryptography-DigitalSignatures.pck.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/linux64/Packages/Features/Identities-UUID.pck.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/linux64/Packages/System/Network-Kernel.pck.st----!
+
+----End fileIn of /home/clinux01/Documentos/TusLibros-04/WebClient.pck.st----!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:17:42'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:17:44'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:17:46'!
+FAILURE!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:26:01' prior: 50474912!
+bookPerformance: anItem
+
+	| bookPerformance totalMoney totalSales salesSemaphore |
+
+	bookPerformance := Dictionary new.
+	
+	salesSemaphore := Semaphore new.
+	
+	[totalSales := self totalSalesOf: anItem. salesSemaphore signal.] fork.
+	[totalMoney := self totalMoneyRaisedBy: anItem. salesSemaphore signal.] fork.
+	
+	salesSemaphore wait.
+	salesSemaphore wait.
+	bookPerformance at: 'quantity' put: totalSales.
+	bookPerformance at: 'total' put: totalMoney.
+	bookPerformance at: 'summary' put: anItem,' was selled ',totalSales asString, ' times and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^bookPerformance
+	
+
+! !
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:26:09' prior: 50513669!
+bookPerformance: anItem
+
+	| bookPerformance totalMoney totalSales semaphore |
+
+	bookPerformance := Dictionary new.
+	
+	semaphore := Semaphore new.
+	
+	[totalSales := self totalSalesOf: anItem. semaphore signal.] fork.
+	[totalMoney := self totalMoneyRaisedBy: anItem. semaphore signal.] fork.
+	
+	semaphore wait.
+	semaphore wait.
+	bookPerformance at: 'quantity' put: totalSales.
+	bookPerformance at: 'total' put: totalMoney.
+	bookPerformance at: 'summary' put: anItem,' was selled ',totalSales asString, ' times and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^bookPerformance
+	
+
+! !
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:26:14'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:26:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:26:18'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:26:20'!
+FAILURE!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:29:16' prior: 50474953!
+storePerformance
+
+	| totalMoney totalSales performance semaphore |
+	
+	performance := Dictionary new.
+	
+	semaphore := Semaphore new.
+	
+	[totalSales := self totalSales. semaphore signal.] fork.
+	[totalMoney := self totalMoneyRaised. semaphore signal.] fork.
+	
+	semaphore wait.
+	semaphore wait.
+	performance at: 'quantity' put: totalSales.
+	performance at: 'total' put: totalMoney.
+	performance at: 'summary' put: 'The store selled a total of ',totalSales asString, ' books and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^performance
+	
+
+! !
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:29:27'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:29:27'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:29:28'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:29:29'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:29:30'!
+PASSED!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:33:55'!
+execute: aBlock inParallelWith: anotherBlock
+
+	| semaphore |
+	semaphore := Semaphore new.
+	
+	[aBlock value. semaphore signal ] fork.
+	[aBlock value. semaphore signal ] fork.
+	
+	semaphore
+		wait;
+		wait.! !
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:33:58' prior: 50513906!
+execute: aBlock inParallelWith: anotherBlock
+
+	| semaphore |
+	
+	semaphore := Semaphore new.
+	
+	[aBlock value. semaphore signal ] fork.
+	[aBlock value. semaphore signal ] fork.
+	
+	semaphore
+		wait;
+		wait.! !
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:34:53' prior: 50513692!
+bookPerformance: anItem
+
+	| bookPerformance totalMoney totalSales |
+
+	bookPerformance := Dictionary new.
+	
+	self
+		execute: [totalSales := self totalSalesOf: anItem]
+		inParallelWith: [totalMoney := self totalMoneyRaisedBy: anItem].
+
+	bookPerformance at: 'quantity' put: totalSales.
+	bookPerformance at: 'total' put: totalMoney.
+	bookPerformance at: 'summary' put: anItem,' was selled ',totalSales asString, ' times and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^bookPerformance
+	
+
+! !
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:35:30' prior: 50513802!
+storePerformance
+
+	| totalMoney totalSales performance |
+	
+	performance := Dictionary new.
+	
+	self
+		execute: [totalSales := self totalSales]
+		inParallelWith: [totalMoney := self totalMoneyRaised].
+		
+	performance at: 'quantity' put: totalSales.
+	performance at: 'total' put: totalMoney.
+	performance at: 'summary' put: 'The store selled a total of ',totalSales asString, ' books and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^performance
+	
+
+! !
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:35:32'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:35:33'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:35:34'!
+FAILURE!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:35:59' prior: 50513916!
+execute: aBlock inParallelWith: anotherBlock
+
+	| semaphore |
+	
+	semaphore := Semaphore new.
+	
+	[aBlock value. semaphore signal ] fork.
+	[aBlock value. semaphore signal ] fork.
+	
+	semaphore wait.
+	semaphore wait.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:36:00'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:36:01'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:36:02'!
+FAILURE!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:36:11' prior: 50513945!
+storePerformance
+
+	| totalMoney totalSales performance |
+	
+	performance := Dictionary new.
+	
+	self
+		execute: [totalSales := self totalSales]
+		inParallelWith: [totalMoney := self totalMoneyRaised].
+		
+	performance at: 'quantity' put: totalSales.
+	performance at: 'total' put: totalMoney.
+	performance at: 'summary' put: 'The store selled a total of ',totalSales asString, ' books and raised a total amount of money equal to: ', totalMoney asString.
+	
+	^performance! !
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:36:16'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:36:17'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:36:18'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:36:21'!
+FAILURE!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:40:42' prior: 50514043!
+execute: aBlock inParallelWith: anotherBlock
+
+	| semaphore |
+	
+	semaphore := Semaphore new.
+	
+	[aBlock value. semaphore signal ] fork.
+	[anotherBlock value. semaphore signal ] fork.
+	
+	semaphore wait.
+	semaphore wait.! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardNumberWithLessThan16DigitsIsNotValid stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardNumberWithMoreThan16DigitsIsNotValid stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardNumberShouldBeDigitsOnly stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test04NameCanNotBeEmpty stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test05IsExpiredOnNextExpirationMonth stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test06IsNotExpiredOnExpirationMonth stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #CreditCardTest #test07CanGetCreditCardInfoFromIt stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:40:48'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:40:49'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:40:50'!
+PASSED!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:45:10' prior: 50514235!
+execute: aBlock inParallelWith: anotherBlock
+
+	| semaphore |
+	
+	semaphore := Semaphore new.
+	
+	[aBlock value. semaphore signal ] fork.
+	[anotherBlock value].
+
+	semaphore wait.! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardNumberWithLessThan16DigitsIsNotValid stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardNumberWithMoreThan16DigitsIsNotValid stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardNumberShouldBeDigitsOnly stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CreditCardTest #test04NameCanNotBeEmpty stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CreditCardTest #test05IsExpiredOnNextExpirationMonth stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CreditCardTest #test06IsNotExpiredOnExpirationMonth stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #CreditCardTest #test07CanGetCreditCardInfoFromIt stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:45:15'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:45:16'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:45:17'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:45:44'!
+FAILURE!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:45:45'!
+FAILURE!
+!TusLibrosSystemFacade methodsFor: 'private' stamp: 'AEC 6/13/2022 21:46:26' prior: 50514397!
+execute: aBlock inParallelWith: anotherBlock
+
+	| semaphore |
+	
+	semaphore := Semaphore new.
+	
+	[aBlock value. semaphore signal ] fork.
+	anotherBlock value.
+
+	semaphore wait.! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardNumberWithLessThan16DigitsIsNotValid stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardNumberWithMoreThan16DigitsIsNotValid stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardNumberShouldBeDigitsOnly stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CreditCardTest #test04NameCanNotBeEmpty stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CreditCardTest #test05IsExpiredOnNextExpirationMonth stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CreditCardTest #test06IsNotExpiredOnExpirationMonth stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #CreditCardTest #test07CanGetCreditCardInfoFromIt stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/13/2022 21:46:33'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:46:34'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/13/2022 21:46:35'!
+PASSED!
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/13/2022 21:56:12' prior: 50476631!
+addToCart
+
+	| cartId bookIsbn |
+
+	(self areCartIdAndBookSelected) ifTrue:[
+		cartId := self selectedCartId.
+		bookIsbn := self selectedBook.
+		[ restInterface add: 1 of: bookIsbn toCartIdentifiedAs: cartId.
+		self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)] fork
+	]! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/13/2022 21:58:00' prior: 50476644!
+createCart
+
+	| newCartId |
+	
+	[newCartId := restInterface createCartFor: 'hernan' password: 'smalltalk'.
+	cartIds add: newCartId.
+	self triggerEvent: #newCartIdArrived] fork! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/13/2022 21:58:42' prior: 50476653!
+listCart
+
+	| cartId |
+	
+	(self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		[currentSelectedCartContent := restInterface listCart: cartId.
+		self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId] fork
+	].! !
+
+----SNAPSHOT----(13 June 2022 21:59:37) CuisUniversity-5096.image priorSource: 4557982!
+
+----SNAPSHOT----(13 June 2022 22:01:12) CuisUniversity-5096.image priorSource: 5859344!
+
+----SNAPSHOT----(13 June 2022 22:01:30) CuisUniversity-5096.image priorSource: 5859433!
+
+----SNAPSHOT----(13 June 2022 22:01:52) CuisUniversity-5096.image priorSource: 5859522!
+
+----STARTUP---- (15 June 2022 21:47:23) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/TusLibros-04/linux64/CuisUniversity-5096.image!
+
+!Behavior method!
+initialize
+	(today _ [
+	(DateAndTime
+		cover: (23 to: 33)
+		declaredAt: (23 to: 33)) now ] valueCoveringAll:
+		{35 to: 37})
+		cover: (14 to: 18)
+		declaredAt: (14 to: 18).! !
+!Behavior method!
+createCart
+	^ [
+	(Cart
+		cover: (16 to: 19)
+		declaredAt: (16 to: 19)) acceptingItemsOf:
+		([
+		(self coverAll:
+			{39 to: 42}) defaultCatalog ] valueCoveringAll:
+			{44 to: 57}) ] valueCoveringAll:
+		{21 to: 37}.! !
+!Behavior method!
+defaultCatalog
+	^ [ | cascadeReceiver |
+	cascadeReceiver _ [
+	(Dictionary
+		cover: (21 to: 30)
+		declaredAt: (21 to: 30)) new ] valueCoveringAll:
+		{32 to: 34}.
+	[
+	cascadeReceiver
+		at:
+			([
+			(self coverAll:
+				{42 to: 45}) itemSellByTheStore ] valueCoveringAll:
+				{47 to: 64})
+		put:
+			([
+			(self coverAll:
+				{71 to: 74}) itemSellByTheStorePrice ] valueCoveringAll:
+				{76 to: 98}) ] valueCoveringAll:
+		{38 to: 40. 66 to: 69}.
+	[
+	cascadeReceiver
+		at:
+			([
+			(self coverAll:
+				{107 to: 110}) anotherItemSellByTheStore ] valueCoveringAll:
+				{112 to: 136})
+		put:
+			([
+			(self coverAll:
+				{143 to: 146}) anotherItemSellByTheStorePrice ] valueCoveringAll:
+				{148 to: 177}) ] valueCoveringAll:
+		{103 to: 105. 138 to: 141}.
+	[ cascadeReceiver yourself ] valueCoveringAll:
+		{182 to: 189} ] value.! !
+!Behavior method!
+itemSellByTheStore
+	^ 'validBook' coverAll:
+		{25 to: 35}.! !
+!Behavior method!
+itemSellByTheStorePrice
+	^ 10 coverAll:
+		{29 to: 30}.! !
+!Behavior method!
+anotherItemSellByTheStore
+	^ 'anotherValidBook' coverAll:
+		{31 to: 48}.! !
+!Behavior method!
+anotherItemSellByTheStorePrice
+	^ 15 coverAll:
+		{36 to: 37}.! !
+!Behavior method!
+acceptingItemsOf: aCatalog
+	^ [
+	([
+	(self coverAll:
+		{31 to: 34}) new ] valueCoveringAll:
+		{36 to: 38}) initializeAcceptingItemsOf:
+		(aCatalog
+			cover: (68 to: 75)
+			declaredAt: (19 to: 26)) ] valueCoveringAll:
+		{40 to: 66}.! !
+!Behavior method!
+initializeAcceptingItemsOf: aCatalog
+	(catalog _ aCatalog
+		cover: (51 to: 58)
+		declaredAt: (29 to: 36))
+		cover: (40 to: 46)
+		declaredAt: (40 to: 46).
+	(items _ [
+	(Bag
+		cover: (71 to: 73)
+		declaredAt: (71 to: 73)) new ] valueCoveringAll:
+		{75 to: 77})
+		cover: (62 to: 66)
+		declaredAt: (62 to: 66).! !
+!Behavior method!
+isEmpty
+	^ [
+	(items
+		cover: (13 to: 17)
+		declaredAt: (13 to: 17)) isEmpty ] valueCoveringAll:
+		{19 to: 25}.! !
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+!Behavior method!
+itemNotSellByTheStore
+	^ 'invalidBook' coverAll:
+		{27 to: 39}.! !
+!Behavior method!
+add: anItem
+	^ [
+	(self coverAll:
+		{17 to: 20})
+		add:
+			(1 coverAll:
+				{27 to: 27})
+		of:
+			(anItem
+				cover: (33 to: 38)
+				declaredAt: (6 to: 11)) ] valueCoveringAll:
+		{22 to: 25. 29 to: 31}.! !
+!Behavior method!
+add: aQuantity of: anItem
+	[
+	(self coverAll:
+		{29 to: 32}) assertIsValidQuantity:
+		(aQuantity
+			cover: (57 to: 65)
+			declaredAt: (6 to: 14)) ] valueCoveringAll:
+		{34 to: 55}.
+	[
+	(self coverAll:
+		{69 to: 72}) assertIsValidItem:
+		(anItem
+			cover: (93 to: 98)
+			declaredAt: (20 to: 25)) ] valueCoveringAll:
+		{74 to: 91}.
+	[
+	(items
+		cover: (103 to: 107)
+		declaredAt: (103 to: 107))
+		add:
+			(anItem
+				cover: (114 to: 119)
+				declaredAt: (20 to: 25))
+		withOccurrences:
+			(aQuantity
+				cover: (138 to: 146)
+				declaredAt: (6 to: 14)) ] valueCoveringAll:
+		{109 to: 112. 121 to: 136}.! !
+!Behavior method!
+assertIsValidQuantity: aQuantity
+	[
+	([
+	(aQuantity
+		cover: (36 to: 44)
+		declaredAt: (24 to: 32)) strictlyPositive ] valueCoveringAll:
+		{46 to: 61}) ifFalse: [
+		[
+		(self coverAll:
+			{73 to: 76}) signalInvalidQuantity ] valueCoveringAll:
+			{78 to: 98} ]] valueCoveringAll:
+		{63 to: 70}.! !
+!Behavior method!
+assertIsValidItem: anItem
+	[
+	([
+	(catalog
+		cover: (30 to: 36)
+		declaredAt: (30 to: 36)) includesKey:
+		(anItem
+			cover: (51 to: 56)
+			declaredAt: (20 to: 25)) ] valueCoveringAll:
+		{38 to: 49}) ifFalse: [
+		[
+		(self coverAll:
+			{70 to: 73}) signalInvalidItem ] valueCoveringAll:
+			{75 to: 91} ]] valueCoveringAll:
+		{59 to: 66}.! !
+!Behavior method!
+signalInvalidItem
+	[
+	(self coverAll:
+		{22 to: 25}) error:
+		([
+		(self coverAll:
+			{34 to: 37}) invalidItemErrorMessage ] valueCoveringAll:
+			{39 to: 61}) ] valueCoveringAll:
+		{27 to: 32}.! !
+!Behavior method!
+invalidItemErrorMessage
+	^ [
+	([
+	(self coverAll:
+		{29 to: 32}) class ] valueCoveringAll:
+		{34 to: 38}) invalidItemErrorMessage ] valueCoveringAll:
+		{40 to: 62}.! !
+!Behavior method!
+invalidItemErrorMessage
+	^ 'Item is not in catalog' coverAll:
+		{29 to: 52}.! !
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+!Behavior method!
+signalInvalidQuantity
+	[
+	(self coverAll:
+		{26 to: 29}) error:
+		([
+		(self coverAll:
+			{38 to: 41}) invalidQuantityErrorMessage ] valueCoveringAll:
+			{43 to: 69}) ] valueCoveringAll:
+		{31 to: 36}.! !
+!Behavior method!
+invalidQuantityErrorMessage
+	^ [
+	([
+	(self coverAll:
+		{33 to: 36}) class ] valueCoveringAll:
+		{38 to: 42}) invalidQuantityErrorMessage ] valueCoveringAll:
+		{44 to: 70}.! !
+!Behavior method!
+invalidQuantityErrorMessage
+	^ 'Invalid number of items' coverAll:
+		{33 to: 57}.! !
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+!Behavior method!
+includes: anItem
+	^ [
+	(items
+		cover: (21 to: 25)
+		declaredAt: (21 to: 25)) includes:
+		(anItem
+			cover: (37 to: 42)
+			declaredAt: (11 to: 16)) ] valueCoveringAll:
+		{27 to: 35}.! !
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+!Behavior method!
+occurrencesOf: anItem
+	^ [
+	(items
+		cover: (26 to: 30)
+		declaredAt: (26 to: 30)) occurrencesOf:
+		(anItem
+			cover: (47 to: 52)
+			declaredAt: (16 to: 21)) ] valueCoveringAll:
+		{32 to: 45}.! !
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'AEC 6/15/2022 21:49:20'!
+PASSED!
+!Behavior method!
+customer
+	^ 'aCustomer' coverAll:
+		{14 to: 24}.! !
+!Behavior method!
+notExpiredCreditCard
+	^ [
+	(CreditCard
+		cover: (26 to: 35)
+		declaredAt: (26 to: 35))
+		numbered:
+			([
+			(self coverAll:
+				{47 to: 50}) validCreditCardNumber ] valueCoveringAll:
+				{52 to: 72})
+		ownedBy:
+			([
+			(self coverAll:
+				{83 to: 86}) validOwnerName ] valueCoveringAll:
+				{88 to: 101})
+		expiringOn:
+			([
+			(self coverAll:
+				{115 to: 118}) notExpiredMonthOfYear ] valueCoveringAll:
+				{120 to: 140}) ] valueCoveringAll:
+		{37 to: 45. 74 to: 81. 103 to: 113}.! !
+!Behavior method!
+validCreditCardNumber
+	^ '1234567890123456' coverAll:
+		{27 to: 44}.! !
+!Behavior method!
+validOwnerName
+	^ 'Pepe Sanchez' coverAll:
+		{20 to: 33}.! !
+!Behavior method!
+notExpiredMonthOfYear
+	^ [
+	(Month
+		cover: (27 to: 31)
+		declaredAt: (27 to: 31))
+		month:
+			([
+			(today
+				cover: (40 to: 44)
+				declaredAt: (40 to: 44)) monthIndex ] valueCoveringAll:
+				{46 to: 55})
+		year:
+			([
+			([
+			(today
+				cover: (63 to: 67)
+				declaredAt: (40 to: 44)) yearNumber ] valueCoveringAll:
+				{69 to: 78}) +
+				(1 coverAll:
+					{81 to: 82}) ] valueCoveringAll:
+				{80 to: 80}) ] valueCoveringAll:
+		{33 to: 38. 57 to: 61}.! !
+!Behavior method!
+numbered: aNumber ownedBy: anOwnerName expiringOn: aMonth
+	[
+	(self coverAll:
+		{63 to: 66}) assertIsValidNumber:
+		(aNumber
+			cover: (89 to: 95)
+			declaredAt: (11 to: 17)) ] valueCoveringAll:
+		{68 to: 87}.
+	[
+	(self coverAll:
+		{99 to: 102}) assertIsValidOwnerName:
+		(anOwnerName
+			cover: (128 to: 138)
+			declaredAt: (28 to: 38)) ] valueCoveringAll:
+		{104 to: 126}.
+	^ [
+	([
+	(self coverAll:
+		{145 to: 148}) new ] valueCoveringAll:
+		{150 to: 152})
+		initializeNumbered:
+			(aNumber
+				cover: (174 to: 180)
+				declaredAt: (11 to: 17))
+		ownedBy:
+			(anOwnerName
+				cover: (191 to: 201)
+				declaredAt: (28 to: 38))
+		expiringOn:
+			(aMonth
+				cover: (215 to: 220)
+				declaredAt: (52 to: 57)) ] valueCoveringAll:
+		{154 to: 172. 182 to: 189. 203 to: 213}.! !
+!Behavior method!
+assertIsValidNumber: aNumber
+	[
+	([
+	([
+	(aNumber
+		cover: (32 to: 38)
+		declaredAt: (22 to: 28)) size ] valueCoveringAll:
+		{40 to: 43}) =
+		(16 coverAll:
+			{47 to: 48}) ] valueCoveringAll:
+		{45 to: 45}) ifFalse: [
+		[
+		(self coverAll:
+			{61 to: 64}) signalInvalidNumber ] valueCoveringAll:
+			{66 to: 84} ]] valueCoveringAll:
+		{50 to: 57}.
+	[
+	([
+	(aNumber
+		cover: (91 to: 97)
+		declaredAt: (22 to: 28)) anySatisfy: [ :aCharacter |
+		[
+		([
+		(aCharacter
+			cover: (127 to: 136)
+			declaredAt: (114 to: 123)) isDigit ] valueCoveringAll:
+			{138 to: 144}) not ] valueCoveringAll:
+			{146 to: 148} ]] valueCoveringAll:
+		{99 to: 109}) ifTrue: [
+		[
+		(self coverAll:
+			{163 to: 166}) signalInvalidNumber ] valueCoveringAll:
+			{168 to: 186} ]] valueCoveringAll:
+		{153 to: 159}.! !
+!Behavior method!
+assertIsValidOwnerName: anOwnerName
+	[
+	([
+	(anOwnerName
+		cover: (39 to: 49)
+		declaredAt: (25 to: 35)) isEmpty ] valueCoveringAll:
+		{51 to: 57}) ifTrue: [
+		[
+		(self coverAll:
+			{69 to: 72}) signalInvalidOwnerName ] valueCoveringAll:
+			{74 to: 95} ]] valueCoveringAll:
+		{59 to: 65}.! !
+!Behavior method!
+initializeNumbered: aNumber ownedBy: anOwnerName expiringOn: aMonth
+	(number _ aNumber
+		cover: (83 to: 89)
+		declaredAt: (21 to: 27))
+		cover: (73 to: 78)
+		declaredAt: (73 to: 78).
+	(ownerName _ anOwnerName
+		cover: (106 to: 116)
+		declaredAt: (38 to: 48))
+		cover: (93 to: 101)
+		declaredAt: (93 to: 101).
+	(expiration _ aMonth
+		cover: (134 to: 139)
+		declaredAt: (62 to: 67))
+		cover: (120 to: 129)
+		declaredAt: (120 to: 129).! !
+!Behavior method!
+today
+	^ today
+		cover: (12 to: 16)
+		declaredAt: (12 to: 16).! !
+!Behavior method!
+toCheckout: aCart ownedBy: anOwner charging: aCreditCard throught: aMerchantProcessor on: aDate registeringOn: aSalesBook
+	[
+	(self coverAll:
+		{126 to: 129}) assertIsNotEmpty:
+		(aCart
+			cover: (149 to: 153)
+			declaredAt: (13 to: 17)) ] valueCoveringAll:
+		{131 to: 147}.
+	[
+	(self coverAll:
+		{157 to: 160})
+		assertIsNotExpired:
+			(aCreditCard
+				cover: (182 to: 192)
+				declaredAt: (46 to: 56))
+		on:
+			(aDate
+				cover: (198 to: 202)
+				declaredAt: (91 to: 95)) ] valueCoveringAll:
+		{162 to: 180. 194 to: 196}.
+	^ [
+	([
+	(self coverAll:
+		{209 to: 212}) new ] valueCoveringAll:
+		{214 to: 216})
+		initializeToCheckout:
+			(aCart
+				cover: (240 to: 244)
+				declaredAt: (13 to: 17))
+		ownedBy:
+			(anOwner
+				cover: (255 to: 261)
+				declaredAt: (28 to: 34))
+		charging:
+			(aCreditCard
+				cover: (273 to: 283)
+				declaredAt: (46 to: 56))
+		throught:
+			(aMerchantProcessor
+				cover: (295 to: 312)
+				declaredAt: (68 to: 85))
+		registeringOn:
+			(aSalesBook
+				cover: (329 to: 338)
+				declaredAt: (112 to: 121)) ] valueCoveringAll:
+		{218 to: 238. 246 to: 253. 263 to: 271. 285 to: 293. 314 to: 327}.! !
+!Behavior method!
+assertIsNotEmpty: aCart
+	[
+	([
+	(aCart
+		cover: (29 to: 33)
+		declaredAt: (19 to: 23)) isEmpty ] valueCoveringAll:
+		{35 to: 41}) ifTrue: [
+		[
+		(self coverAll:
+			{52 to: 55}) signalCartCanNotBeEmpty ] valueCoveringAll:
+			{57 to: 79} ]] valueCoveringAll:
+		{43 to: 49}.! !
+!Behavior method!
+signalCartCanNotBeEmpty
+	[
+	(self coverAll:
+		{27 to: 30}) error:
+		([
+		(self coverAll:
+			{39 to: 42}) cartCanNotBeEmptyErrorMessage ] valueCoveringAll:
+			{44 to: 72}) ] valueCoveringAll:
+		{32 to: 37}.! !
+!Behavior method!
+cartCanNotBeEmptyErrorMessage
+	^ 'Can not check out an empty cart' coverAll:
+		{35 to: 67}.! !
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+assertIsNotExpired: aCreditCard on: aDate
+	[
+	([
+	(aCreditCard
+		cover: (47 to: 57)
+		declaredAt: (21 to: 31)) isExpiredOn:
+		(aDate
+			cover: (72 to: 76)
+			declaredAt: (37 to: 41)) ] valueCoveringAll:
+		{59 to: 70}) ifTrue: [
+		[
+		(self coverAll:
+			{88 to: 91}) signalCanNotChargeAnExpiredCreditCard ] valueCoveringAll:
+			{93 to: 129} ]] valueCoveringAll:
+		{79 to: 85}.! !
+!Behavior method!
+isExpiredOn: aDate
+	^ [
+	([
+	(expiration
+		cover: (25 to: 34)
+		declaredAt: (25 to: 34)) start ] valueCoveringAll:
+		{36 to: 40}) <
+		([
+		([
+		(Month
+			cover: (45 to: 49)
+			declaredAt: (45 to: 49))
+			month:
+				([
+				(aDate
+					cover: (58 to: 62)
+					declaredAt: (14 to: 18)) monthIndex ] valueCoveringAll:
+					{64 to: 73})
+			year:
+				([
+				(aDate
+					cover: (81 to: 85)
+					declaredAt: (14 to: 18)) yearNumber ] valueCoveringAll:
+					{87 to: 96}) ] valueCoveringAll:
+			{51 to: 56. 75 to: 79}) start ] valueCoveringAll:
+			{99 to: 103}) ] valueCoveringAll:
+		{42 to: 42}.! !
+!Behavior method!
+initializeToCheckout: aCart ownedBy: anOwner charging: aCreditCard throught: aMerchantProcessor registeringOn: aSalesBook
+	(cart _ aCart
+		cover: (134 to: 138)
+		declaredAt: (23 to: 27))
+		cover: (126 to: 129)
+		declaredAt: (126 to: 129).
+	(owner _ anOwner
+		cover: (151 to: 157)
+		declaredAt: (38 to: 44))
+		cover: (142 to: 146)
+		declaredAt: (142 to: 146).
+	(creditCard _ aCreditCard
+		cover: (175 to: 185)
+		declaredAt: (56 to: 66))
+		cover: (161 to: 170)
+		declaredAt: (161 to: 170).
+	(merchantProcessor _ aMerchantProcessor
+		cover: (210 to: 227)
+		declaredAt: (78 to: 95))
+		cover: (189 to: 205)
+		declaredAt: (189 to: 205).
+	(salesBook _ aSalesBook
+		cover: (244 to: 253)
+		declaredAt: (112 to: 121))
+		cover: (231 to: 239)
+		declaredAt: (231 to: 239).! !
+!Behavior method!
+checkOut
+	[
+	(self coverAll:
+		{12 to: 15}) createTicket ] valueCoveringAll:
+		{17 to: 28}.
+	[
+	(self coverAll:
+		{32 to: 35}) debitTotal ] valueCoveringAll:
+		{37 to: 46}.
+	[
+	(self coverAll:
+		{50 to: 53}) registerSale ] valueCoveringAll:
+		{55 to: 66}.
+	^ ticket
+		cover: (73 to: 78)
+		declaredAt: (73 to: 78).! !
+!Behavior method!
+createTicket
+	| lineItems |
+	(lineItems _ [
+	(OrderedCollection
+		cover: (46 to: 62)
+		declaredAt: (46 to: 62)) new ] valueCoveringAll:
+		{64 to: 66})
+		cover: (33 to: 41)
+		declaredAt: (18 to: 26).
+	[
+	(cart
+		cover: (70 to: 73)
+		declaredAt: (70 to: 73)) itemsAndQuantitiesDo: [ :anItem :aQuantity |
+		[
+		(lineItems
+			cover: (123 to: 131)
+			declaredAt: (18 to: 26)) add:
+			([
+			(self coverAll:
+				{139 to: 142})
+				createLineItemOf:
+					(anItem
+						cover: (162 to: 167)
+						declaredAt: (100 to: 105))
+				quantity:
+					(aQuantity
+						cover: (179 to: 187)
+						declaredAt: (108 to: 116)) ] valueCoveringAll:
+				{144 to: 160. 169 to: 177}) ] valueCoveringAll:
+			{133 to: 136} ]] valueCoveringAll:
+		{75 to: 95}.
+	(ticket _ [
+	(Ticket
+		cover: (205 to: 210)
+		declaredAt: (205 to: 210)) of:
+		(lineItems
+			cover: (216 to: 224)
+			declaredAt: (18 to: 26)) ] valueCoveringAll:
+		{212 to: 214})
+		cover: (195 to: 200)
+		declaredAt: (195 to: 200).! !
+!Behavior method!
+itemsAndQuantitiesDo: aBlock
+	^ [
+	([
+	(items
+		cover: (35 to: 39)
+		declaredAt: (35 to: 39)) contents ] valueCoveringAll:
+		{41 to: 48}) keysAndValuesDo: [ :anItem :aQuantity |
+		[
+		(aBlock
+			cover: (90 to: 95)
+			declaredAt: (23 to: 28))
+			value:
+				(anItem
+					cover: (104 to: 109)
+					declaredAt: (70 to: 75))
+			value:
+				(aQuantity
+					cover: (118 to: 126)
+					declaredAt: (78 to: 86)) ] valueCoveringAll:
+			{97 to: 102. 111 to: 116} ]] valueCoveringAll:
+		{50 to: 65}.! !
+!Behavior method!
+createLineItemOf: anItem quantity: aQuantity
+	^ [
+	(LineItem
+		cover: (50 to: 57)
+		declaredAt: (50 to: 57))
+		of:
+			(anItem
+				cover: (63 to: 68)
+				declaredAt: (19 to: 24))
+		quantity:
+			(aQuantity
+				cover: (80 to: 88)
+				declaredAt: (36 to: 44))
+		total:
+			([
+			(self coverAll:
+				{98 to: 101})
+				totalOf:
+					(anItem
+						cover: (112 to: 117)
+						declaredAt: (19 to: 24))
+				quantity:
+					(aQuantity
+						cover: (129 to: 137)
+						declaredAt: (36 to: 44)) ] valueCoveringAll:
+				{103 to: 110. 119 to: 127}) ] valueCoveringAll:
+		{59 to: 61. 70 to: 78. 90 to: 95}.! !
+!Behavior method!
+totalOf: anItem quantity: aQuantity
+	^ [
+	([
+	([
+	(cart
+		cover: (42 to: 45)
+		declaredAt: (42 to: 45)) catalog ] valueCoveringAll:
+		{47 to: 53}) at:
+		(anItem
+			cover: (59 to: 64)
+			declaredAt: (10 to: 15)) ] valueCoveringAll:
+		{55 to: 57}) *
+		(aQuantity
+			cover: (69 to: 77)
+			declaredAt: (27 to: 35)) ] valueCoveringAll:
+		{67 to: 67}.! !
+!Behavior method!
+catalog
+	^ catalog
+		cover: (14 to: 20)
+		declaredAt: (14 to: 20).! !
+!Behavior method!
+of: anItem quantity: aQuantity total: aTotal
+	^ [
+	([
+	(self coverAll:
+		{49 to: 52}) new ] valueCoveringAll:
+		{54 to: 56})
+		initializeOf:
+			(anItem
+				cover: (72 to: 77)
+				declaredAt: (5 to: 10))
+		quantity:
+			(aQuantity
+				cover: (89 to: 97)
+				declaredAt: (22 to: 30))
+		total:
+			(aTotal
+				cover: (106 to: 111)
+				declaredAt: (39 to: 44)) ] valueCoveringAll:
+		{58 to: 70. 79 to: 87. 99 to: 104}.! !
+!Behavior method!
+initializeOf: anItem quantity: aQuantity total: aTotal
+	(item _ anItem
+		cover: (66 to: 71)
+		declaredAt: (15 to: 20))
+		cover: (58 to: 61)
+		declaredAt: (58 to: 61).
+	(quantity _ aQuantity
+		cover: (87 to: 95)
+		declaredAt: (32 to: 40))
+		cover: (75 to: 82)
+		declaredAt: (75 to: 82).
+	(total _ aTotal
+		cover: (108 to: 113)
+		declaredAt: (49 to: 54))
+		cover: (99 to: 103)
+		declaredAt: (99 to: 103).! !
+!Behavior method!
+of: aCollectionOfLineItems
+	^ [
+	([
+	(self coverAll:
+		{31 to: 34}) new ] valueCoveringAll:
+		{36 to: 38}) initializeOf:
+		(aCollectionOfLineItems
+			cover: (54 to: 75)
+			declaredAt: (5 to: 26)) ] valueCoveringAll:
+		{40 to: 52}.! !
+!Behavior method!
+initializeOf: aCollectionOfLineItems
+	(lineItems _ aCollectionOfLineItems
+		cover: (54 to: 75)
+		declaredAt: (15 to: 36))
+		cover: (41 to: 49)
+		declaredAt: (41 to: 49).! !
+!Behavior method!
+debitTotal
+	| transactionId |
+	(transactionId _ [
+	(merchantProcessor
+		cover: (52 to: 68)
+		declaredAt: (52 to: 68))
+		debit:
+			([
+			(ticket
+				cover: (77 to: 82)
+				declaredAt: (77 to: 82)) total ] valueCoveringAll:
+				{84 to: 88})
+		from:
+			(creditCard
+				cover: (96 to: 105)
+				declaredAt: (96 to: 105)) ] valueCoveringAll:
+		{70 to: 75. 90 to: 94})
+		cover: (35 to: 47)
+		declaredAt: (16 to: 28).
+	[
+	(ticket
+		cover: (109 to: 114)
+		declaredAt: (77 to: 82)) transactionId:
+		(transactionId
+			cover: (131 to: 143)
+			declaredAt: (16 to: 28)) ] valueCoveringAll:
+		{116 to: 129}.! !
+!Behavior method!
+total
+	^ [
+	(lineItems
+		cover: (11 to: 19)
+		declaredAt: (11 to: 19)) sum: [ :aLineItem |
+		[
+		(aLineItem
+			cover: (41 to: 49)
+			declaredAt: (29 to: 37)) total ] valueCoveringAll:
+			{51 to: 55} ]] valueCoveringAll:
+		{21 to: 24}.! !
+!Behavior method!
+total
+	^ total
+		cover: (12 to: 16)
+		declaredAt: (12 to: 16).! !
+!Behavior method!
+transactionId: anId
+	(transactionId _ anId
+		cover: (40 to: 43)
+		declaredAt: (16 to: 19))
+		cover: (23 to: 35)
+		declaredAt: (23 to: 35).! !
+!Behavior method!
+registerSale
+	[
+	(salesBook
+		cover: (16 to: 24)
+		declaredAt: (16 to: 24)) add:
+		([
+		(self coverAll:
+			{31 to: 34}) createSale ] valueCoveringAll:
+			{36 to: 45}) ] valueCoveringAll:
+		{26 to: 29}.! !
+!Behavior method!
+createSale
+	^ [
+	(Sale
+		cover: (16 to: 19)
+		declaredAt: (16 to: 19))
+		doneBy:
+			(owner
+				cover: (29 to: 33)
+				declaredAt: (29 to: 33))
+		certifiedWith:
+			(ticket
+				cover: (50 to: 55)
+				declaredAt: (50 to: 55)) ] valueCoveringAll:
+		{21 to: 27. 35 to: 48}.! !
+!Behavior method!
+doneBy: aCustomer certifiedWith: aTicket
+	^ [
+	([
+	(self coverAll:
+		{46 to: 49}) new ] valueCoveringAll:
+		{51 to: 53})
+		initializeDoneBy:
+			(aCustomer
+				cover: (73 to: 81)
+				declaredAt: (9 to: 17))
+		certifiedWith:
+			(aTicket
+				cover: (98 to: 104)
+				declaredAt: (34 to: 40)) ] valueCoveringAll:
+		{55 to: 71. 83 to: 96}.! !
+!Behavior method!
+initializeDoneBy: aCustomer certifiedWith: aTicket
+	(customer _ aCustomer
+		cover: (67 to: 75)
+		declaredAt: (19 to: 27))
+		cover: (55 to: 62)
+		declaredAt: (55 to: 62).
+	(ticket _ aTicket
+		cover: (89 to: 95)
+		declaredAt: (44 to: 50))
+		cover: (79 to: 84)
+		declaredAt: (79 to: 84).! !
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+expiredCreditCard
+	^ [
+	(CreditCard
+		cover: (23 to: 32)
+		declaredAt: (23 to: 32))
+		numbered:
+			([
+			(self coverAll:
+				{44 to: 47}) validCreditCardNumber ] valueCoveringAll:
+				{49 to: 69})
+		ownedBy:
+			([
+			(self coverAll:
+				{80 to: 83}) validOwnerName ] valueCoveringAll:
+				{85 to: 98})
+		expiringOn:
+			([
+			(self coverAll:
+				{112 to: 115}) expiredMonthOfYear ] valueCoveringAll:
+				{117 to: 134}) ] valueCoveringAll:
+		{34 to: 42. 71 to: 78. 100 to: 110}.! !
+!Behavior method!
+expiredMonthOfYear
+	^ [
+	(Month
+		cover: (25 to: 29)
+		declaredAt: (25 to: 29))
+		month:
+			([
+			(today
+				cover: (38 to: 42)
+				declaredAt: (38 to: 42)) monthIndex ] valueCoveringAll:
+				{44 to: 53})
+		year:
+			([
+			([
+			(today
+				cover: (61 to: 65)
+				declaredAt: (38 to: 42)) yearNumber ] valueCoveringAll:
+				{67 to: 76}) -
+				(1 coverAll:
+					{79 to: 80}) ] valueCoveringAll:
+				{78 to: 78}) ] valueCoveringAll:
+		{31 to: 36. 55 to: 59}.! !
+!Behavior method!
+signalCanNotChargeAnExpiredCreditCard
+	[
+	(self coverAll:
+		{42 to: 45}) error:
+		([
+		(self coverAll:
+			{54 to: 57}) canNotChargeAnExpiredCreditCardErrorMessage ] valueCoveringAll:
+			{59 to: 101}) ] valueCoveringAll:
+		{47 to: 52}.! !
+!Behavior method!
+canNotChargeAnExpiredCreditCardErrorMessage
+	^ 'Can not charge an expired credit card' coverAll:
+		{49 to: 87}.! !
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+total
+	^ [
+	(ticket
+		cover: (12 to: 17)
+		declaredAt: (12 to: 17)) total ] valueCoveringAll:
+		{19 to: 23}.! !
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+creditCardHasNoCreditErrorMessage
+	^ 'Credit card has no credit' coverAll:
+		{39 to: 65}.! !
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+invalidNumberErrorDescription
+	^ 'Invalid credit card number. It must be 16 digits' coverAll:
+		{35 to: 84}.! !
+!Behavior method!
+signalInvalidNumber
+	[
+	(self coverAll:
+		{24 to: 27}) error:
+		([
+		(self coverAll:
+			{36 to: 39}) invalidNumberErrorDescription ] valueCoveringAll:
+			{41 to: 69}) ] valueCoveringAll:
+		{29 to: 34}.! !
+
+!testRun: #CreditCardTest #test01CreditCardNumberWithLessThan16DigitsIsNotValid stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardNumberWithMoreThan16DigitsIsNotValid stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+
+!testRun: #CreditCardTest #test03CreditCardNumberShouldBeDigitsOnly stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+invalidOwnerNameErrorDescription
+	^ 'Owner name can not be empty' coverAll:
+		{38 to: 66}.! !
+!Behavior method!
+signalInvalidOwnerName
+	[
+	(self coverAll:
+		{27 to: 30}) error:
+		([
+		(self coverAll:
+			{39 to: 42}) invalidOwnerNameErrorDescription ] valueCoveringAll:
+			{44 to: 75}) ] valueCoveringAll:
+		{32 to: 37}.! !
+
+!testRun: #CreditCardTest #test04NameCanNotBeEmpty stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+
+!testRun: #CreditCardTest #test05IsExpiredOnNextExpirationMonth stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+
+!testRun: #CreditCardTest #test06IsNotExpiredOnExpirationMonth stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+number
+	^ number
+		cover: (12 to: 17)
+		declaredAt: (12 to: 17).! !
+!Behavior method!
+ownerName
+	^ ownerName
+		cover: (15 to: 23)
+		declaredAt: (15 to: 23).! !
+!Behavior method!
+expiration
+	^ expiration
+		cover: (16 to: 25)
+		declaredAt: (16 to: 25).! !
+
+!testRun: #CreditCardTest #test07CanGetCreditCardInfoFromIt stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+now: aTime
+	^ [
+	([
+	(self coverAll:
+		{17 to: 20}) new ] valueCoveringAll:
+		{22 to: 24}) initializeNow:
+		(aTime
+			cover: (41 to: 45)
+			declaredAt: (6 to: 10)) ] valueCoveringAll:
+		{26 to: 39}.! !
+!Behavior method!
+initializeNow: aTime
+	(now _ aTime
+		cover: (32 to: 36)
+		declaredAt: (16 to: 20))
+		cover: (25 to: 27)
+		declaredAt: (25 to: 27).! !
+!Behavior method!
+authenticatingWith: aValidUsersAndPasswords acceptingItemsOf: aCatalog registeringOn: aSalesBook debitingThrought: aMerchantProcessor measuringTimeWith: aClock
+	^ [
+	([
+	(self coverAll:
+		{172 to: 175}) new ] valueCoveringAll:
+		{177 to: 179})
+		initializeAuthenticatingWith:
+			(aValidUsersAndPasswords
+				cover: (214 to: 236)
+				declaredAt: (21 to: 43))
+		acceptingItemsOf:
+			(aCatalog
+				cover: (259 to: 266)
+				declaredAt: (65 to: 72))
+		registeringOn:
+			(aSalesBook
+				cover: (286 to: 295)
+				declaredAt: (91 to: 100))
+		debitingThrought:
+			(aMerchantProcessor
+				cover: (318 to: 335)
+				declaredAt: (122 to: 139))
+		measuringTimeWith:
+			(aClock
+				cover: (359 to: 364)
+				declaredAt: (162 to: 167)) ] valueCoveringAll:
+		{184 to: 212. 241 to: 257. 271 to: 284. 300 to: 316. 340 to: 357}.! !
+!Behavior method!
+initializeAuthenticatingWith: aValidUsersAndPasswords acceptingItemsOf: aCatalog registeringOn: aSalesBook debitingThrought: aMerchantProcessor measuringTimeWith: aClock
+	(validUsersAndPasswords _ aValidUsersAndPasswords
+		cover: (207 to: 229)
+		declaredAt: (31 to: 53))
+		cover: (181 to: 202)
+		declaredAt: (181 to: 202).
+	(catalog _ aCatalog
+		cover: (244 to: 251)
+		declaredAt: (75 to: 82))
+		cover: (233 to: 239)
+		declaredAt: (233 to: 239).
+	(salesBook _ aSalesBook
+		cover: (268 to: 277)
+		declaredAt: (101 to: 110))
+		cover: (255 to: 263)
+		declaredAt: (255 to: 263).
+	(merchantProcessor _ aMerchantProcessor
+		cover: (302 to: 319)
+		declaredAt: (132 to: 149))
+		cover: (281 to: 297)
+		declaredAt: (281 to: 297).
+	(clock _ aClock
+		cover: (332 to: 337)
+		declaredAt: (172 to: 177))
+		cover: (323 to: 327)
+		declaredAt: (323 to: 327).
+	(cartSessions _ [
+	(Dictionary
+		cover: (359 to: 368)
+		declaredAt: (359 to: 368)) new ] valueCoveringAll:
+		{370 to: 372})
+		cover: (343 to: 354)
+		declaredAt: (343 to: 354).
+	(lastId _ 0 coverAll:
+		{386 to: 386})
+		cover: (376 to: 381)
+		declaredAt: (376 to: 381).! !
+!Behavior method!
+createCartFor: aUser authenticatedWith: aPassword
+	^ [
+	(self coverAll:
+		{55 to: 58})
+		if:
+			(aUser
+				cover: (64 to: 68)
+				declaredAt: (16 to: 20))
+		authenticatesWith:
+			(aPassword
+				cover: (89 to: 97)
+				declaredAt: (41 to: 49))
+		do: [ | cartId cartSession |
+			(cartId _ [
+			(self coverAll:
+				{142 to: 145}) generateCartId ] valueCoveringAll:
+				{147 to: 160})
+				cover: (132 to: 137)
+				declaredAt: (107 to: 112).
+			(cartSession _ [
+			(CartSession
+				cover: (180 to: 190)
+				declaredAt: (180 to: 190))
+				ownedBy:
+					(aUser
+						cover: (201 to: 205)
+						declaredAt: (16 to: 20))
+				with:
+					([
+					(Cart
+						cover: (214 to: 217)
+						declaredAt: (214 to: 217)) acceptingItemsOf:
+						(catalog
+							cover: (237 to: 243)
+							declaredAt: (237 to: 243)) ] valueCoveringAll:
+						{219 to: 235})
+				on:
+					(self coverAll:
+						{250 to: 253}) ] valueCoveringAll:
+				{192 to: 199. 207 to: 211. 246 to: 248})
+				cover: (165 to: 175)
+				declaredAt: (114 to: 124).
+			[
+			(cartSessions
+				cover: (259 to: 270)
+				declaredAt: (259 to: 270))
+				at:
+					(cartId
+						cover: (276 to: 281)
+						declaredAt: (107 to: 112))
+				put:
+					(cartSession
+						cover: (288 to: 298)
+						declaredAt: (114 to: 124)) ] valueCoveringAll:
+				{272 to: 274. 283 to: 286}.
+			cartId
+				cover: (305 to: 310)
+				declaredAt: (107 to: 112) ]] valueCoveringAll:
+		{60 to: 62. 70 to: 87. 99 to: 101}.! !
+!Behavior method!
+if: aUser authenticatesWith: aPassword do: aBlock
+	^ [
+	([
+	(self coverAll:
+		{56 to: 59})
+		does:
+			(aUser
+				cover: (67 to: 71)
+				declaredAt: (5 to: 9))
+		authenticatesWith:
+			(aPassword
+				cover: (92 to: 100)
+				declaredAt: (30 to: 38)) ] valueCoveringAll:
+		{61 to: 65. 73 to: 90})
+		ifTrue:
+			(aBlock
+				cover: (114 to: 119)
+				declaredAt: (44 to: 49))
+		ifFalse: [
+			[
+			(self coverAll:
+				{135 to: 138}) signalInvalidUserAndOrPassword ] valueCoveringAll:
+				{140 to: 169} ]] valueCoveringAll:
+		{106 to: 112. 124 to: 131}.! !
+!Behavior method!
+does: aUser authenticatesWith: aPassword
+	"Recordar que esto es solo un ejemplo. No se deben guardar passwords en un sistema de verdad sino un
+	hash o similar - Hernan"
+	| storedPassword |
+	(storedPassword _ [
+	(validUsersAndPasswords
+		cover: (215 to: 236)
+		declaredAt: (215 to: 236))
+		at:
+			(aUser
+				cover: (242 to: 246)
+				declaredAt: (7 to: 11))
+		ifAbsent: [ ^ false coverAll:
+				{261 to: 265} ]] valueCoveringAll:
+		{238 to: 240. 248 to: 256})
+		cover: (197 to: 210)
+		declaredAt: (177 to: 190).
+	^ [
+	(aPassword
+		cover: (272 to: 280)
+		declaredAt: (32 to: 40)) =
+		(storedPassword
+			cover: (284 to: 297)
+			declaredAt: (177 to: 190)) ] valueCoveringAll:
+		{282 to: 282}.! !
+!Behavior method!
+generateCartId
+	"Recuerden que esto es un ejemplo, por lo que voy a generar ids numericos consecutivos, pero en una 
+	implementacion real no deberian se numeros consecutivos ni nada que genere problemas de seguridad - Hernan"
+	(lastId _ [
+	(lastId
+		cover: (232 to: 237)
+		declaredAt: (232 to: 237)) +
+		(1 coverAll:
+			{251 to: 251}) ] valueCoveringAll:
+		{249 to: 249})
+		cover: (242 to: 247)
+		declaredAt: (232 to: 237).
+	^ lastId
+		cover: (256 to: 261)
+		declaredAt: (232 to: 237).! !
+!Behavior method!
+ownedBy: aCustomer with: aCart on: aSystemFacade
+	^ [
+	([
+	(self coverAll:
+		{53 to: 56}) new ] valueCoveringAll:
+		{58 to: 60})
+		initializeOwnedBy:
+			(aCustomer
+				cover: (81 to: 89)
+				declaredAt: (10 to: 18))
+		with:
+			(aCart
+				cover: (97 to: 101)
+				declaredAt: (26 to: 30))
+		on:
+			(aSystemFacade
+				cover: (107 to: 119)
+				declaredAt: (36 to: 48)) ] valueCoveringAll:
+		{62 to: 79. 91 to: 95. 103 to: 105}.! !
+!Behavior method!
+initializeOwnedBy: aCustomer with: aCart on: aSystemFacade
+	(owner _ aCustomer
+		cover: (71 to: 79)
+		declaredAt: (20 to: 28))
+		cover: (62 to: 66)
+		declaredAt: (62 to: 66).
+	(cart _ aCart
+		cover: (91 to: 95)
+		declaredAt: (36 to: 40))
+		cover: (83 to: 86)
+		declaredAt: (83 to: 86).
+	(systemFacade _ aSystemFacade
+		cover: (115 to: 127)
+		declaredAt: (46 to: 58))
+		cover: (99 to: 110)
+		declaredAt: (99 to: 110).
+	(lastUsedTime _ [
+	(self coverAll:
+		{147 to: 150}) now ] valueCoveringAll:
+		{152 to: 154})
+		cover: (131 to: 142)
+		declaredAt: (131 to: 142).! !
+!Behavior method!
+now
+	^ [
+	(systemFacade
+		cover: (8 to: 19)
+		declaredAt: (8 to: 19)) now ] valueCoveringAll:
+		{21 to: 23}.! !
+!Behavior method!
+now
+	^ [
+	(clock
+		cover: (9 to: 13)
+		declaredAt: (9 to: 13)) now ] valueCoveringAll:
+		{15 to: 17}.! !
+!Behavior method!
+now
+	^ now
+		cover: (10 to: 12)
+		declaredAt: (10 to: 12).! !
+!Behavior method!
+listCartIdentifiedAs: aCartId
+	^ [
+	(self coverAll:
+		{35 to: 38})
+		withCartSessionIdentifiedAs:
+			(aCartId
+				cover: (69 to: 75)
+				declaredAt: (23 to: 29))
+		do: [ :cartSession |
+			[
+			(cartSession
+				cover: (98 to: 108)
+				declaredAt: (84 to: 94)) cartContent ] valueCoveringAll:
+				{110 to: 120} ]] valueCoveringAll:
+		{40 to: 67. 77 to: 79}.! !
+!Behavior method!
+withCartSessionIdentifiedAs: aCartId do: aBlock
+	| cartSession |
+	(cartSession _ [
+	(cartSessions
+		cover: (85 to: 96)
+		declaredAt: (85 to: 96))
+		at:
+			(aCartId
+				cover: (102 to: 108)
+				declaredAt: (30 to: 36))
+		ifAbsent: [
+			[
+			(self coverAll:
+				{121 to: 124}) signalInvalidCartId ] valueCoveringAll:
+				{126 to: 144} ]] valueCoveringAll:
+		{98 to: 100. 110 to: 118})
+		cover: (70 to: 80)
+		declaredAt: (53 to: 63).
+	^ [
+	(cartSession
+		cover: (151 to: 161)
+		declaredAt: (53 to: 63)) do:
+		(aBlock
+			cover: (167 to: 172)
+			declaredAt: (42 to: 47)) ] valueCoveringAll:
+		{163 to: 165}.! !
+!Behavior method!
+do: aBlock
+	| now |
+	(now _ [
+	(self coverAll:
+		{31 to: 34}) now ] valueCoveringAll:
+		{36 to: 38})
+		cover: (24 to: 26)
+		declaredAt: (16 to: 18).
+	[
+	(self coverAll:
+		{42 to: 45}) assertIsNotExpirtedAt:
+		(now
+			cover: (70 to: 72)
+			declaredAt: (16 to: 18)) ] valueCoveringAll:
+		{47 to: 68}.
+	^ [
+	[
+	[
+	(aBlock
+		cover: (82 to: 87)
+		declaredAt: (5 to: 10)) value:
+		(self coverAll:
+			{96 to: 99}) ] valueCoveringAll:
+		{89 to: 94} ] ensure: [
+		(lastUsedTime _ now
+			cover: (129 to: 131)
+			declaredAt: (16 to: 18))
+			cover: (113 to: 124)
+			declaredAt: (113 to: 124) ]] valueCoveringAll:
+		{103 to: 109}.! !
+!Behavior method!
+assertIsNotExpirtedAt: aTime
+	[
+	([
+	(self coverAll:
+		{33 to: 36}) isExpiredAt:
+		(aTime
+			cover: (51 to: 55)
+			declaredAt: (24 to: 28)) ] valueCoveringAll:
+		{38 to: 49}) ifTrue: [
+		[
+		(self coverAll:
+			{68 to: 71}) signalCartSessionExpired ] valueCoveringAll:
+			{73 to: 96} ]] valueCoveringAll:
+		{58 to: 64}.! !
+!Behavior method!
+isExpiredAt: aTime
+	^ [
+	([
+	(lastUsedTime
+		cover: (27 to: 38)
+		declaredAt: (27 to: 38)) +
+		([
+		(systemFacade
+			cover: (42 to: 53)
+			declaredAt: (42 to: 53)) sessionDuration ] valueCoveringAll:
+			{55 to: 69}) ] valueCoveringAll:
+		{40 to: 40}) <
+		(aTime
+			cover: (74 to: 78)
+			declaredAt: (14 to: 18)) ] valueCoveringAll:
+		{72 to: 72}.! !
+!Behavior method!
+sessionDuration
+	^ [
+	(30 coverAll:
+		{21 to: 22}) minutes ] valueCoveringAll:
+		{24 to: 30}.! !
+!Behavior method!
+cartContent
+	^ [
+	(cart
+		cover: (16 to: 19)
+		declaredAt: (16 to: 19)) content ] valueCoveringAll:
+		{21 to: 27}.! !
+!Behavior method!
+content
+	^ [
+	(items
+		cover: (13 to: 17)
+		declaredAt: (13 to: 17)) copy ] valueCoveringAll:
+		{19 to: 22}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test01CanCreateCartWithValidUserAndPassword stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+signalInvalidUserAndOrPassword
+	[
+	(self coverAll:
+		{35 to: 38}) error:
+		([
+		(self coverAll:
+			{47 to: 50}) invalidUserAndOrPasswordErrorDescription ] valueCoveringAll:
+			{52 to: 91}) ] valueCoveringAll:
+		{40 to: 45}.! !
+!Behavior method!
+invalidUserAndOrPasswordErrorDescription
+	^ 'Invalid user and/or password' coverAll:
+		{46 to: 75}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test02CanNotCreateCartWithInvalidUser stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test03CanNotCreateCartWithInvalidPassword stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+add: anAmount of: aBook toCartIdentifiedAs: aCartId
+	[
+	(self coverAll:
+		{55 to: 58})
+		withCartSessionIdentifiedAs:
+			(aCartId
+				cover: (89 to: 95)
+				declaredAt: (45 to: 51))
+		do: [ :cartSession |
+			[
+			(cartSession
+				cover: (118 to: 128)
+				declaredAt: (104 to: 114))
+				addToCart:
+					(anAmount
+						cover: (141 to: 148)
+						declaredAt: (6 to: 13))
+				of:
+					(aBook
+						cover: (154 to: 158)
+						declaredAt: (19 to: 23)) ] valueCoveringAll:
+				{130 to: 139. 150 to: 152} ]] valueCoveringAll:
+		{60 to: 87. 97 to: 99}.! !
+!Behavior method!
+addToCart: anAmount of: aBook
+	^ [
+	(cart
+		cover: (34 to: 37)
+		declaredAt: (34 to: 37))
+		add:
+			(anAmount
+				cover: (44 to: 51)
+				declaredAt: (12 to: 19))
+		of:
+			(aBook
+				cover: (57 to: 61)
+				declaredAt: (25 to: 29)) ] valueCoveringAll:
+		{39 to: 42. 53 to: 55}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test04CanAddItemsToACreatedCart stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+signalInvalidCartId
+	[
+	(self coverAll:
+		{24 to: 27}) error:
+		([
+		(self coverAll:
+			{36 to: 39}) invalidCartIdErrorDescription ] valueCoveringAll:
+			{41 to: 69}) ] valueCoveringAll:
+		{29 to: 34}.! !
+!Behavior method!
+invalidCartIdErrorDescription
+	^ 'Invalid cart id' coverAll:
+		{35 to: 51}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test05CanNotAddItemToNotCreatedCart stamp: 'AEC 6/15/2022 21:49:21'!
+PASSED!
+!Behavior method!
+invalidItemErrorMessage
+	^ [
+	(Cart
+		cover: (29 to: 32)
+		declaredAt: (29 to: 32)) invalidItemErrorMessage ] valueCoveringAll:
+		{34 to: 56}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test06CanNotAddItemNotSellByTheStore stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test08CanNotListCartOfInvalidCartId stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test09ListCartReturnsTheRightNumberOfItems stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+!Behavior method!
+checkOutCartIdentifiedAs: aCartId withCreditCardNumbered: aCreditCartNumber ownedBy: anOwner expiringOn: anExpirationMonthOfYear
+	^ [
+	(self coverAll:
+		{133 to: 136})
+		withCartSessionIdentifiedAs:
+			(aCartId
+				cover: (170 to: 176)
+				declaredAt: (27 to: 33))
+		do: [ :cartSession | | ticket |
+			(ticket _ [
+			(cartSession
+				cover: (227 to: 237)
+				declaredAt: (188 to: 198))
+				checkOutCartWithCreditCardNumbered:
+					(aCreditCartNumber
+						cover: (280 to: 296)
+						declaredAt: (59 to: 75))
+				ownedBy:
+					(anOwner
+						cover: (312 to: 318)
+						declaredAt: (86 to: 92))
+				expiringOn:
+					(anExpirationMonthOfYear
+						cover: (337 to: 359)
+						declaredAt: (106 to: 128)) ] valueCoveringAll:
+				{244 to: 278. 303 to: 310. 325 to: 335})
+				cover: (217 to: 222)
+				declaredAt: (204 to: 209).
+			[
+			(self coverAll:
+				{365 to: 368}) removeCartId:
+				(aCartId
+					cover: (384 to: 390)
+					declaredAt: (27 to: 33)) ] valueCoveringAll:
+				{370 to: 382}.
+			[
+			(ticket
+				cover: (396 to: 401)
+				declaredAt: (204 to: 209)) transactionId ] valueCoveringAll:
+				{403 to: 415} ]] valueCoveringAll:
+		{141 to: 168. 181 to: 183}.! !
+!Behavior method!
+checkOutCartWithCreditCardNumbered: aCreditCartNumber ownedBy: anOwner expiringOn: anExpirationMonthOfYear
+	^ [
+	([
+	(Cashier
+		cover: (113 to: 119)
+		declaredAt: (113 to: 119))
+		toCheckout:
+			(cart
+				cover: (136 to: 139)
+				declaredAt: (136 to: 139))
+		ownedBy:
+			(owner
+				cover: (153 to: 157)
+				declaredAt: (153 to: 157))
+		charging:
+			([
+			(CreditCard
+				cover: (172 to: 181)
+				declaredAt: (172 to: 181))
+				numbered:
+					(aCreditCartNumber
+						cover: (193 to: 209)
+						declaredAt: (37 to: 53))
+				ownedBy:
+					(anOwner
+						cover: (220 to: 226)
+						declaredAt: (64 to: 70))
+				expiringOn:
+					(anExpirationMonthOfYear
+						cover: (240 to: 262)
+						declaredAt: (84 to: 106)) ] valueCoveringAll:
+				{183 to: 191. 211 to: 218. 228 to: 238})
+		throught:
+			([
+			(systemFacade
+				cover: (278 to: 289)
+				declaredAt: (278 to: 289)) merchantProcessor ] valueCoveringAll:
+				{291 to: 307})
+		on:
+			([
+			(self coverAll:
+				{316 to: 319}) today ] valueCoveringAll:
+				{321 to: 325})
+		registeringOn:
+			([
+			(systemFacade
+				cover: (345 to: 356)
+				declaredAt: (278 to: 289)) salesBook ] valueCoveringAll:
+				{358 to: 366}) ] valueCoveringAll:
+		{124 to: 134. 144 to: 151. 161 to: 169. 268 to: 276. 312 to: 314. 330 to: 343}) checkOut ] valueCoveringAll:
+		{369 to: 376}.! !
+!Behavior method!
+merchantProcessor
+	^ merchantProcessor
+		cover: (23 to: 39)
+		declaredAt: (23 to: 39).! !
+!Behavior method!
+today
+	^ [
+	(systemFacade
+		cover: (10 to: 21)
+		declaredAt: (10 to: 21)) today ] valueCoveringAll:
+		{23 to: 27}.! !
+!Behavior method!
+today
+	^ [
+	(clock
+		cover: (11 to: 15)
+		declaredAt: (11 to: 15)) today ] valueCoveringAll:
+		{17 to: 21}.! !
+!Behavior method!
+today
+	^ [
+	(now
+		cover: (11 to: 13)
+		declaredAt: (11 to: 13)) date ] valueCoveringAll:
+		{15 to: 18}.! !
+!Behavior method!
+salesBook
+	^ salesBook
+		cover: (15 to: 23)
+		declaredAt: (15 to: 23).! !
+!Behavior method!
+removeCartId: aCartId
+	"I'll not generate an error if the cartId is invalid because when used from http
+	request can be duplicated - Hernan"
+	[
+	(cartSessions
+		cover: (144 to: 155)
+		declaredAt: (144 to: 155))
+		removeKey:
+			(aCartId
+				cover: (168 to: 174)
+				declaredAt: (15 to: 21))
+		ifAbsent: [ ]] valueCoveringAll:
+		{157 to: 166. 176 to: 184}.! !
+!Behavior method!
+transactionId
+	^ transactionId
+		cover: (18 to: 30)
+		declaredAt: (18 to: 30).! !
+!Behavior method!
+listPurchasesOf: aUser authenticatingWith: aPassword
+	^ [
+	(self coverAll:
+		{57 to: 60})
+		if:
+			(aUser
+				cover: (66 to: 70)
+				declaredAt: (18 to: 22))
+		authenticatesWith:
+			(aPassword
+				cover: (91 to: 99)
+				declaredAt: (44 to: 52))
+		do: [
+			[
+			(self coverAll:
+				{107 to: 110}) listPurchasesOf:
+				(aUser
+					cover: (129 to: 133)
+					declaredAt: (18 to: 22)) ] valueCoveringAll:
+				{112 to: 127} ]] valueCoveringAll:
+		{62 to: 64. 72 to: 89. 101 to: 103}.! !
+!Behavior method!
+listPurchasesOf: aUser
+	| sales soldItems total |
+	(sales _ [
+	(self coverAll:
+		{64 to: 67}) salesDoneBy:
+		(aUser
+			cover: (82 to: 86)
+			declaredAt: (18 to: 22)) ] valueCoveringAll:
+		{69 to: 80})
+		cover: (55 to: 59)
+		declaredAt: (28 to: 32).
+	(soldItems _ [
+	(sales
+		cover: (104 to: 108)
+		declaredAt: (28 to: 32))
+		inject:
+			([
+			(Dictionary
+				cover: (120 to: 129)
+				declaredAt: (120 to: 129)) new ] valueCoveringAll:
+				{131 to: 133})
+		into: [ :quantitiesByItem :aSale |
+			[
+			(self coverAll:
+				{176 to: 179})
+				list:
+					(aSale
+						cover: (187 to: 191)
+						declaredAt: (164 to: 168))
+				on:
+					(quantitiesByItem
+						cover: (197 to: 212)
+						declaredAt: (146 to: 161)) ] valueCoveringAll:
+				{181 to: 185. 193 to: 195}.
+			quantitiesByItem
+				cover: (218 to: 233)
+				declaredAt: (146 to: 161) ]] valueCoveringAll:
+		{112 to: 118. 137 to: 141})
+		cover: (91 to: 99)
+		declaredAt: (34 to: 42).
+	(total _ [
+	(sales
+		cover: (248 to: 252)
+		declaredAt: (28 to: 32))
+		sum: [ :aSale |
+			[
+			(aSale
+				cover: (270 to: 274)
+				declaredAt: (262 to: 266)) total ] valueCoveringAll:
+				{276 to: 280} ]
+		ifEmpty: [
+			0 coverAll:
+				{295 to: 295} ]] valueCoveringAll:
+		{254 to: 257. 284 to: 291})
+		cover: (239 to: 243)
+		declaredAt: (44 to: 48).
+	^ [
+	(Array
+		cover: (302 to: 306)
+		declaredAt: (302 to: 306))
+		with:
+			(soldItems
+				cover: (314 to: 322)
+				declaredAt: (34 to: 42))
+		with:
+			(total
+				cover: (330 to: 334)
+				declaredAt: (44 to: 48)) ] valueCoveringAll:
+		{308 to: 312. 324 to: 328}.! !
+!Behavior method!
+salesDoneBy: aUser
+	"Esto es un indicio de que por ahi conviene empezar a pensar en modelar un SaleBook - Hernan"
+	^ [
+	(salesBook
+		cover: (119 to: 127)
+		declaredAt: (119 to: 127)) select: [ :aSale |
+		[
+		(aSale
+			cover: (148 to: 152)
+			declaredAt: (140 to: 144)) wasDoneBy:
+			(aUser
+				cover: (165 to: 169)
+				declaredAt: (14 to: 18)) ] valueCoveringAll:
+			{154 to: 163} ]] valueCoveringAll:
+		{129 to: 135}.! !
+!Behavior method!
+wasDoneBy: aCustomer
+	^ [
+	(customer
+		cover: (25 to: 32)
+		declaredAt: (25 to: 32)) =
+		(aCustomer
+			cover: (36 to: 44)
+			declaredAt: (12 to: 20)) ] valueCoveringAll:
+		{34 to: 34}.! !
+!Behavior method!
+list: aSale on: quantitiesByItem
+	"Esto es un indicio de que por ahi conviene empezar a pensar en modelar un SaleBook - Hernan"
+	[
+	(aSale
+		cover: (132 to: 136)
+		declaredAt: (7 to: 11)) lineItemsDo: [ :aLineItem | | oldQuantity newQuantity |
+		(oldQuantity _ [
+		(quantitiesByItem
+			cover: (211 to: 226)
+			declaredAt: (17 to: 32))
+			at:
+				([
+				(aLineItem
+					cover: (232 to: 240)
+					declaredAt: (154 to: 162)) item ] valueCoveringAll:
+					{242 to: 245})
+			ifAbsentPut: [
+				0 coverAll:
+					{262 to: 262} ]] valueCoveringAll:
+			{228 to: 230. 247 to: 258})
+			cover: (196 to: 206)
+			declaredAt: (168 to: 178).
+		(newQuantity _ [
+		(oldQuantity
+			cover: (284 to: 294)
+			declaredAt: (168 to: 178)) +
+			([
+			(aLineItem
+				cover: (298 to: 306)
+				declaredAt: (154 to: 162)) quantity ] valueCoveringAll:
+				{308 to: 315}) ] valueCoveringAll:
+			{296 to: 296})
+			cover: (269 to: 279)
+			declaredAt: (180 to: 190).
+		[
+		(quantitiesByItem
+			cover: (320 to: 335)
+			declaredAt: (17 to: 32))
+			at:
+				([
+				(aLineItem
+					cover: (341 to: 349)
+					declaredAt: (154 to: 162)) item ] valueCoveringAll:
+					{351 to: 354})
+			put:
+				(newQuantity
+					cover: (361 to: 371)
+					declaredAt: (180 to: 190)) ] valueCoveringAll:
+			{337 to: 339. 356 to: 359} ]] valueCoveringAll:
+		{138 to: 149}.! !
+!Behavior method!
+lineItemsDo: aBlock
+	^ [
+	(ticket
+		cover: (25 to: 30)
+		declaredAt: (25 to: 30)) lineItemsDo:
+		(aBlock
+			cover: (45 to: 50)
+			declaredAt: (14 to: 19)) ] valueCoveringAll:
+		{32 to: 43}.! !
+!Behavior method!
+lineItemsDo: aBlock
+	^ [
+	(lineItems
+		cover: (25 to: 33)
+		declaredAt: (25 to: 33)) do:
+		(aBlock
+			cover: (39 to: 44)
+			declaredAt: (14 to: 19)) ] valueCoveringAll:
+		{35 to: 37}.! !
+!Behavior method!
+item
+	^ item
+		cover: (11 to: 14)
+		declaredAt: (11 to: 14).! !
+!Behavior method!
+quantity
+	^ quantity
+		cover: (13 to: 20)
+		declaredAt: (13 to: 20).! !
+
+!testRun: #TusLibrosSystemFacadeTest #test10CheckOutReturnsTransactionIdAndImpactsCustomerPurchases stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test10_1_CanNotCheckoutAnAlreadyCheckedOutCart stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test11CanNotCheckoutANotCreatedCart stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+!Behavior method!
+cartCanNotBeEmptyErrorMessage
+	^ [
+	(Cashier
+		cover: (35 to: 41)
+		declaredAt: (35 to: 41)) cartCanNotBeEmptyErrorMessage ] valueCoveringAll:
+		{43 to: 71}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test12CanNotCheckoutAnEmptyCart stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+!Behavior method!
+canNotChargeAnExpiredCreditCardErrorMessage
+	^ [
+	(Cashier
+		cover: (49 to: 55)
+		declaredAt: (49 to: 55)) canNotChargeAnExpiredCreditCardErrorMessage ] valueCoveringAll:
+		{57 to: 99}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test13CanNotCheckoutWithAnExpiredCreditCard stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test14ListPurchasesIncludesBoughtItems stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test15CanNotListPurchasesOfInvalidCustomer stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test16CanNotListPurchasesOfValidCustomerWithInvalidPassword stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+!Behavior method!
+advanceTime: aDuration
+	(now _ [
+	(now
+		cover: (28 to: 30)
+		declaredAt: (28 to: 30)) +
+		(aDuration
+			cover: (41 to: 49)
+			declaredAt: (14 to: 22)) ] valueCoveringAll:
+		{39 to: 39})
+		cover: (35 to: 37)
+		declaredAt: (28 to: 30).! !
+!Behavior method!
+signalCartSessionExpired
+	[
+	(self coverAll:
+		{29 to: 32}) error:
+		([
+		(systemFacade
+			cover: (41 to: 52)
+			declaredAt: (41 to: 52)) sessionHasExpiredErrorDescription ] valueCoveringAll:
+			{54 to: 86}) ] valueCoveringAll:
+		{34 to: 39}.! !
+!Behavior method!
+sessionHasExpiredErrorDescription
+	^ [
+	([
+	('Can not use the cart after ' coverAll:
+		{39 to: 67}) ,
+		([
+		([
+		([
+		(self coverAll:
+			{70 to: 73}) sessionDuration ] valueCoveringAll:
+			{75 to: 89}) minutes ] valueCoveringAll:
+			{91 to: 97}) printString ] valueCoveringAll:
+			{99 to: 109}) ] valueCoveringAll:
+		{68 to: 68}) ,
+		(' minutes of inactivity' coverAll:
+			{113 to: 136}) ] valueCoveringAll:
+		{111 to: 111}.! !
+!Behavior method!
+revertTime: aDuration
+	(now _ [
+	(now
+		cover: (27 to: 29)
+		declaredAt: (27 to: 29)) +
+		([
+		(aDuration
+			cover: (40 to: 48)
+			declaredAt: (13 to: 21)) negated ] valueCoveringAll:
+			{50 to: 56}) ] valueCoveringAll:
+		{38 to: 38})
+		cover: (34 to: 36)
+		declaredAt: (27 to: 29).! !
+
+!testRun: #TusLibrosSystemFacadeTest #test17CanNotAddToCartWhenSessionIsExpired stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test18CanNotListCartWhenSessionIsExpired stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+
+!testRun: #TusLibrosSystemFacadeTest #test19CanNotCheckOutCartWhenSessionIsExpired stamp: 'AEC 6/15/2022 21:49:22'!
+PASSED!
+!Behavior method!
+bookPerformance: anItem
+	| bookPerformance totalMoney totalSales |
+	(bookPerformance _ [
+	(Dictionary
+		cover: (90 to: 99)
+		declaredAt: (90 to: 99)) new ] valueCoveringAll:
+		{101 to: 103})
+		cover: (71 to: 85)
+		declaredAt: (29 to: 43).
+	[
+	(self coverAll:
+		{109 to: 112})
+		execute: [
+			(totalSales _ [
+			(self coverAll:
+				{140 to: 143}) totalSalesOf:
+				(anItem
+					cover: (159 to: 164)
+					declaredAt: (18 to: 23)) ] valueCoveringAll:
+				{145 to: 157})
+				cover: (126 to: 135)
+				declaredAt: (56 to: 65) ]
+		inParallelWith: [
+			(totalMoney _ [
+			(self coverAll:
+				{200 to: 203}) totalMoneyRaisedBy:
+				(anItem
+					cover: (225 to: 230)
+					declaredAt: (18 to: 23)) ] valueCoveringAll:
+				{205 to: 223})
+				cover: (186 to: 195)
+				declaredAt: (45 to: 54) ]] valueCoveringAll:
+		{116 to: 123. 169 to: 183}.
+	[
+	(bookPerformance
+		cover: (236 to: 250)
+		declaredAt: (29 to: 43))
+		at:
+			('quantity' coverAll:
+				{256 to: 265})
+		put:
+			(totalSales
+				cover: (272 to: 281)
+				declaredAt: (56 to: 65)) ] valueCoveringAll:
+		{252 to: 254. 267 to: 270}.
+	[
+	(bookPerformance
+		cover: (285 to: 299)
+		declaredAt: (29 to: 43))
+		at:
+			('total' coverAll:
+				{305 to: 311})
+		put:
+			(totalMoney
+				cover: (318 to: 327)
+				declaredAt: (45 to: 54)) ] valueCoveringAll:
+		{301 to: 303. 313 to: 316}.
+	[
+	(bookPerformance
+		cover: (331 to: 345)
+		declaredAt: (29 to: 43))
+		at:
+			('summary' coverAll:
+				{351 to: 359})
+		put:
+			([
+			([
+			([
+			([
+			(anItem
+				cover: (366 to: 371)
+				declaredAt: (18 to: 23)) ,
+				(' was selled ' coverAll:
+					{373 to: 386}) ] valueCoveringAll:
+				{372 to: 372}) ,
+				([
+				(totalSales
+					cover: (388 to: 397)
+					declaredAt: (56 to: 65)) asString ] valueCoveringAll:
+					{399 to: 406}) ] valueCoveringAll:
+				{387 to: 387}) ,
+				(' times and raised a total amount of money equal to: ' coverAll:
+					{409 to: 462}) ] valueCoveringAll:
+				{407 to: 407}) ,
+				([
+				(totalMoney
+					cover: (465 to: 474)
+					declaredAt: (45 to: 54)) asString ] valueCoveringAll:
+					{476 to: 483}) ] valueCoveringAll:
+				{463 to: 463}) ] valueCoveringAll:
+		{347 to: 349. 361 to: 364}.
+	^ bookPerformance
+		cover: (490 to: 504)
+		declaredAt: (29 to: 43).! !
+!Behavior method!
+execute: aBlock inParallelWith: anotherBlock
+	| semaphore |
+	(semaphore _ [
+	(Semaphore
+		cover: (78 to: 86)
+		declaredAt: (78 to: 86)) new ] valueCoveringAll:
+		{88 to: 90})
+		cover: (65 to: 73)
+		declaredAt: (50 to: 58).
+	[
+	[
+	[
+	(aBlock
+		cover: (97 to: 102)
+		declaredAt: (10 to: 15)) value ] valueCoveringAll:
+		{104 to: 108}.
+	[
+	(semaphore
+		cover: (111 to: 119)
+		declaredAt: (50 to: 58)) signal ] valueCoveringAll:
+		{121 to: 126} ] fork ] valueCoveringAll:
+		{130 to: 133}.
+	[
+	(anotherBlock
+		cover: (137 to: 148)
+		declaredAt: (33 to: 44)) value ] valueCoveringAll:
+		{150 to: 154}.
+	[
+	(semaphore
+		cover: (159 to: 167)
+		declaredAt: (50 to: 58)) wait ] valueCoveringAll:
+		{169 to: 172}.! !
+!Behavior method!
+totalMoneyRaisedBy: anItem
+	[
+	([
+	(Delay
+		cover: (32 to: 36)
+		declaredAt: (32 to: 36)) forSeconds:
+		(1 coverAll:
+			{50 to: 50}) ] valueCoveringAll:
+		{38 to: 48}) wait ] valueCoveringAll:
+		{53 to: 56}.
+	^ [
+	(salesBook
+		cover: (62 to: 70)
+		declaredAt: (62 to: 70)) sum: [ :aSale | | totalPerItem |
+		(totalPerItem _ 0 coverAll:
+			{121 to: 121})
+			cover: (106 to: 117)
+			declaredAt: (89 to: 100).
+		[
+		(aSale
+			cover: (126 to: 130)
+			declaredAt: (79 to: 83)) lineItemsDo: [ :aLineItem |
+			[
+			([
+			([
+			(aLineItem
+				cover: (160 to: 168)
+				declaredAt: (147 to: 155)) item ] valueCoveringAll:
+				{170 to: 173}) =
+				(anItem
+					cover: (177 to: 182)
+					declaredAt: (21 to: 26)) ] valueCoveringAll:
+				{175 to: 175}) ifTrue: [
+				(totalPerItem _ [
+				(totalPerItem
+					cover: (194 to: 205)
+					declaredAt: (89 to: 100)) +
+					([
+					(aLineItem
+						cover: (225 to: 233)
+						declaredAt: (147 to: 155)) total ] valueCoveringAll:
+						{235 to: 239}) ] valueCoveringAll:
+					{223 to: 223})
+					cover: (210 to: 221)
+					declaredAt: (89 to: 100) ]] valueCoveringAll:
+				{185 to: 191} ]] valueCoveringAll:
+			{132 to: 143}.
+		totalPerItem
+			cover: (246 to: 257)
+			declaredAt: (89 to: 100) ]] valueCoveringAll:
+		{72 to: 75}.! !
+!Behavior method!
+totalSalesOf: anItem
+	[
+	([
+	(Delay
+		cover: (26 to: 30)
+		declaredAt: (26 to: 30)) forSeconds:
+		(1 coverAll:
+			{44 to: 44}) ] valueCoveringAll:
+		{32 to: 42}) wait ] valueCoveringAll:
+		{47 to: 50}.
+	^ [
+	(salesBook
+		cover: (56 to: 64)
+		declaredAt: (56 to: 64)) sum: [ :aSale | | quantityPerItem |
+		(quantityPerItem _ 0 coverAll:
+			{123 to: 123})
+			cover: (104 to: 118)
+			declaredAt: (83 to: 97).
+		[
+		(aSale
+			cover: (128 to: 132)
+			declaredAt: (73 to: 77)) lineItemsDo: [ :aLineItem |
+			[
+			([
+			([
+			(aLineItem
+				cover: (162 to: 170)
+				declaredAt: (149 to: 157)) item ] valueCoveringAll:
+				{172 to: 175}) =
+				(anItem
+					cover: (179 to: 184)
+					declaredAt: (15 to: 20)) ] valueCoveringAll:
+				{177 to: 177}) ifTrue: [
+				(quantityPerItem _ [
+				(quantityPerItem
+					cover: (196 to: 210)
+					declaredAt: (83 to: 97)) +
+					([
+					(aLineItem
+						cover: (233 to: 241)
+						declaredAt: (149 to: 157)) quantity ] valueCoveringAll:
+						{243 to: 250}) ] valueCoveringAll:
+					{231 to: 231})
+					cover: (215 to: 229)
+					declaredAt: (83 to: 97) ]] valueCoveringAll:
+				{187 to: 193} ]] valueCoveringAll:
+			{134 to: 145}.
+		quantityPerItem
+			cover: (257 to: 271)
+			declaredAt: (83 to: 97) ]] valueCoveringAll:
+		{66 to: 69}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test20BookPerformanceShouldNotTakeTooLong stamp: 'AEC 6/15/2022 21:49:23'!
+PASSED!
+!Behavior method!
+storePerformance
+	| totalMoney totalSales performance |
+	(performance _ [
+	(Dictionary
+		cover: (76 to: 85)
+		declaredAt: (76 to: 85)) new ] valueCoveringAll:
+		{87 to: 89})
+		cover: (61 to: 71)
+		declaredAt: (44 to: 54).
+	[
+	(self coverAll:
+		{95 to: 98})
+		execute: [
+			(totalSales _ [
+			(self coverAll:
+				{126 to: 129}) totalSales ] valueCoveringAll:
+				{131 to: 140})
+				cover: (112 to: 121)
+				declaredAt: (33 to: 42) ]
+		inParallelWith: [
+			(totalMoney _ [
+			(self coverAll:
+				{176 to: 179}) totalMoneyRaised ] valueCoveringAll:
+				{181 to: 196})
+				cover: (162 to: 171)
+				declaredAt: (22 to: 31) ]] valueCoveringAll:
+		{102 to: 109. 145 to: 159}.
+	[
+	(performance
+		cover: (204 to: 214)
+		declaredAt: (44 to: 54))
+		at:
+			('quantity' coverAll:
+				{220 to: 229})
+		put:
+			(totalSales
+				cover: (236 to: 245)
+				declaredAt: (33 to: 42)) ] valueCoveringAll:
+		{216 to: 218. 231 to: 234}.
+	[
+	(performance
+		cover: (249 to: 259)
+		declaredAt: (44 to: 54))
+		at:
+			('total' coverAll:
+				{265 to: 271})
+		put:
+			(totalMoney
+				cover: (278 to: 287)
+				declaredAt: (22 to: 31)) ] valueCoveringAll:
+		{261 to: 263. 273 to: 276}.
+	[
+	(performance
+		cover: (291 to: 301)
+		declaredAt: (44 to: 54))
+		at:
+			('summary' coverAll:
+				{307 to: 315})
+		put:
+			([
+			([
+			([
+			('The store selled a total of ' coverAll:
+				{322 to: 351}) ,
+				([
+				(totalSales
+					cover: (353 to: 362)
+					declaredAt: (33 to: 42)) asString ] valueCoveringAll:
+					{364 to: 371}) ] valueCoveringAll:
+				{352 to: 352}) ,
+				(' books and raised a total amount of money equal to: ' coverAll:
+					{374 to: 427}) ] valueCoveringAll:
+				{372 to: 372}) ,
+				([
+				(totalMoney
+					cover: (430 to: 439)
+					declaredAt: (22 to: 31)) asString ] valueCoveringAll:
+					{441 to: 448}) ] valueCoveringAll:
+				{428 to: 428}) ] valueCoveringAll:
+		{303 to: 305. 317 to: 320}.
+	^ performance
+		cover: (455 to: 465)
+		declaredAt: (44 to: 54).! !
+!Behavior method!
+totalMoneyRaised
+	[
+	([
+	(Delay
+		cover: (22 to: 26)
+		declaredAt: (22 to: 26)) forSeconds:
+		(1 coverAll:
+			{40 to: 40}) ] valueCoveringAll:
+		{28 to: 38}) wait ] valueCoveringAll:
+		{43 to: 46}.
+	^ [
+	(salesBook
+		cover: (53 to: 61)
+		declaredAt: (53 to: 61)) sum: [ :aSale |
+		[
+		(aSale
+			cover: (78 to: 82)
+			declaredAt: (70 to: 74)) total ] valueCoveringAll:
+			{84 to: 88} ]] valueCoveringAll:
+		{63 to: 66}.! !
+!Behavior method!
+totalSales
+	[
+	([
+	(Delay
+		cover: (16 to: 20)
+		declaredAt: (16 to: 20)) forSeconds:
+		(1 coverAll:
+			{34 to: 34}) ] valueCoveringAll:
+		{22 to: 32}) wait ] valueCoveringAll:
+		{37 to: 40}.
+	^ [
+	(salesBook
+		cover: (46 to: 54)
+		declaredAt: (46 to: 54)) sum: [ :aSale | | totalQuantity |
+		(totalQuantity _ 0 coverAll:
+			{108 to: 108})
+			cover: (91 to: 103)
+			declaredAt: (73 to: 85).
+		[
+		(aSale
+			cover: (113 to: 117)
+			declaredAt: (63 to: 67)) lineItemsDo: [ :aLineItem |
+			(totalQuantity _ [
+			(totalQuantity
+				cover: (146 to: 158)
+				declaredAt: (73 to: 85)) +
+				([
+				(aLineItem
+					cover: (179 to: 187)
+					declaredAt: (134 to: 142)) quantity ] valueCoveringAll:
+					{189 to: 196}) ] valueCoveringAll:
+				{177 to: 177})
+				cover: (163 to: 175)
+				declaredAt: (73 to: 85) ]] valueCoveringAll:
+			{119 to: 130}.
+		totalQuantity
+			cover: (202 to: 214)
+			declaredAt: (73 to: 85) ]] valueCoveringAll:
+		{56 to: 59}.! !
+
+!testRun: #TusLibrosSystemFacadeTest #test21StorePerformanceShouldNotTakeTooLong stamp: 'AEC 6/15/2022 21:49:24'!
+PASSED!
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:20:59'!
+asyncAdd: quantity of: bookIsbn toCartIdentifiedAs: cartId
+
+	| fieldDict resp |
+
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. 'bookIsbn'. bookIsbn. 'bookQuantity'. quantity}.		
+		
+	resp := WebClient htmlSubmit: (self url,'/addToCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream))]
+		ifFalse:[^self error: resp content]! !
+
+!methodRemoval: TusLibrosClientRestInterface #asyncAdd:of:toCartIdentifiedAs: stamp: 'AEC 6/15/2022 22:21:03'!
+asyncAdd: quantity of: bookIsbn toCartIdentifiedAs: cartId
+
+	| fieldDict resp |
+
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. 'bookIsbn'. bookIsbn. 'bookQuantity'. quantity}.		
+		
+	resp := WebClient htmlSubmit: (self url,'/addToCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream))]
+		ifFalse:[^self error: resp content]!
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:21:10'!
+asyncListCart: cartId
+
+	| fieldDict resp |
+	
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. }.		
+	
+	resp := WebClient htmlSubmit: (self url,'/listCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)) asOrderedCollection] 
+		ifFalse:[^self error: resp content]! !
+
+!methodRemoval: TusLibrosClientRestInterface #asyncListCart: stamp: 'AEC 6/15/2022 22:22:16'!
+asyncListCart: cartId
+
+	| fieldDict resp |
+	
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. }.		
+	
+	resp := WebClient htmlSubmit: (self url,'/listCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)) asOrderedCollection] 
+		ifFalse:[^self error: resp content]!
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:24:10'!
+asyncListCart: cartId
+
+	| fieldDict resp |
+	
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. }.		
+	
+	resp := WebClient htmlSubmit: (self url,'/listCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^(WebUtils jsonDecode: ((resp content) readStream)) asOrderedCollection] 
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:24:41' prior: 50476532!
+listCart: cartId
+
+	[self asyncListCart: cartId] fork! !
+!TusLibrosClientRestInterface methodsFor: 'nil' stamp: 'AEC 6/15/2022 22:28:22'!
+decodeResponse: aWebResponse
+
+	^WebUtils jsonDecode: ((aWebResponse content) readStream)! !
+
+!classDefinition: #TusLibrosClientRestInterface category: 'TusLibrosREST' stamp: 'AEC 6/15/2022 22:29:01'!
+Object subclass: #TusLibrosClientRestInterface
+	instanceVariableNames: 'port observers'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:28:57' prior: 50516637!
+asyncListCart: cartId
+
+	| fieldDict resp decodedContents |
+	
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. }.		
+	
+	resp := WebClient htmlSubmit: (self url,'/listCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[
+			decodedContents := (self decodeResponse: resp) asOrderedCollection.
+			observers do: [:observer | observer cartContentArrived: decodedContents]
+		] 
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientRestInterface methodsFor: 'initialization' stamp: 'AEC 6/15/2022 22:29:59' overrides: 16920235!
+initialize
+
+	observers := OrderedCollection new.! !
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:30:55' prior: 50476518!
+createCartFor: aUser password: aPassword
+
+	| fieldDict resp |
+	
+	fieldDict := Dictionary newFromPairs: {'clientId'. aUser. 'password'. aPassword}.		
+	
+	resp := WebClient htmlSubmit: (self url,'/createCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^self decodeResponse: resp] 
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:31:08' prior: 50476503!
+add: quantity of: bookIsbn toCartIdentifiedAs: cartId
+
+	| fieldDict resp |
+
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. 'bookIsbn'. bookIsbn. 'bookQuantity'. quantity}.		
+		
+	resp := WebClient htmlSubmit: (self url,'/addToCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^self decodeResponse: resp]
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientRestInterface methodsFor: 'nil' stamp: 'AEC 6/15/2022 22:32:26'!
+attach: anObserver
+
+	observers add: anObserver! !
+!TusLibrosClientRestInterface methodsFor: 'initialization' stamp: 'AEC 6/15/2022 22:33:08' prior: 50516688 overrides: 16920235!
+initialize
+
+	observers := OrderedCollection new.! !
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'AEC 6/15/2022 22:33:41' prior: 50476673 overrides: 16920235!
+initialize
+
+	cartIds := OrderedCollection new.
+	currentSelectedCartContent := OrderedCollection new.
+	selectedCartIdsIndex := 0.
+	selectedBookCatalogIndex := 0.
+	restInterface := TusLibrosClientRestInterface new.
+	restInterface attach: self.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:35:30' prior: 50514745!
+listCart
+
+	| cartId |
+	
+	(self isCartIdSelected) ifTrue:[
+		cartId := self selectedCartId.
+		restInterface listCart: cartId 
+	].! !
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:36:56' prior: 50516671!
+asyncListCart: cartId
+
+	| fieldDict resp decodedContents |
+	
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. }.		
+	
+	resp := WebClient htmlSubmit: (self url,'/listCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[
+			decodedContents := (self decodeResponse: resp) asOrderedCollection.
+			observers do: [:observer | observer cartContentArrived: decodedContents for: cartId]
+		] 
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientTestWindowModel methodsFor: 'nil' stamp: 'AEC 6/15/2022 22:37:04'!
+cartContentArrived: cartContents for: cartId
+
+	currentSelectedCartContent := cartContents.
+	self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+WebServer reset!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open!
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:40:40'!
+asyncCreateCartFor: aUser password: aPassword
+
+	| fieldDict resp |
+	
+	fieldDict := Dictionary newFromPairs: {'clientId'. aUser. 'password'. aPassword}.		
+	
+	resp := WebClient htmlSubmit: (self url,'/createCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^self decodeResponse: resp] 
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:40:47'!
+asyncAdd: quantity of: bookIsbn toCartIdentifiedAs: cartId
+
+	| fieldDict resp |
+
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. 'bookIsbn'. bookIsbn. 'bookQuantity'. quantity}.		
+		
+	resp := WebClient htmlSubmit: (self url,'/addToCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[^self decodeResponse: resp]
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:41:22' prior: 50516693!
+createCartFor: aUser password: aPassword
+
+	[self asyncCreateCartFor: aUser password: aPassword] fork! !
+!TusLibrosClientRestInterface methodsFor: 'requests' stamp: 'AEC 6/15/2022 22:42:24' prior: 50516707!
+add: quantity of: bookIsbn toCartIdentifiedAs: cartId
+
+	[self asyncAdd: quantity of: bookIsbn toCartIdentifiedAs: cartId] fork! !
+!TusLibrosClientRestInterface methodsFor: 'requests - private' stamp: 'AEC 6/15/2022 22:46:07' prior: 50516783!
+asyncCreateCartFor: aUser password: aPassword
+
+	| fieldDict resp |
+	
+	fieldDict := Dictionary newFromPairs: {'clientId'. aUser. 'password'. aPassword}.		
+	
+	resp := WebClient htmlSubmit: (self url,'/createCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[
+			observers do: [:observer | observer newCartIdArrived: (self decodeResponse: resp)]
+		] 
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:46:35' prior: 50514736!
+createCart
+
+	| newCartId |
+	
+	newCartId := restInterface createCartFor: 'hernan' password: 'smalltalk'.! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:46:47' prior: 50516843!
+createCart
+
+	restInterface createCartFor: 'hernan' password: 'smalltalk'.! !
+!TusLibrosClientTestWindowModel methodsFor: 'as yet unclassified' stamp: 'AEC 6/15/2022 22:46:54'!
+newCartIdArrived: aCartId
+
+	cartIds add: aCartId.
+	self triggerEvent: #newCartIdArrived! !
+!TusLibrosClientRestInterface methodsFor: 'requests - private' stamp: 'AEC 6/15/2022 22:50:03' prior: 50516797!
+asyncAdd: quantity of: bookIsbn toCartIdentifiedAs: cartId
+
+	| fieldDict resp |
+
+	fieldDict := Dictionary newFromPairs: {'cartId'. cartId. 'bookIsbn'. bookIsbn. 'bookQuantity'. quantity}.		
+		
+	resp := WebClient htmlSubmit: (self url,'/addToCart') fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[
+			observers do: [:observer | observer book: bookIsbn addedToCart: cartId]	
+		]
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:50:26' prior: 50514722!
+addToCart
+
+	| cartId bookIsbn |
+
+	(self areCartIdAndBookSelected) ifTrue:[
+		cartId := self selectedCartId.
+		bookIsbn := self selectedBook.
+		restInterface add: 1 of: bookIsbn toCartIdentifiedAs: cartId.
+	]! !
+!TusLibrosClientTestWindowModel methodsFor: 'as yet unclassified' stamp: 'AEC 6/15/2022 22:50:49'!
+book: bookIsbn addedToCart: cartId
+
+	self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:53:33' prior: 50516880!
+addToCart
+
+	(self areCartIdAndBookSelected) ifTrue:[
+		restInterface add: 1 of: self selectedBook toCartIdentifiedAs: self selectedCartId.
+	]! !
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:53:48' prior: 50516745!
+listCart
+
+	(self isCartIdSelected) ifTrue:[
+		restInterface listCart: self selectedCartId 
+	].! !
+
+{'clientId'. 1. 'password'. 2}!
+!TusLibrosClientRestInterface methodsFor: 'requests - private' stamp: 'AEC 6/15/2022 23:02:57'!
+submitRequestUsing: anArrayOfPairs toEndpoint: anEndpoint onSuccessDo: aBlock
+
+	| fieldDict resp decodedResponse |
+
+	fieldDict := Dictionary newFromPairs: anArrayOfPairs.		
+		
+	resp := WebClient htmlSubmit: (self url,anEndpoint) fields: fieldDict.
+		
+	resp isSuccess 
+		ifTrue:[
+			decodedResponse := self decodeResponse: resp.
+			observers do: [:observer | aBlock value: observer value: decodedResponse]	
+		]
+		ifFalse:[^self error: resp content]! !
+!TusLibrosClientRestInterface methodsFor: 'requests - private' stamp: 'AEC 6/15/2022 23:04:23' prior: 50516827!
+asyncCreateCartFor: aUser password: aPassword
+
+	self submitRequestUsing: {'clientId'. aUser. 'password'. aPassword}
+		toEndpoint: '/createCart'	
+		onSuccessDo: [:observer :decodedResponse | observer newCartIdArrived: decodedResponse]! !
+!TusLibrosClientRestInterface methodsFor: 'requests - private' stamp: 'AEC 6/15/2022 23:06:52' prior: 50516753!
+asyncListCart: cartId
+
+	self submitRequestUsing: {'cartId'. cartId. } 
+		toEndpoint: '/listCart'
+		onSuccessDo: [:observer :decodedContents | observer cartContentArrived: (decodedContents asOrderedCollection) for: cartId]		
+		
+	
+	
+	
+		! !
+!TusLibrosClientRestInterface methodsFor: 'requests - private' stamp: 'AEC 6/15/2022 23:09:05' prior: 50516863!
+asyncAdd: quantity of: bookIsbn toCartIdentifiedAs: cartId
+
+	self submitRequestUsing: {'cartId'. cartId. 'bookIsbn'. bookIsbn. 'bookQuantity'. quantity} 		toEndpoint: '/addToCart'
+		onSuccessDo: [:observer :decodedResponse | observer book: bookIsbn addedToCart: cartId]	
+
+	.		
+		
+! !
+
+----QUIT----(15 June 2022 23:14:06) CuisUniversity-5096.image priorSource: 5859611!
