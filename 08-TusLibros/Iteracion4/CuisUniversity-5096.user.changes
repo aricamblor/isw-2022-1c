@@ -3693,3 +3693,220 @@ asyncAdd: quantity of: bookIsbn toCartIdentifiedAs: cartId
 ! !
 
 ----QUIT----(15 June 2022 23:14:06) CuisUniversity-5096.image priorSource: 5859611!
+
+----STARTUP---- (16 June 2022 13:13:09) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/TusLibros-04/linux64/CuisUniversity-5096.image!
+
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:27:57' prior: 50476257!
+refreshCurrentSelectedCartContent: cartId
+
+	cartContentListMorph updateList.
+	selectedCartLabelMorph contents: 'Books in CartId: ', cartId
+	
+	
+	! !
+
+!classDefinition: #TusLibrosClientTestWindow category: 'TusLibrosREST' stamp: 'AEC 6/16/2022 13:30:51'!
+SystemWindow subclass: #TusLibrosClientTestWindow
+	instanceVariableNames: 'cartIdsListMorph booksCatalogListMorph cartContentListMorph addToCartButtonMorph listCartButtonMorph selectedCartLabelMorph cartContentMutex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+
+!classDefinition: #TusLibrosClientTestWindow category: 'TusLibrosREST' stamp: 'AEC 6/16/2022 13:30:52'!
+SystemWindow subclass: #TusLibrosClientTestWindow
+	instanceVariableNames: 'cartIdsListMorph booksCatalogListMorph cartContentListMorph addToCartButtonMorph listCartButtonMorph selectedCartLabelMorph cartContentMutex cartIdsMutex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+!TusLibrosClientTestWindow methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:30:49' prior: 50476410!
+initializeWith: aTitle
+
+	self setLabel: aTitle.
+	self model: (TusLibrosClientTestWindowModel new).
+	self morphExtent: (self defaultExtent).
+	self buildMorphicWindow.
+	self openInWorld.
+	
+	cartContentMutex = Semaphore forMutualExclusion.
+	cartIdsMutex = Semaphore forMutualExclusion.
+			
+	self model when: #newCartIdArrived send: #refreshListOfCartIds to: self.		
+	self model when: #selectedCartChanged send: #refreshCartButtonsLabels: to: self.	
+	self model when: #bookAddedToCart send: #informBook:addedToCart: to: self.
+	self model when: #newCurrentSelectedCartContentArrived send: #refreshCurrentSelectedCartContent: to: self! !
+!TusLibrosClientTestWindow methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:33:32' prior: 50517008!
+initializeWith: aTitle
+
+	self setLabel: aTitle.
+	self model: (TusLibrosClientTestWindowModel new).
+	self morphExtent: (self defaultExtent).
+	self buildMorphicWindow.
+	self openInWorld.
+			
+	self model when: #newCartIdArrived send: #refreshListOfCartIds to: self.		
+	self model when: #selectedCartChanged send: #refreshCartButtonsLabels: to: self.	
+	self model when: #bookAddedToCart send: #informBook:addedToCart: to: self.
+	self model when: #newCurrentSelectedCartContentArrived send: #refreshCurrentSelectedCartContent: to: self! !
+
+!classDefinition: #TusLibrosClientTestWindowModel category: 'TusLibrosREST' stamp: 'AEC 6/16/2022 13:34:44'!
+Object subclass: #TusLibrosClientTestWindowModel
+	instanceVariableNames: 'cartIds selectedCartIdsIndex selectedBookCatalogIndex currentSelectedCartContent restInterface currentSelectedCartContentMutex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+
+!classDefinition: #TusLibrosClientTestWindowModel category: 'TusLibrosREST' stamp: 'AEC 6/16/2022 13:34:45'!
+Object subclass: #TusLibrosClientTestWindowModel
+	instanceVariableNames: 'cartIds selectedCartIdsIndex selectedBookCatalogIndex currentSelectedCartContent restInterface currentSelectedCartContentMutex cartIdsMutex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:34:43' prior: 50516733 overrides: 16920235!
+initialize
+
+	cartIds := OrderedCollection new.
+	currentSelectedCartContent := OrderedCollection new.
+	selectedCartIdsIndex := 0.
+	selectedBookCatalogIndex := 0.
+	restInterface := TusLibrosClientRestInterface new.
+	restInterface attach: self.
+	
+	currentSelectedCartContentMutex = Semaphore forMutualExclusion.
+	cartIdsMutex = Semaphore forMutualExclusion.! !
+
+!classDefinition: #TusLibrosClientTestWindow category: 'TusLibrosREST' stamp: 'AEC 6/16/2022 13:34:49'!
+SystemWindow subclass: #TusLibrosClientTestWindow
+	instanceVariableNames: 'cartIdsListMorph booksCatalogListMorph cartContentListMorph addToCartButtonMorph listCartButtonMorph selectedCartLabelMorph cartIdsMutex'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+
+!classDefinition: #TusLibrosClientTestWindow category: 'TusLibrosREST' stamp: 'AEC 6/16/2022 13:34:49'!
+SystemWindow subclass: #TusLibrosClientTestWindow
+	instanceVariableNames: 'cartIdsListMorph booksCatalogListMorph cartContentListMorph addToCartButtonMorph listCartButtonMorph selectedCartLabelMorph'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibrosREST'!
+!TusLibrosClientTestWindowModel methodsFor: 'updating' stamp: 'AEC 6/16/2022 13:36:31' prior: 50516770!
+cartContentArrived: cartContents for: cartId
+
+	currentSelectedCartContentMutex wait.
+	currentSelectedCartContent := cartContents.
+	self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId! !
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:37:48' prior: 50516974!
+refreshCurrentSelectedCartContent: cartId
+
+	cartContentListMorph updateList.
+	selectedCartLabelMorph contents: 'Books in CartId: ', cartId.
+	self model cartContentUpdated
+	
+	
+	! !
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:38:17' prior: 50517127!
+refreshCurrentSelectedCartContent: cartId
+
+	cartContentListMorph updateList.
+	selectedCartLabelMorph contents: 'Books in CartId: ', cartId.
+	self model cartContentConsumed
+	
+	
+	! !
+!TusLibrosClientTestWindowModel methodsFor: 'nil' stamp: 'AEC 6/16/2022 13:38:29'!
+cartContentConsumed
+
+	currentSelectedCartContentMutex signal! !
+!TusLibrosClientTestWindowModel methodsFor: 'updating' stamp: 'AEC 6/16/2022 13:38:48' prior: 50516856!
+newCartIdArrived: aCartId
+
+	cartIdsMutex wait.
+	cartIds add: aCartId.
+	self triggerEvent: #newCartIdArrived! !
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:39:03' prior: 50476265!
+refreshListOfCartIds
+
+	cartIdsListMorph updateList
+	self model cartIdsConsumed
+	! !
+!TusLibrosClientTestWindowModel methodsFor: 'as yet unclassified' stamp: 'AEC 6/16/2022 13:39:15'!
+cartIdsConsumed
+
+	cartIdsMutex signal! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open!
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:40:53' prior: 50517078 overrides: 16920235!
+initialize
+
+	cartIds := OrderedCollection new.
+	currentSelectedCartContent := OrderedCollection new.
+	selectedCartIdsIndex := 0.
+	selectedBookCatalogIndex := 0.
+	restInterface := TusLibrosClientRestInterface new.
+	restInterface attach: self.! !
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:41:03' prior: 50517173 overrides: 16920235!
+initialize
+
+	cartIds := OrderedCollection new.
+	currentSelectedCartContent := OrderedCollection new.
+	currentSelectedCartContentMutex = Semaphore forMutualExclusion.
+	cartIdsMutex = Semaphore forMutualExclusion.
+	selectedCartIdsIndex := 0.
+	selectedBookCatalogIndex := 0.
+	restInterface := TusLibrosClientRestInterface new.
+	restInterface attach: self.! !
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+WebServer reset!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open!
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:42:35' prior: 50517185 overrides: 16920235!
+initialize
+
+	cartIds := OrderedCollection new.
+	currentSelectedCartContent := OrderedCollection new.
+	currentSelectedCartContentMutex := Semaphore forMutualExclusion.
+	cartIdsMutex := Semaphore forMutualExclusion.
+	selectedCartIdsIndex := 0.
+	selectedBookCatalogIndex := 0.
+	restInterface := TusLibrosClientRestInterface new.
+	restInterface attach: self.! !
+
+WebServer reset!
+
+TusLibrosServerRestInterface installForDefaultSystem!
+
+TusLibrosClientTestWindow open!
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:42:57' prior: 50517158!
+refreshListOfCartIds
+
+	cartIdsListMorph updateList.
+	self model cartIdsConsumed
+	! !
+
+[]ensure:[]!
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:51:41' prior: 50517136!
+refreshCurrentSelectedCartContent: cartId
+
+	[cartContentListMorph updateList.
+	selectedCartLabelMorph contents: 'Books in CartId: ', cartId.]
+	ensure: [self model cartContentConsumed]
+	
+	
+	! !
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:51:51' prior: 50517224!
+refreshListOfCartIds
+
+	[cartIdsListMorph updateList.]
+	ensure:[self model cartIdsConsumed]
+	! !
+
+----QUIT----(16 June 2022 14:23:08) CuisUniversity-5096.image priorSource: 5930075!
+
+----STARTUP---- (16 June 2022 14:23:21) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/TusLibros-04/linux64/CuisUniversity-5096.image!
+
+
+----QUIT----(16 June 2022 14:23:30) CuisUniversity-5096.image priorSource: 5939071!

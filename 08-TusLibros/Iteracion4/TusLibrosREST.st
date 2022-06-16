@@ -21,19 +21,21 @@ refreshCartButtonsLabels: anIndex
 	
 	! !
 
-!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'NR 6/13/2022 07:06:35'!
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:51:41'!
 refreshCurrentSelectedCartContent: cartId
 
-	cartContentListMorph updateList.
-	selectedCartLabelMorph contents: 'Books in CartId: ', cartId
+	[cartContentListMorph updateList.
+	selectedCartLabelMorph contents: 'Books in CartId: ', cartId.]
+	ensure: [self model cartContentConsumed]
 	
 	
 	! !
 
-!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'NR 6/13/2022 07:06:39'!
+!TusLibrosClientTestWindow methodsFor: 'events' stamp: 'AEC 6/16/2022 13:51:51'!
 refreshListOfCartIds
 
-	cartIdsListMorph updateList
+	[cartIdsListMorph updateList.]
+	ensure:[self model cartIdsConsumed]
 	! !
 
 
@@ -169,7 +171,7 @@ heightOfButtons
 	^ 66! !
 
 
-!TusLibrosClientTestWindow methodsFor: 'initialization' stamp: 'NR 6/13/2022 07:07:04'!
+!TusLibrosClientTestWindow methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:33:32'!
 initializeWith: aTitle
 
 	self setLabel: aTitle.
@@ -333,7 +335,7 @@ attach: anObserver
 
 !classDefinition: #TusLibrosClientTestWindowModel category: 'TusLibrosREST'!
 Object subclass: #TusLibrosClientTestWindowModel
-	instanceVariableNames: 'cartIds selectedCartIdsIndex selectedBookCatalogIndex currentSelectedCartContent restInterface'
+	instanceVariableNames: 'cartIds selectedCartIdsIndex selectedBookCatalogIndex currentSelectedCartContent restInterface currentSelectedCartContentMutex cartIdsMutex'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibrosREST'!
@@ -349,15 +351,46 @@ selectedCartId
 	^self cartIds at: selectedCartIdsIndex! !
 
 
-!TusLibrosClientTestWindowModel methodsFor: 'testing' stamp: 'NR 6/13/2022 07:09:49'!
-areCartIdAndBookSelected
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:53:33'!
+addToCart
 
-	^selectedCartIdsIndex  ~= 0 and: [selectedBookCatalogIndex  ~= 0]! !
+	(self areCartIdAndBookSelected) ifTrue:[
+		restInterface add: 1 of: self selectedBook toCartIdentifiedAs: self selectedCartId.
+	]! !
 
-!TusLibrosClientTestWindowModel methodsFor: 'testing' stamp: 'NR 6/13/2022 07:09:52'!
-isCartIdSelected
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:46:47'!
+createCart
 
-	^selectedCartIdsIndex ~= 0! !
+	restInterface createCartFor: 'hernan' password: 'smalltalk'.! !
+
+!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:53:48'!
+listCart
+
+	(self isCartIdSelected) ifTrue:[
+		restInterface listCart: self selectedCartId 
+	].! !
+
+
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'NR 6/9/2022 08:13:11'!
+defaultCatalog 
+
+	^Dictionary new
+		at: 'GreenBook' put: 10*dollar;
+		at: 'BlueBook' put: 15*dollar;
+		at: 'MartinFierro' put: 350*peso;
+		yourself! !
+
+!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'AEC 6/16/2022 13:42:35'!
+initialize
+
+	cartIds := OrderedCollection new.
+	currentSelectedCartContent := OrderedCollection new.
+	currentSelectedCartContentMutex := Semaphore forMutualExclusion.
+	cartIdsMutex := Semaphore forMutualExclusion.
+	selectedCartIdsIndex := 0.
+	selectedBookCatalogIndex := 0.
+	restInterface := TusLibrosClientRestInterface new.
+	restInterface attach: self.! !
 
 
 !TusLibrosClientTestWindowModel methodsFor: 'listSelectors' stamp: 'NR 6/13/2022 07:10:01'!
@@ -399,44 +432,26 @@ cartIdsIndex: anIndex
 	! !
 
 
-!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:53:33'!
-addToCart
+!TusLibrosClientTestWindowModel methodsFor: 'mutexing' stamp: 'AEC 6/16/2022 13:38:29'!
+cartContentConsumed
 
-	(self areCartIdAndBookSelected) ifTrue:[
-		restInterface add: 1 of: self selectedBook toCartIdentifiedAs: self selectedCartId.
-	]! !
+	currentSelectedCartContentMutex signal! !
 
-!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:46:47'!
-createCart
+!TusLibrosClientTestWindowModel methodsFor: 'mutexing' stamp: 'AEC 6/16/2022 13:39:15'!
+cartIdsConsumed
 
-	restInterface createCartFor: 'hernan' password: 'smalltalk'.! !
-
-!TusLibrosClientTestWindowModel methodsFor: 'buttonSelectors' stamp: 'AEC 6/15/2022 22:53:48'!
-listCart
-
-	(self isCartIdSelected) ifTrue:[
-		restInterface listCart: self selectedCartId 
-	].! !
+	cartIdsMutex signal! !
 
 
-!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'NR 6/9/2022 08:13:11'!
-defaultCatalog 
+!TusLibrosClientTestWindowModel methodsFor: 'testing' stamp: 'NR 6/13/2022 07:09:49'!
+areCartIdAndBookSelected
 
-	^Dictionary new
-		at: 'GreenBook' put: 10*dollar;
-		at: 'BlueBook' put: 15*dollar;
-		at: 'MartinFierro' put: 350*peso;
-		yourself! !
+	^selectedCartIdsIndex  ~= 0 and: [selectedBookCatalogIndex  ~= 0]! !
 
-!TusLibrosClientTestWindowModel methodsFor: 'initialization' stamp: 'AEC 6/15/2022 22:33:41'!
-initialize
+!TusLibrosClientTestWindowModel methodsFor: 'testing' stamp: 'NR 6/13/2022 07:09:52'!
+isCartIdSelected
 
-	cartIds := OrderedCollection new.
-	currentSelectedCartContent := OrderedCollection new.
-	selectedCartIdsIndex := 0.
-	selectedBookCatalogIndex := 0.
-	restInterface := TusLibrosClientRestInterface new.
-	restInterface attach: self.! !
+	^selectedCartIdsIndex ~= 0! !
 
 
 !TusLibrosClientTestWindowModel methodsFor: 'updating' stamp: 'AEC 6/15/2022 22:50:49'!
@@ -444,15 +459,17 @@ book: bookIsbn addedToCart: cartId
 
 	self triggerEvent: #bookAddedToCart withArguments: (Array with: bookIsbn with: cartId)! !
 
-!TusLibrosClientTestWindowModel methodsFor: 'updating' stamp: 'AEC 6/15/2022 22:37:04'!
+!TusLibrosClientTestWindowModel methodsFor: 'updating' stamp: 'AEC 6/16/2022 13:36:31'!
 cartContentArrived: cartContents for: cartId
 
+	currentSelectedCartContentMutex wait.
 	currentSelectedCartContent := cartContents.
 	self triggerEvent: #newCurrentSelectedCartContentArrived with: cartId! !
 
-!TusLibrosClientTestWindowModel methodsFor: 'updating' stamp: 'AEC 6/15/2022 22:46:54'!
+!TusLibrosClientTestWindowModel methodsFor: 'updating' stamp: 'AEC 6/16/2022 13:38:48'!
 newCartIdArrived: aCartId
 
+	cartIdsMutex wait.
 	cartIds add: aCartId.
 	self triggerEvent: #newCartIdArrived! !
 
