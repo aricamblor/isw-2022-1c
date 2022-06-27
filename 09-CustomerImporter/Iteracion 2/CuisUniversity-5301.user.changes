@@ -1,0 +1,1290 @@
+
+
+----STARTUP---- (27 June 2022 13:36:04) as C:\Users\Fede\Documents\Cuis-limpio\customer importer v2\CuisUniversity-5301.image!
+
+!CustomerImporter class methodsFor: 'instance creation' stamp: 'fm 6/27/2022 13:39:08' prior: 50521814!
+from: aStream into: aSession
+
+	^self new initializeFrom: aStream into: aSession! !
+!CustomerImporter methodsFor: 'initialization' stamp: 'fm 6/27/2022 13:39:49' prior: 50521820!
+initializeFrom: aStream into: aSession
+
+	session := aSession.
+	stream := aStream.! !
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'fm 6/27/2022 13:49:12'!
+PASSED!
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:04:18' prior: 50523926!
+test02CustomerRecordMustStartWithLetterCOnly
+
+	self should: [ self importFrom: self invalidCustomerTypeRecord ]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter invalidRecordTypeErrorDescription.	
+		self assertNoCustomerWasImported.
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:04:46'!
+assertNoCustomerWasImported
+
+	self assert: 0 equals: (session selectAllOfType: Customer) size! !
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'fm 6/27/2022 14:04:55'!
+PASSED!
+
+String crString!
+
+String crString!
+
+String crString!
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:08:02' prior: 50523914!
+test03AddressRecordMustStartWithLetterAOnly
+
+	self should: [ self importFrom: (self validCustomerWithAddress: self addressWithInvalidType) ]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter invalidRecordTypeErrorDescription.	
+		self assertNoCustomerWasImported 
+	].! !
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 14:08:06'!
+FAILURE!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 14:08:06'!
+FAILURE!
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:13:16'!
+assertPepeSanchezPersonalInformationIsImportedCorrectly
+
+	| importedCustomer |
+	
+	importedCustomer := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assert: importedCustomer hasFirstName: 'Pepe' lastName: 'Sanchez' idType: 'D' idNumber: '22333444'.! !
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:13:59' prior: 50522125!
+assertPepeSanchezIsImportedCorrectly
+
+	| importedCustomer |
+	
+	importedCustomer := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+	
+	self assert: importedCustomer hasAddressAt: 'San Martin' number: 3322 town: 'Olivos' zipCode: 1636 province: 'BsAs'.
+	
+	self assert: importedCustomer hasAddressAt: 'Maipu' number: 888 town: 'Florida' zipCode: 1122 province: 'Buenos Aires'.! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:16:59' prior: 50526853!
+test03AddressRecordMustStartWithLetterAOnly
+
+	self should: [ self importFrom: (self validCustomerWithAddress: self addressWithInvalidType) ]
+	raise: Error
+	withExceptionDo: [:anError | | importedCustomer |
+		self assert: anError messageText equals: CustomerImporter invalidRecordTypeErrorDescription.	
+		importedCustomer := self customerWithIdType: 'D' number: '22333444'.
+		self assertCustomerCorrespondsWithPepeSanchez: importedCustomer.
+		self assertNoAddressesWereImportedFor: importedCustomer
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:08:02' prior: 50526900!
+test03AddressRecordMustStartWithLetterAOnly
+
+	self should: [ self importFrom: (self validCustomerWithAddress: self addressWithInvalidType) ]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter invalidRecordTypeErrorDescription.	
+		self assertNoCustomerWasImported 
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:18:04' prior: 50526919!
+test03AddressRecordMustStartWithLetterAOnly
+
+	self should: [ self importFrom: (self validCustomerWithAddress: self addressWithInvalidType) ]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter invalidRecordTypeErrorDescription.	
+		self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+		self assertNoAddressesWereImported.
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:18:27'!
+assertNoAddressesWereImported
+
+	self assert: 0 equals: (session selectAllOfType: Address) size! !
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'fm 6/27/2022 14:19:04'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'fm 6/27/2022 14:19:04'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 14:19:05'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'fm 6/27/2022 14:19:05'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'fm 6/27/2022 14:19:05'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'fm 6/27/2022 14:19:05'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'fm 6/27/2022 14:19:05'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'fm 6/27/2022 14:19:05'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'fm 6/27/2022 14:19:05'!
+PASSED!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'fm 6/27/2022 14:19:12'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'fm 6/27/2022 14:19:12'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 14:19:12'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'fm 6/27/2022 14:19:12'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'fm 6/27/2022 14:19:12'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'fm 6/27/2022 14:19:12'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'fm 6/27/2022 14:19:13'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'fm 6/27/2022 14:19:13'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'fm 6/27/2022 14:19:13'!
+PASSED!
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:19:28' prior: 50523937!
+test04CustomerRecordCantHaveMoreThanFiveFields
+	
+	self should: [self importFrom: self customerRecordWithSixFields]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter customerRecordWithTooManyFieldsErrorDescription.	
+		self assertNoCustomerWasImported
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:19:37' prior: 50523949!
+test05CustomerRecordCantHaveLessThanFiveFields
+	
+	self should: [self importFrom: self customerRecordWithFourFields]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter customerRecordWithNotEnoughFieldsErrorDescription.	
+		self assertNoCustomerWasImported
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:20:01' prior: 50524009!
+test06AddressRecordCantHaveMoreThanSixFields
+	
+	self should: [self importFrom:(self validCustomerWithAddress: self addressWithSevenFields)]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter addressRecordWithTooManyFieldsErrorDescription.	
+		self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+		self assertNoAddressesWereImported
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:20:06' prior: 50524026!
+test07AddressRecordCantHaveLessThanSixFields
+	
+	self should: [self importFrom:(self validCustomerWithAddress: self addressWithFiveFields)]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter addressRecordWithNotEnoughFieldsErrorDescription.	
+		self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+		self assertNoAddressesWereImported
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:20:24' prior: 50524202!
+test08CantImportAddressIfNoCustomerHasBeenImported
+	
+	self should: [self importFrom: self validAddressRecord]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter noCustomerToImportAddressErrorDescription.	
+		self assertNoAddressesWereImported
+	].! !
+!ImportTest methodsFor: 'tests' stamp: 'fm 6/27/2022 14:20:40' prior: 50524728!
+test09CantImportEmptyRecord
+	
+	self should: [self importFrom: self streamWithEmptyLine]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter emptyRecordErrorDescription.	
+		self assertNoCustomerWasImported.
+		self assertNoAddressesWereImported
+	].! !
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'fm 6/27/2022 14:20:45'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'fm 6/27/2022 14:20:46'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 14:20:46'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'fm 6/27/2022 14:20:46'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'fm 6/27/2022 14:20:46'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'fm 6/27/2022 14:20:46'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'fm 6/27/2022 14:20:47'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'fm 6/27/2022 14:20:47'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'fm 6/27/2022 14:20:47'!
+PASSED!
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:21:23'!
+assertNoAddressWasImported
+
+	self assert: 0 equals: (session selectAllOfType: Address) size! !
+!ImportTest methodsFor: 'as yet unclassified' stamp: 'fm 6/27/2022 14:21:23' prior: 50526932!
+test03AddressRecordMustStartWithLetterAOnly
+
+	self should: [ self importFrom: (self validCustomerWithAddress: self addressWithInvalidType) ]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter invalidRecordTypeErrorDescription.	
+		self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+		self assertNoAddressWasImported.
+	].! !
+!ImportTest methodsFor: 'as yet unclassified' stamp: 'fm 6/27/2022 14:21:23' prior: 50527056!
+test07AddressRecordCantHaveLessThanSixFields
+	
+	self should: [self importFrom:(self validCustomerWithAddress: self addressWithFiveFields)]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter addressRecordWithNotEnoughFieldsErrorDescription.	
+		self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+		self assertNoAddressWasImported
+	].! !
+!ImportTest methodsFor: 'as yet unclassified' stamp: 'fm 6/27/2022 14:21:23' prior: 50527084!
+test09CantImportEmptyRecord
+	
+	self should: [self importFrom: self streamWithEmptyLine]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter emptyRecordErrorDescription.	
+		self assertNoCustomerWasImported.
+		self assertNoAddressWasImported
+	].! !
+!ImportTest methodsFor: 'as yet unclassified' stamp: 'fm 6/27/2022 14:21:23' prior: 50527040!
+test06AddressRecordCantHaveMoreThanSixFields
+	
+	self should: [self importFrom:(self validCustomerWithAddress: self addressWithSevenFields)]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter addressRecordWithTooManyFieldsErrorDescription.	
+		self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+		self assertNoAddressWasImported
+	].! !
+!ImportTest methodsFor: 'as yet unclassified' stamp: 'fm 6/27/2022 14:21:23' prior: 50527072!
+test08CantImportAddressIfNoCustomerHasBeenImported
+	
+	self should: [self importFrom: self validAddressRecord]
+	raise: Error
+	withExceptionDo: [:anError |
+		self assert: anError messageText equals: CustomerImporter noCustomerToImportAddressErrorDescription.	
+		self assertNoAddressWasImported
+	].! !
+
+!methodRemoval: ImportTest #assertNoAddressesWereImported stamp: 'fm 6/27/2022 14:21:23'!
+assertNoAddressesWereImported
+
+	self assert: 0 equals: (session selectAllOfType: Address) size!
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:22:27'!
+assertPepeSanchezAddressesAreImportedCorrectly: importedCustomer
+
+	self assert: importedCustomer hasAddressAt: 'San Martin' number: 3322 town: 'Olivos' zipCode: 1636 province: 'BsAs'.
+	
+	self assert: importedCustomer hasAddressAt: 'Maipu' number: 888 town: 'Florida' zipCode: 1122 province: 'Buenos Aires'! !
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:22:28' prior: 50526883!
+assertPepeSanchezIsImportedCorrectly
+
+	| importedCustomer |
+	
+	importedCustomer := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+	
+	self assertPepeSanchezAddressesAreImportedCorrectly: importedCustomer.! !
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:23:03' prior: 50527212!
+assertPepeSanchezAddressesAreImportedCorrectly: importedCustomer
+
+	| importedCustomera |
+	
+	importedCustomera := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assert: importedCustomera hasAddressAt: 'San Martin' number: 3322 town: 'Olivos' zipCode: 1636 province: 'BsAs'.
+	
+	self assert: importedCustomera hasAddressAt: 'Maipu' number: 888 town: 'Florida' zipCode: 1122 province: 'Buenos Aires'! !
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:23:18'!
+assertPepeSanchezAddressesAreImportedCorrectly
+
+	| importedCustomera |
+	
+	importedCustomera := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assert: importedCustomera hasAddressAt: 'San Martin' number: 3322 town: 'Olivos' zipCode: 1636 province: 'BsAs'.
+	
+	self assert: importedCustomera hasAddressAt: 'Maipu' number: 888 town: 'Florida' zipCode: 1122 province: 'Buenos Aires'! !
+!ImportTest methodsFor: 'as yet unclassified' stamp: 'fm 6/27/2022 14:23:18' prior: 50527225!
+assertPepeSanchezIsImportedCorrectly
+
+	| importedCustomer |
+	
+	importedCustomer := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+	
+	self assertPepeSanchezAddressesAreImportedCorrectly.! !
+
+!methodRemoval: ImportTest #assertPepeSanchezAddressesAreImportedCorrectly: stamp: 'fm 6/27/2022 14:23:18'!
+assertPepeSanchezAddressesAreImportedCorrectly: importedCustomer
+
+	| importedCustomera |
+	
+	importedCustomera := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assert: importedCustomera hasAddressAt: 'San Martin' number: 3322 town: 'Olivos' zipCode: 1636 province: 'BsAs'.
+	
+	self assert: importedCustomera hasAddressAt: 'Maipu' number: 888 town: 'Florida' zipCode: 1122 province: 'Buenos Aires'!
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:23:27' prior: 50527252!
+assertPepeSanchezAddressesAreImportedCorrectly
+
+	| importedCustomer |
+	
+	importedCustomer := self customerWithIdType: 'D' number: '22333444'.
+	
+	self assert: importedCustomer hasAddressAt: 'San Martin' number: 3322 town: 'Olivos' zipCode: 1636 province: 'BsAs'.
+	
+	self assert: importedCustomer hasAddressAt: 'Maipu' number: 888 town: 'Florida' zipCode: 1122 province: 'Buenos Aires'! !
+!ImportTest methodsFor: 'asserting' stamp: 'fm 6/27/2022 14:23:42' prior: 50527268!
+assertPepeSanchezIsImportedCorrectly
+	
+	self assertPepeSanchezPersonalInformationIsImportedCorrectly.
+	self assertPepeSanchezAddressesAreImportedCorrectly.! !
+
+----SNAPSHOT----(27 June 2022 14:24:53) CuisUniversity-5301.image priorSource: 6244135!
+!Behavior method!
+for: aConfiguration
+	^ [
+	([
+	(self coverAll:
+		{24 to: 27}) new ] valueCoveringAll:
+		{29 to: 31}) initializeFor:
+		(aConfiguration
+			cover: (48 to: 61)
+			declaredAt: (6 to: 19)) ] valueCoveringAll:
+		{33 to: 46}.! !
+!Behavior method!
+initializeFor: aConfiguration
+	(configuration _ aConfiguration
+		cover: (50 to: 63)
+		declaredAt: (16 to: 29))
+		cover: (33 to: 45)
+		declaredAt: (33 to: 45).
+	(tables _ [
+	(Dictionary
+		cover: (77 to: 86)
+		declaredAt: (77 to: 86)) new ] valueCoveringAll:
+		{88 to: 90})
+		cover: (67 to: 72)
+		declaredAt: (67 to: 72).
+	(id _ 0 coverAll:
+		{100 to: 100})
+		cover: (94 to: 95)
+		declaredAt: (94 to: 95).! !
+!Behavior method!
+beginTransaction
+	^ self.! !
+!Behavior method!
+from: aStream into: aSession
+	^ [
+	([
+	(self coverAll:
+		{33 to: 36}) new ] valueCoveringAll:
+		{38 to: 40})
+		initializeFrom:
+			(aStream
+				cover: (58 to: 64)
+				declaredAt: (7 to: 13))
+		into:
+			(aSession
+				cover: (72 to: 79)
+				declaredAt: (21 to: 28)) ] valueCoveringAll:
+		{42 to: 56. 66 to: 70}.! !
+!Behavior method!
+initializeFrom: aStream into: aSession
+	(session _ aSession
+		cover: (53 to: 60)
+		declaredAt: (31 to: 38))
+		cover: (42 to: 48)
+		declaredAt: (42 to: 48).
+	(stream _ aStream
+		cover: (74 to: 80)
+		declaredAt: (17 to: 23))
+		cover: (64 to: 69)
+		declaredAt: (64 to: 69).! !
+!Behavior method!
+value
+	[
+	[
+	[
+	(self coverAll:
+		{11 to: 14}) hasLineToImport ] valueCoveringAll:
+		{16 to: 30} ] whileTrue: [
+		[
+		(self coverAll:
+			{49 to: 52}) createRecord ] valueCoveringAll:
+			{54 to: 65}.
+		[
+		(self coverAll:
+			{70 to: 73}) importRecord ] valueCoveringAll:
+			{75 to: 86} ]] valueCoveringAll:
+		{34 to: 43}.! !
+!Behavior method!
+hasLineToImport
+	(line _ [
+	(stream
+		cover: (27 to: 32)
+		declaredAt: (27 to: 32)) nextLine ] valueCoveringAll:
+		{34 to: 41})
+		cover: (19 to: 22)
+		declaredAt: (19 to: 22).
+	^ [
+	(line
+		cover: (47 to: 50)
+		declaredAt: (19 to: 22)) notNil ] valueCoveringAll:
+		{52 to: 57}.! !
+!Behavior method!
+createRecord
+	(record _ [
+	(line
+		cover: (26 to: 29)
+		declaredAt: (26 to: 29)) findTokens:
+		($, coverAll:
+			{43 to: 44}) ] valueCoveringAll:
+		{31 to: 41})
+		cover: (16 to: 21)
+		declaredAt: (16 to: 21).! !
+!Behavior method!
+importRecord
+	[
+	(self coverAll:
+		{16 to: 19}) assertRecordIsNotEmpty ] valueCoveringAll:
+		{21 to: 42}.
+	[
+	([
+	(self coverAll:
+		{48 to: 51}) isCustomerRecord ] valueCoveringAll:
+		{53 to: 68}) ifTrue: [ ^ [
+		(self coverAll:
+			{82 to: 85}) importCustomer ] valueCoveringAll:
+			{87 to: 100} ]] valueCoveringAll:
+		{70 to: 76}.
+	[
+	([
+	(self coverAll:
+		{106 to: 109}) isAddressRecord ] valueCoveringAll:
+		{111 to: 125}) ifTrue: [ ^ [
+		(self coverAll:
+			{139 to: 142}) importAddress ] valueCoveringAll:
+			{144 to: 156} ]] valueCoveringAll:
+		{127 to: 133}.
+	[
+	(self coverAll:
+		{164 to: 167}) error:
+		([
+		([
+		(self coverAll:
+			{176 to: 179}) class ] valueCoveringAll:
+			{181 to: 185}) invalidRecordTypeErrorDescription ] valueCoveringAll:
+			{187 to: 219}) ] valueCoveringAll:
+		{169 to: 174}.! !
+!Behavior method!
+assertRecordIsNotEmpty
+	^ [
+	(record
+		cover: (28 to: 33)
+		declaredAt: (28 to: 33)) ifEmpty: [
+		[
+		(self coverAll:
+			{46 to: 49}) error:
+			([
+			([
+			(self coverAll:
+				{58 to: 61}) class ] valueCoveringAll:
+				{63 to: 67}) emptyRecordErrorDescription ] valueCoveringAll:
+				{69 to: 95}) ] valueCoveringAll:
+			{51 to: 56} ]] valueCoveringAll:
+		{35 to: 42}.! !
+!Behavior method!
+isCustomerRecord
+	^ [
+	([
+	(record
+		cover: (22 to: 27)
+		declaredAt: (22 to: 27)) first ] valueCoveringAll:
+		{29 to: 33}) =
+		('C' coverAll:
+			{37 to: 39}) ] valueCoveringAll:
+		{35 to: 35}.! !
+!Behavior method!
+importCustomer
+	[
+	(self coverAll:
+		{18 to: 21}) assertRecordSizeIsCorrectForCustomer ] valueCoveringAll:
+		{23 to: 58}.
+	(newCustomer _ [
+	(Customer
+		cover: (79 to: 86)
+		declaredAt: (79 to: 86)) new ] valueCoveringAll:
+		{88 to: 90})
+		cover: (64 to: 74)
+		declaredAt: (64 to: 74).
+	[
+	(newCustomer
+		cover: (94 to: 104)
+		declaredAt: (64 to: 74)) firstName:
+		([
+		(record
+			cover: (117 to: 122)
+			declaredAt: (117 to: 122)) second ] valueCoveringAll:
+			{124 to: 129}) ] valueCoveringAll:
+		{106 to: 115}.
+	[
+	(newCustomer
+		cover: (133 to: 143)
+		declaredAt: (64 to: 74)) lastName:
+		([
+		(record
+			cover: (155 to: 160)
+			declaredAt: (117 to: 122)) third ] valueCoveringAll:
+			{162 to: 166}) ] valueCoveringAll:
+		{145 to: 153}.
+	[
+	(newCustomer
+		cover: (170 to: 180)
+		declaredAt: (64 to: 74)) identificationType:
+		([
+		(record
+			cover: (202 to: 207)
+			declaredAt: (117 to: 122)) fourth ] valueCoveringAll:
+			{209 to: 214}) ] valueCoveringAll:
+		{182 to: 200}.
+	[
+	(newCustomer
+		cover: (218 to: 228)
+		declaredAt: (64 to: 74)) identificationNumber:
+		([
+		(record
+			cover: (252 to: 257)
+			declaredAt: (117 to: 122)) fifth ] valueCoveringAll:
+			{259 to: 263}) ] valueCoveringAll:
+		{230 to: 250}.
+	[
+	(session
+		cover: (267 to: 273)
+		declaredAt: (267 to: 273)) persist:
+		(newCustomer
+			cover: (284 to: 294)
+			declaredAt: (64 to: 74)) ] valueCoveringAll:
+		{275 to: 282}.! !
+!Behavior method!
+assertRecordSizeIsCorrectForCustomer
+	[
+	([
+	([
+	(record
+		cover: (41 to: 46)
+		declaredAt: (41 to: 46)) size ] valueCoveringAll:
+		{48 to: 51}) >
+		(5 coverAll:
+			{55 to: 55}) ] valueCoveringAll:
+		{53 to: 53}) ifTrue: [
+		[
+		(self coverAll:
+			{67 to: 70}) error:
+			([
+			([
+			(self coverAll:
+				{79 to: 82}) class ] valueCoveringAll:
+				{84 to: 88}) customerRecordWithTooManyFieldsErrorDescription ] valueCoveringAll:
+				{90 to: 136}) ] valueCoveringAll:
+			{72 to: 77} ]] valueCoveringAll:
+		{58 to: 64}.
+	[
+	([
+	([
+	(record
+		cover: (142 to: 147)
+		declaredAt: (41 to: 46)) size ] valueCoveringAll:
+		{149 to: 152}) <
+		(5 coverAll:
+			{156 to: 156}) ] valueCoveringAll:
+		{154 to: 154}) ifTrue: [
+		[
+		(self coverAll:
+			{168 to: 171}) error:
+			([
+			([
+			(self coverAll:
+				{180 to: 183}) class ] valueCoveringAll:
+				{185 to: 189}) customerRecordWithNotEnoughFieldsErrorDescription ] valueCoveringAll:
+				{191 to: 239}) ] valueCoveringAll:
+			{173 to: 178} ]] valueCoveringAll:
+		{159 to: 165}.! !
+!Behavior method!
+initialize
+	[ super initialize ] valueCoveringAll:
+		{20 to: 29}.
+	(addresses _ [
+	(OrderedCollection
+		cover: (46 to: 62)
+		declaredAt: (46 to: 62)) new ] valueCoveringAll:
+		{64 to: 66})
+		cover: (33 to: 41)
+		declaredAt: (33 to: 41).! !
+!Behavior method!
+firstName: aName
+	(firstName _ aName
+		cover: (33 to: 37)
+		declaredAt: (12 to: 16))
+		cover: (20 to: 28)
+		declaredAt: (20 to: 28).! !
+!Behavior method!
+lastName: aLastName
+	(lastName _ aLastName
+		cover: (35 to: 43)
+		declaredAt: (11 to: 19))
+		cover: (23 to: 30)
+		declaredAt: (23 to: 30).! !
+!Behavior method!
+identificationType: anIdentificationType
+	(identificationType _ anIdentificationType
+		cover: (66 to: 85)
+		declaredAt: (21 to: 40))
+		cover: (44 to: 61)
+		declaredAt: (44 to: 61).! !
+!Behavior method!
+identificationNumber: anIdentificationNumber
+	(identificationNumber _ anIdentificationNumber
+		cover: (72 to: 93)
+		declaredAt: (23 to: 44))
+		cover: (48 to: 67)
+		declaredAt: (48 to: 67).! !
+!Behavior method!
+persist: anObject
+	| table |
+	[
+	(self coverAll:
+		{33 to: 36}) delay ] valueCoveringAll:
+		{38 to: 42}.
+	(table _ [
+	(tables
+		cover: (55 to: 60)
+		declaredAt: (55 to: 60))
+		at:
+			([
+			(anObject
+				cover: (66 to: 73)
+				declaredAt: (10 to: 17)) class ] valueCoveringAll:
+				{75 to: 79})
+		ifAbsentPut: [
+			[
+			(Set
+				cover: (96 to: 98)
+				declaredAt: (96 to: 98)) new ] valueCoveringAll:
+				{100 to: 102} ]] valueCoveringAll:
+		{62 to: 64. 81 to: 92})
+		cover: (46 to: 50)
+		declaredAt: (23 to: 27).
+	[
+	(self coverAll:
+		{109 to: 112}) defineIdOf:
+		(anObject
+			cover: (126 to: 133)
+			declaredAt: (10 to: 17)) ] valueCoveringAll:
+		{114 to: 124}.
+	[
+	(table
+		cover: (137 to: 141)
+		declaredAt: (23 to: 27)) add:
+		(anObject
+			cover: (148 to: 155)
+			declaredAt: (10 to: 17)) ] valueCoveringAll:
+		{143 to: 146}.
+	[
+	([
+	(anObject
+		cover: (161 to: 168)
+		declaredAt: (10 to: 17)) isKindOf:
+		(Customer
+			cover: (180 to: 187)
+			declaredAt: (180 to: 187)) ] valueCoveringAll:
+		{170 to: 178}) ifTrue: [
+		[
+		(self coverAll:
+			{200 to: 203}) persistAddressesOf:
+			(anObject
+				cover: (225 to: 232)
+				declaredAt: (10 to: 17)) ] valueCoveringAll:
+			{205 to: 223} ]] valueCoveringAll:
+		{190 to: 196}.! !
+!Behavior method!
+delay
+	[
+	([
+	(Delay
+		cover: (10 to: 14)
+		declaredAt: (10 to: 14)) forMilliseconds:
+		(100 coverAll:
+			{33 to: 35}) ] valueCoveringAll:
+		{16 to: 31}) wait ] valueCoveringAll:
+		{38 to: 41}.! !
+!Behavior method!
+defineIdOf: anObject
+	[
+	(anObject
+		cover: (24 to: 31)
+		declaredAt: (13 to: 20))
+		instVarNamed:
+			('id' coverAll:
+				{47 to: 50})
+		put:
+			([
+			(self coverAll:
+				{58 to: 61}) newIdFor:
+				(anObject
+					cover: (73 to: 80)
+					declaredAt: (13 to: 20)) ] valueCoveringAll:
+				{63 to: 71}) ] valueCoveringAll:
+		{33 to: 45. 52 to: 55}.! !
+!Behavior method!
+newIdFor: anObject
+	(id _ [
+	(id
+		cover: (22 to: 23)
+		declaredAt: (22 to: 23)) +
+		(1 coverAll:
+			{33 to: 33}) ] valueCoveringAll:
+		{31 to: 31})
+		cover: (28 to: 29)
+		declaredAt: (22 to: 23).
+	^ id
+		cover: (38 to: 39)
+		declaredAt: (22 to: 23).! !
+!Behavior method!
+persistAddressesOf: anObjectWithAddresses
+	[
+	([
+	(anObjectWithAddresses
+		cover: (45 to: 65)
+		declaredAt: (21 to: 41)) addresses ] valueCoveringAll:
+		{67 to: 75}) do: [ :anAddress |
+		[
+		(self coverAll:
+			{96 to: 99}) persist:
+			(anAddress
+				cover: (110 to: 118)
+				declaredAt: (84 to: 92)) ] valueCoveringAll:
+			{101 to: 108} ]] valueCoveringAll:
+		{77 to: 79}.! !
+!Behavior method!
+addresses
+	^ addresses
+		cover: (15 to: 23)
+		declaredAt: (15 to: 23).! !
+!Behavior method!
+isAddressRecord
+	^ [
+	([
+	(record
+		cover: (21 to: 26)
+		declaredAt: (21 to: 26)) first ] valueCoveringAll:
+		{28 to: 32}) =
+		('A' coverAll:
+			{36 to: 38}) ] valueCoveringAll:
+		{34 to: 34}.! !
+!Behavior method!
+importAddress
+	| newAddress |
+	[
+	(self coverAll:
+		{35 to: 38}) assertRecordSizeIsCorrectForAddress ] valueCoveringAll:
+		{40 to: 74}.
+	[
+	(self coverAll:
+		{78 to: 81}) assertCustomerWasImported ] valueCoveringAll:
+		{83 to: 107}.
+	(newAddress _ [
+	(Address
+		cover: (127 to: 133)
+		declaredAt: (127 to: 133)) new ] valueCoveringAll:
+		{135 to: 137})
+		cover: (113 to: 122)
+		declaredAt: (19 to: 28).
+	[
+	(newCustomer
+		cover: (141 to: 151)
+		declaredAt: (141 to: 151)) addAddress:
+		(newAddress
+			cover: (165 to: 174)
+			declaredAt: (19 to: 28)) ] valueCoveringAll:
+		{153 to: 163}.
+	[
+	(newAddress
+		cover: (178 to: 187)
+		declaredAt: (19 to: 28)) streetName:
+		([
+		(record
+			cover: (201 to: 206)
+			declaredAt: (201 to: 206)) second ] valueCoveringAll:
+			{208 to: 213}) ] valueCoveringAll:
+		{189 to: 199}.
+	[
+	(newAddress
+		cover: (217 to: 226)
+		declaredAt: (19 to: 28)) streetNumber:
+		([
+		([
+		(record
+			cover: (242 to: 247)
+			declaredAt: (201 to: 206)) third ] valueCoveringAll:
+			{249 to: 253}) asNumber ] valueCoveringAll:
+			{255 to: 262}) ] valueCoveringAll:
+		{228 to: 240}.
+	[
+	(newAddress
+		cover: (267 to: 276)
+		declaredAt: (19 to: 28)) town:
+		([
+		(record
+			cover: (284 to: 289)
+			declaredAt: (201 to: 206)) fourth ] valueCoveringAll:
+			{291 to: 296}) ] valueCoveringAll:
+		{278 to: 282}.
+	[
+	(newAddress
+		cover: (300 to: 309)
+		declaredAt: (19 to: 28)) zipCode:
+		([
+		([
+		(record
+			cover: (320 to: 325)
+			declaredAt: (201 to: 206)) fifth ] valueCoveringAll:
+			{327 to: 331}) asNumber ] valueCoveringAll:
+			{333 to: 340}) ] valueCoveringAll:
+		{311 to: 318}.
+	[
+	(newAddress
+		cover: (345 to: 354)
+		declaredAt: (19 to: 28)) province:
+		([
+		(record
+			cover: (366 to: 371)
+			declaredAt: (201 to: 206)) sixth ] valueCoveringAll:
+			{373 to: 377}) ] valueCoveringAll:
+		{356 to: 364}.! !
+!Behavior method!
+assertRecordSizeIsCorrectForAddress
+	[
+	([
+	([
+	(record
+		cover: (40 to: 45)
+		declaredAt: (40 to: 45)) size ] valueCoveringAll:
+		{47 to: 50}) >
+		(6 coverAll:
+			{54 to: 54}) ] valueCoveringAll:
+		{52 to: 52}) ifTrue: [
+		[
+		(self coverAll:
+			{66 to: 69}) error:
+			([
+			([
+			(self coverAll:
+				{78 to: 81}) class ] valueCoveringAll:
+				{83 to: 87}) addressRecordWithTooManyFieldsErrorDescription ] valueCoveringAll:
+				{89 to: 134}) ] valueCoveringAll:
+			{71 to: 76} ]] valueCoveringAll:
+		{57 to: 63}.
+	[
+	([
+	([
+	(record
+		cover: (140 to: 145)
+		declaredAt: (40 to: 45)) size ] valueCoveringAll:
+		{147 to: 150}) <
+		(6 coverAll:
+			{154 to: 154}) ] valueCoveringAll:
+		{152 to: 152}) ifTrue: [
+		[
+		(self coverAll:
+			{166 to: 169}) error:
+			([
+			([
+			(self coverAll:
+				{178 to: 181}) class ] valueCoveringAll:
+				{183 to: 187}) addressRecordWithNotEnoughFieldsErrorDescription ] valueCoveringAll:
+				{189 to: 236}) ] valueCoveringAll:
+			{171 to: 176} ]] valueCoveringAll:
+		{157 to: 163}.! !
+!Behavior method!
+assertCustomerWasImported
+	^ [
+	(newCustomer
+		cover: (31 to: 41)
+		declaredAt: (31 to: 41)) ifNil: [
+		[
+		(self coverAll:
+			{51 to: 54}) error:
+			([
+			([
+			(self coverAll:
+				{63 to: 66}) class ] valueCoveringAll:
+				{68 to: 72}) noCustomerToImportAddressErrorDescription ] valueCoveringAll:
+				{74 to: 114}) ] valueCoveringAll:
+			{56 to: 61} ]] valueCoveringAll:
+		{43 to: 48}.! !
+!Behavior method!
+addAddress: anAddress
+	[
+	(addresses
+		cover: (25 to: 33)
+		declaredAt: (25 to: 33)) add:
+		(anAddress
+			cover: (40 to: 48)
+			declaredAt: (13 to: 21)) ] valueCoveringAll:
+		{35 to: 38}.! !
+!Behavior method!
+streetName: aStreetName
+	(streetName _ aStreetName
+		cover: (41 to: 51)
+		declaredAt: (13 to: 23))
+		cover: (27 to: 36)
+		declaredAt: (27 to: 36).! !
+!Behavior method!
+streetNumber: aStreetNumber
+	(streetNumber _ aStreetNumber
+		cover: (47 to: 59)
+		declaredAt: (15 to: 27))
+		cover: (31 to: 42)
+		declaredAt: (31 to: 42).! !
+!Behavior method!
+town: aTown
+	(town _ aTown
+		cover: (23 to: 27)
+		declaredAt: (7 to: 11))
+		cover: (15 to: 18)
+		declaredAt: (15 to: 18).! !
+!Behavior method!
+zipCode: aZipCode
+	(zipCode _ aZipCode
+		cover: (32 to: 39)
+		declaredAt: (10 to: 17))
+		cover: (21 to: 27)
+		declaredAt: (21 to: 27).! !
+!Behavior method!
+province: aProvince
+	(province _ aProvince
+		cover: (35 to: 43)
+		declaredAt: (11 to: 19))
+		cover: (23 to: 30)
+		declaredAt: (23 to: 30).! !
+!Behavior method!
+selectAllOfType: aType
+	[
+	(self coverAll:
+		{26 to: 29}) delay ] valueCoveringAll:
+		{31 to: 35}.
+	^ [
+	([
+	(self coverAll:
+		{41 to: 44}) objectsOfType:
+		(aType
+			cover: (61 to: 65)
+			declaredAt: (18 to: 22)) ] valueCoveringAll:
+		{46 to: 59}) copy ] valueCoveringAll:
+		{68 to: 71}.! !
+!Behavior method!
+objectsOfType: aType
+	^ [
+	(tables
+		cover: (26 to: 31)
+		declaredAt: (26 to: 31))
+		at:
+			(aType
+				cover: (37 to: 41)
+				declaredAt: (16 to: 20))
+		ifAbsent: [
+			#() coverAll:
+				{55 to: 57} ]] valueCoveringAll:
+		{33 to: 35. 43 to: 51}.! !
+!Behavior method!
+select: aCondition ofType: aType
+	[
+	(self coverAll:
+		{36 to: 39}) delay ] valueCoveringAll:
+		{41 to: 45}.
+	^ [
+	([
+	(self coverAll:
+		{51 to: 54}) objectsOfType:
+		(aType
+			cover: (71 to: 75)
+			declaredAt: (28 to: 32)) ] valueCoveringAll:
+		{56 to: 69}) select:
+		(aCondition
+			cover: (86 to: 95)
+			declaredAt: (9 to: 18)) ] valueCoveringAll:
+		{78 to: 84}.! !
+!Behavior method!
+idTypeIs: anIdType andIdNumberIs: anIdNumber
+	^ [
+	([
+	(identificationType
+		cover: (52 to: 69)
+		declaredAt: (52 to: 69)) =
+		(anIdType
+			cover: (73 to: 80)
+			declaredAt: (11 to: 18)) ] valueCoveringAll:
+		{71 to: 71}) and: [
+		[
+		(identificationNumber
+			cover: (88 to: 107)
+			declaredAt: (88 to: 107)) =
+			(anIdNumber
+				cover: (111 to: 120)
+				declaredAt: (35 to: 44)) ] valueCoveringAll:
+			{109 to: 109} ]] valueCoveringAll:
+		{82 to: 85}.! !
+!Behavior method!
+firstName
+	^ firstName
+		cover: (14 to: 22)
+		declaredAt: (14 to: 22).! !
+!Behavior method!
+lastName
+	^ lastName
+		cover: (13 to: 20)
+		declaredAt: (13 to: 20).! !
+!Behavior method!
+identificationType
+	^ identificationType
+		cover: (23 to: 40)
+		declaredAt: (23 to: 40).! !
+!Behavior method!
+identificationNumber
+	^ identificationNumber
+		cover: (25 to: 44)
+		declaredAt: (25 to: 44).! !
+!Behavior method!
+addressAt: aStreetName number: aStreetNumber
+	^ [
+	(addresses
+		cover: (52 to: 60)
+		declaredAt: (52 to: 60)) detect: [ :anAddress |
+		[
+		(anAddress
+			cover: (84 to: 92)
+			declaredAt: (72 to: 80))
+			isAt:
+				(aStreetName
+					cover: (100 to: 110)
+					declaredAt: (12 to: 22))
+			number:
+				(aStreetNumber
+					cover: (120 to: 132)
+					declaredAt: (32 to: 44)) ] valueCoveringAll:
+			{94 to: 98. 112 to: 118} ]] valueCoveringAll:
+		{62 to: 68}.! !
+!Behavior method!
+isAt: aStreetName number: aStreetNumber
+	^ [
+	([
+	(streetName
+		cover: (46 to: 55)
+		declaredAt: (46 to: 55)) =
+		(aStreetName
+			cover: (59 to: 69)
+			declaredAt: (7 to: 17)) ] valueCoveringAll:
+		{57 to: 57}) and: [
+		[
+		(streetNumber
+			cover: (77 to: 88)
+			declaredAt: (77 to: 88)) =
+			(aStreetNumber
+				cover: (92 to: 104)
+				declaredAt: (27 to: 39)) ] valueCoveringAll:
+			{90 to: 90} ]] valueCoveringAll:
+		{71 to: 74}.! !
+!Behavior method!
+streetName
+	^ streetName
+		cover: (15 to: 24)
+		declaredAt: (15 to: 24).! !
+!Behavior method!
+streetNumber
+	^ streetNumber
+		cover: (17 to: 28)
+		declaredAt: (17 to: 28).! !
+!Behavior method!
+town
+	^ town
+		cover: (9 to: 12)
+		declaredAt: (9 to: 12).! !
+!Behavior method!
+zipCode
+	^ zipCode
+		cover: (12 to: 18)
+		declaredAt: (12 to: 18).! !
+!Behavior method!
+province
+	^ province
+		cover: (13 to: 20)
+		declaredAt: (13 to: 20).! !
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'fm 6/27/2022 14:25:03'!
+PASSED!
+!Behavior method!
+commit
+	[
+	([
+	(tables
+		cover: (11 to: 16)
+		declaredAt: (11 to: 16))
+		at:
+			(Customer
+				cover: (22 to: 29)
+				declaredAt: (22 to: 29))
+		ifAbsent: [
+			#() coverAll:
+				{42 to: 44} ]] valueCoveringAll:
+		{18 to: 20. 31 to: 39}) do: [ :aCustomer |
+		[
+		(self coverAll:
+			{67 to: 70}) persistAddressesOf:
+			(aCustomer
+				cover: (92 to: 100)
+				declaredAt: (55 to: 63)) ] valueCoveringAll:
+			{72 to: 90} ]] valueCoveringAll:
+		{48 to: 50}.! !
+!Behavior method!
+close
+	^ self.! !
+!Behavior method!
+invalidRecordTypeErrorDescription
+	^ 'El campo de tipo del registro tiene un valor invalido.' coverAll:
+		{38 to: 93}.! !
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'fm 6/27/2022 14:25:03'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 14:25:04'!
+PASSED!
+!Behavior method!
+customerRecordWithTooManyFieldsErrorDescription
+	^ 'El registro de customer tiene mas campos de los esperados.' coverAll:
+		{52 to: 111}.! !
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'fm 6/27/2022 14:25:04'!
+PASSED!
+!Behavior method!
+customerRecordWithNotEnoughFieldsErrorDescription
+	^ 'El registro de customer no tiene la cantidad de campos esperados.' coverAll:
+		{56 to: 122}.! !
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'fm 6/27/2022 14:25:04'!
+PASSED!
+!Behavior method!
+addressRecordWithTooManyFieldsErrorDescription
+	^ 'El registro de direccion tiene mas campos de los esperados.' coverAll:
+		{53 to: 113}.! !
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'fm 6/27/2022 14:25:04'!
+PASSED!
+!Behavior method!
+addressRecordWithNotEnoughFieldsErrorDescription
+	^ 'El registro de direccion tiene menos campos de los esperados.' coverAll:
+		{56 to: 118}.! !
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'fm 6/27/2022 14:25:05'!
+PASSED!
+!Behavior method!
+noCustomerToImportAddressErrorDescription
+	^ 'No se importo un customer previo a importar la direccion.' coverAll:
+		{48 to: 106}.! !
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'fm 6/27/2022 14:25:05'!
+PASSED!
+!Behavior method!
+emptyRecordErrorDescription
+	^ 'El registro esta vacio.' coverAll:
+		{34 to: 58}.! !
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'fm 6/27/2022 14:25:05'!
+PASSED!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'fm 6/27/2022 14:25:31'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'fm 6/27/2022 14:25:32'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'fm 6/27/2022 14:25:32'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'fm 6/27/2022 14:25:32'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'fm 6/27/2022 14:25:32'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'fm 6/27/2022 14:25:32'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'fm 6/27/2022 14:25:33'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'fm 6/27/2022 14:25:33'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'fm 6/27/2022 14:25:33'!
+PASSED!
+
+----SNAPSHOT----(27 June 2022 14:25:41) CuisUniversity-5301.image priorSource: 6261342!
