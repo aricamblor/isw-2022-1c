@@ -1,0 +1,405 @@
+
+
+----STARTUP---- (28 June 2022 19:45:01) as /mnt/c/Users/Ari/Desktop/Ingenieria/CuisUniversity/CustomerImporter-03/linux64/CuisUniversity-5301.image!
+
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:45:42'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:45:42'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:45:43'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:45:43'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:45:43'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:45:43'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:45:44'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:45:44'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:45:44'!
+PASSED!
+
+Smalltalk at: #ENV put: 'DEV'.!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:45:51'!
+PASSED!
+!Environment class methodsFor: 'selecting' stamp: 'AEC 6/28/2022 19:46:25' prior: 50520427!
+current
+
+	^ (self subclasses detect: [:subclass | subclass isCurrent ]) new! !
+!Environment methodsFor: 'accessing' stamp: 'AEC 6/28/2022 19:46:35'!
+system
+
+	self subclassResponsibility ! !
+
+!methodRemoval: Environment class #system stamp: 'AEC 6/28/2022 19:46:35'!
+system
+
+	self subclassResponsibility !
+!DevelopmentEnvironment methodsFor: 'accessing' stamp: 'AEC 6/28/2022 19:46:50' overrides: 50522143!
+system
+
+	^ TransientCustomerSystem new! !
+
+!methodRemoval: DevelopmentEnvironment class #system stamp: 'AEC 6/28/2022 19:46:50'!
+system
+
+	^ TransientCustomerSystem new!
+!IntegrationEnvironment methodsFor: 'accessing' stamp: 'AEC 6/28/2022 19:46:55' overrides: 50522143!
+system
+
+	^ PersistentCustomerSystem new! !
+
+!methodRemoval: IntegrationEnvironment class #system stamp: 'AEC 6/28/2022 19:46:55'!
+system
+
+	^ PersistentCustomerSystem new!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:48:31'!
+PASSED!
+
+Smalltalk at: #ENV put: 'STAGING'!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:48:41'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:48:41'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:48:42'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:48:42'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:48:42'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:48:42'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:48:43'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:48:43'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:48:43'!
+PASSED!
+
+Smalltalk at: #ENV put: 'DEV'.!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:48:54'!
+PASSED!
+
+Smalltalk at: #ENV put: 'STAGING'!
+!CustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:53:14'!
+amountOfCustomers
+	
+	self subclassResponsibility ! !
+!CustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:53:27'!
+amountOfAdresses
+	
+	self subclassResponsibility ! !
+!CustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:53:40'!
+amountOfAddresses
+	
+	self subclassResponsibility ! !
+
+!methodRemoval: CustomerSystem #amountOfAdresses stamp: 'AEC 6/28/2022 19:53:40'!
+amountOfAdresses
+	
+	self subclassResponsibility !
+!PersistentCustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:54:08' overrides: 50522265!
+amountOfCustomers
+	
+	^ (session selectAllOfType: Customer) size! !
+!PersistentCustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:54:47' overrides: 50522273!
+amountOfAddresses
+	
+	^ (session selectAllOfType: Address) size! !
+!TransientCustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:55:24' overrides: 50522265!
+amountOfCustomers
+
+	^ customers size
+	! !
+!TransientCustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:56:38' overrides: 50522273!
+amountOfAddresses
+	
+	^ customers
+		inject: 0
+		into: [:amount :customer | amount + (customer addresses size) ]
+	! !
+!TransientCustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:57:11' prior: 50522299 overrides: 50522273!
+amountOfAddresses
+	
+	^ customers sum: [:customer | customer addresses size ]
+	! !
+!ImportTest methodsFor: 'tests' stamp: 'AEC 6/28/2022 19:57:47' prior: 50519354!
+test01CanImportValidCustomersWithVaildAddresses
+	
+	(CustomerImporter from: self validData using: system) value.
+	
+	self assert: 2 equals: system amountOfCustomers.
+	
+	self assertPepeSanchezIsImportedCorrectly.
+	
+	self assertJuanPerezIsImportedCorrectly.
+	
+! !
+!ImportTest methodsFor: 'asserting' stamp: 'AEC 6/28/2022 19:57:59' prior: 50519304!
+assertNoCustomerWasImported
+
+	self assert: 0 equals: system amountOfCustomers! !
+!ImportTest methodsFor: 'asserting' stamp: 'AEC 6/28/2022 19:58:09' prior: 50519298!
+assertNoAddressWasImported
+
+	self assert: 0 equals: system amountOfAddresses! !
+
+!methodRemoval: PersistentCustomerSystem #selectAllOfType: stamp: 'AEC 6/28/2022 19:58:28'!
+selectAllOfType: aType
+
+	^ session selectAllOfType: aType!
+
+!methodRemoval: TransientCustomerSystem #selectAllOfType: stamp: 'AEC 6/28/2022 19:58:39'!
+selectAllOfType: aType
+
+	aType = Address
+		ifTrue: [^ customers
+			inject: OrderedCollection new
+			into: [:addresses :customer | addresses addAll: customer addresses ]]
+		ifFalse: [^ customers]
+	!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:58:46'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:58:46'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:58:47'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:58:47'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:58:47'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:58:47'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:58:47'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:58:47'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:58:48'!
+PASSED!
+
+Smalltalk at: #ENV put: 'DEV'.!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:58:57'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:58:57'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:58:57'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:58:57'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:58:57'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:58:57'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:58:57'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:58:57'!
+ERROR!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:58:57'!
+ERROR!
+!TransientCustomerSystem methodsFor: 'querying' stamp: 'AEC 6/28/2022 19:59:30' prior: 50522307 overrides: 50522273!
+amountOfAddresses
+	
+	^ customers sum: [:customer | customer addresses size ] ifEmpty: 0
+	! !
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 19:59:32'!
+PASSED!
+
+Smalltalk at: #ENV put: 'DEV'.!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 20:03:05'!
+PASSED!
+
+Smalltalk at: #ENV put: 'STAGING'!
+
+!testRun: #ImportTest #test01CanImportValidCustomersWithVaildAddresses stamp: 'AEC 6/28/2022 20:03:13'!
+PASSED!
+
+!testRun: #ImportTest #test02CustomerRecordMustStartWithLetterCOnly stamp: 'AEC 6/28/2022 20:03:13'!
+PASSED!
+
+!testRun: #ImportTest #test03AddressRecordMustStartWithLetterAOnly stamp: 'AEC 6/28/2022 20:03:13'!
+PASSED!
+
+!testRun: #ImportTest #test04CustomerRecordCantHaveMoreThanFiveFields stamp: 'AEC 6/28/2022 20:03:13'!
+PASSED!
+
+!testRun: #ImportTest #test05CustomerRecordCantHaveLessThanFiveFields stamp: 'AEC 6/28/2022 20:03:13'!
+PASSED!
+
+!testRun: #ImportTest #test06AddressRecordCantHaveMoreThanSixFields stamp: 'AEC 6/28/2022 20:03:14'!
+PASSED!
+
+!testRun: #ImportTest #test07AddressRecordCantHaveLessThanSixFields stamp: 'AEC 6/28/2022 20:03:14'!
+PASSED!
+
+!testRun: #ImportTest #test08CantImportAddressIfNoCustomerHasBeenImported stamp: 'AEC 6/28/2022 20:03:14'!
+PASSED!
+
+!testRun: #ImportTest #test09CantImportEmptyRecord stamp: 'AEC 6/28/2022 20:03:14'!
+PASSED!
+
+----SNAPSHOT----(28 June 2022 20:03:32) CuisUniversity-5301.image priorSource: 6093320!
+
+----QUIT----(28 June 2022 20:04:13) CuisUniversity-5301.image priorSource: 6107596!
